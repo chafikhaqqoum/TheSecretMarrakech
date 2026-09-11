@@ -42,17 +42,20 @@ revealEls.forEach(el => io.observe(el));
 const reviewsSlider = document.getElementById('reviewsSlider');
 if (reviewsSlider) {
   const cards = reviewsSlider.querySelectorAll('.review-card');
+  const viewport = reviewsSlider.parentElement;
   const prevBtn = document.getElementById('sliderPrev');
   const nextBtn = document.getElementById('sliderNext');
   let current = 0;
 
   function goToSlide(index) {
     current = (index + cards.length) % cards.length;
-    reviewsSlider.style.transform = `translateX(-${current * 100}%)`;
+    const slideWidth = viewport.getBoundingClientRect().width;
+    reviewsSlider.style.transform = `translateX(-${current * slideWidth}px)`;
   }
 
   if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(current - 1));
   if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(current + 1));
+  window.addEventListener('resize', () => goToSlide(current));
 
   let touchStartX = 0;
   reviewsSlider.addEventListener('touchstart', (e) => {

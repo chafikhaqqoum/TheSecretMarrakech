@@ -7,6 +7,7 @@
 .reviews-section .section-head h2{color:#fff}
 .reviews-slider-wrap{position:relative;max-width:700px;margin:0 auto 48px}
 .reviews-slider{display:flex;overflow:hidden;border-radius:16px}
+#reviewsSlider{transition:transform 0.45s cubic-bezier(0.4,0,0.2,1)}
 .review-card{flex:0 0 100%;background:#fff;border-radius:16px;padding:44px 48px;box-sizing:border-box;transition:opacity 0.3s ease}
 .review-top{display:flex;align-items:center;gap:12px;margin-bottom:18px}
 .review-top .stars{color:var(--saffron-deep);font-size:15px;letter-spacing:1px}
