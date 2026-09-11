@@ -41,31 +41,26 @@ revealEls.forEach(el => io.observe(el));
 
 const reviewsSlider = document.getElementById('reviewsSlider');
 if (reviewsSlider) {
-  const cards = reviewsSlider.querySelectorAll('.review-card');
-  const viewport = reviewsSlider.parentElement;
+  const cards = Array.from(reviewsSlider.querySelectorAll('.review-card'));
   const prevBtn = document.getElementById('sliderPrev');
   const nextBtn = document.getElementById('sliderNext');
   let current = 0;
 
   function goToSlide(index) {
     current = (index + cards.length) % cards.length;
-    const slideWidth = viewport.getBoundingClientRect().width;
-    reviewsSlider.style.transform = `translateX(-${current * slideWidth}px)`;
+    cards[current].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
   }
 
   if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(current - 1));
   if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(current + 1));
-  window.addEventListener('resize', () => goToSlide(current));
 
-  let touchStartX = 0;
-  reviewsSlider.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-  reviewsSlider.addEventListener('touchend', (e) => {
-    const diff = e.changedTouches[0].screenX - touchStartX;
-    if (Math.abs(diff) > 40) {
-      diff < 0 ? goToSlide(current + 1) : goToSlide(current - 1);
-    }
-  }, { passive: true });
+  let scrollTimeout;
+  reviewsSlider.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const width = reviewsSlider.clientWidth || 1;
+      current = Math.round(reviewsSlider.scrollLeft / width);
+    }, 100);
+  });
 }
 
