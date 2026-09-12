@@ -58,13 +58,13 @@ header .wrap{max-width:1320px;padding-left:20px}@media(max-width:820px){header{b
 /* ---------- Map of the meeting point ---------- */
 .map-container {
   width: 100%;
-  max-width: 300px; /* Limits how wide it can get on large screens */
+  max-width: 400px; /* Limits how wide it can get on large screens */
   margin: 0 auto;   /* Centers the map on the page */
   border-radius: 12px;
   overflow: hidden;
 }
 .map-container iframe {
-  width: 90%;
+  width: 95%;
   height: 350px;     /* Keeps a consistent height */
   display: block;
 }
