@@ -4,11 +4,11 @@
   --panel:#FFFFFF;
   --ink:#17262A;
   --ink-soft:#5C6E70;
-  --majorelle:#1F4E43;
-  --majorelle-deep:#153730;
-  --saffron:#FF7A54;
-  --saffron-deep:#E85F38;
-  --coral:#FF7A54;
+  --majorelle: #0F5E51;
+  --majorelle-deep: #093D34; 
+  --saffron:#E86A33; 
+  --saffron-deep: #C45220;   
+  --coral:#E86A33;
   --sky:#2E9BD6;
   --line:rgba(23,38,42,0.12);
   --radius:6px;
