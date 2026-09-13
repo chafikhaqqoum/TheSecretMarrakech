@@ -19,7 +19,7 @@ header .wrap{max-width:1320px;padding-left:20px}@media(max-width:820px){header{b
 /* Hero Background Image Styling */
 .hero {
   position: relative;
-  background-image: linear-gradient(rgba(12, 28, 18, 0.3), rgba(12, 28, 18, 0.3)), url('images/gallery/m6.webp');
+  background-image: linear-gradient(rgba(12, 28, 18, 0.3), rgba(12, 28, 18, 0.3)), url('images/gallery/m3.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
