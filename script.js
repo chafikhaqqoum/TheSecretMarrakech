@@ -44,23 +44,22 @@ if (reviewsSlider) {
   const cards = Array.from(reviewsSlider.querySelectorAll('.review-card'));
   const prevBtn = document.getElementById('sliderPrev');
   const nextBtn = document.getElementById('sliderNext');
-  let current = 0;
 
-  function goToSlide(index) {
-    current = (index + cards.length) % cards.length;
-    cards[current].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+  function scrollByCard(direction) {
+    const cardWidth = cards[0].getBoundingClientRect().width;
+    const maxScroll = reviewsSlider.scrollWidth - reviewsSlider.clientWidth;
+    const atStart = reviewsSlider.scrollLeft <= 4;
+    const atEnd = reviewsSlider.scrollLeft >= maxScroll - 4;
+    let target;
+    if (direction > 0) {
+      target = atEnd ? 0 : Math.min(reviewsSlider.scrollLeft + cardWidth, maxScroll);
+    } else {
+      target = atStart ? maxScroll : Math.max(reviewsSlider.scrollLeft - cardWidth, 0);
+    }
+    reviewsSlider.scrollTo({ left: target, behavior: 'smooth' });
   }
 
-  if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(current - 1));
-  if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(current + 1));
-
-  let scrollTimeout;
-  reviewsSlider.addEventListener('scroll', () => {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      const width = reviewsSlider.clientWidth || 1;
-      current = Math.round(reviewsSlider.scrollLeft / width);
-    }, 100);
-  });
+  if (prevBtn) prevBtn.addEventListener('click', () => scrollByCard(-1));
+  if (nextBtn) nextBtn.addEventListener('click', () => scrollByCard(1));
 }
 
