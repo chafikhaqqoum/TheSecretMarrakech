@@ -44,22 +44,30 @@ if (reviewsSlider) {
   const cards = Array.from(reviewsSlider.querySelectorAll('.review-card'));
   const prevBtn = document.getElementById('sliderPrev');
   const nextBtn = document.getElementById('sliderNext');
+  let current = 0;
 
-  function scrollByCard(direction) {
-    const cardWidth = cards[0].getBoundingClientRect().width;
-    const maxScroll = reviewsSlider.scrollWidth - reviewsSlider.clientWidth;
-    const atStart = reviewsSlider.scrollLeft <= 4;
-    const atEnd = reviewsSlider.scrollLeft >= maxScroll - 4;
-    let target;
-    if (direction > 0) {
-      target = atEnd ? 0 : Math.min(reviewsSlider.scrollLeft + cardWidth, maxScroll);
-    } else {
-      target = atStart ? maxScroll : Math.max(reviewsSlider.scrollLeft - cardWidth, 0);
-    }
-    reviewsSlider.scrollTo({ left: target, behavior: 'smooth' });
+  // How many cards are visible at once (3 on desktop, 1 on smaller screens)
+  const perView = () => Math.max(1, Math.round(reviewsSlider.clientWidth / cards[0].offsetWidth));
+  const maxIndex = () => Math.max(0, cards.length - perView());
+
+  function goToSlide(index) {
+    const max = maxIndex();
+    current = index > max ? 0 : index < 0 ? max : index;
+    reviewsSlider.scrollTo({
+      left: cards[current].offsetLeft - cards[0].offsetLeft,
+      behavior: 'smooth'
+    });
   }
 
-  if (prevBtn) prevBtn.addEventListener('click', () => scrollByCard(-1));
-  if (nextBtn) nextBtn.addEventListener('click', () => scrollByCard(1));
-}
+  if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(current - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(current + 1));
 
+  let scrollTimeout;
+  reviewsSlider.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const cardWidth = cards[0].offsetWidth || 1;
+      current = Math.round(reviewsSlider.scrollLeft / cardWidth);
+    }, 100);
+  });
+}
