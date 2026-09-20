@@ -20,8 +20,8 @@ tour-card{background:var(--panel);border-radius:14px;overflow:hidden;display:blo
 /* Hero Background Image Styling */
 .hero {
   position: relative;
-  background-image: linear-gradient(rgba(12, 28, 18, 0.3), rgba(12, 28, 18, 0.3)), url('images/gallery/m8.webp');
-  background-size: cover;
+  background-image: linear-gradient(rgba(12, 28, 18, 0.5), rgba(12, 28, 18, 0.5)), url('images/gallery/m8.webp');
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   color: #ffffff; /* Ensures text defaults to white over the image */
