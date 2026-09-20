@@ -20,7 +20,7 @@ tour-card{background:var(--panel);border-radius:14px;overflow:hidden;display:blo
 /* Hero Background Image Styling */
 .hero {
   position: relative;
-  background-image: linear-gradient(rgba(12, 28, 18, 0.3), rgba(12, 28, 18, 0.3)), url('images/gallery/m7.webp');
+  background-image: linear-gradient(rgba(12, 28, 18, 0.3), rgba(12, 28, 18, 0.3)), url('images/gallery/m8.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
