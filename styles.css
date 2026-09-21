@@ -131,3 +131,7 @@ header .wrap{max-width:1320px;padding-left:20px}@media(max-width:820px){header{b
   .tours-grid::-webkit-scrollbar{display:none}
   .tours-grid .tour-card{flex:0 0 78%;scroll-snap-align:start}
 }
+
+/* ---------- Logo size: change these two numbers to resize the logo on every page ---------- */
+img.brand-mark{height:46px;width:auto}                 /* header */
+.mobile-menu-top img.brand-mark{height:38px}           /* mobile menu */
