@@ -133,7 +133,7 @@ header .wrap{max-width:1320px;padding-left:20px}@media(max-width:820px){header{b
 }
 
 /* ---------- Logo size: change these two numbers to resize the logo on every page ---------- */
-img.brand-mark{height:50px;width:auto;aspect-ratio:1/1;border-radius:50%;object-fit:cover}   /* header (round) */
+img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-fit:cover}   /* header (round) */
 .mobile-menu-top img.brand-mark{height:38px}                                                   /* mobile menu */
 
 /* ---------- Tours page only: taller tour photos ---------- */
