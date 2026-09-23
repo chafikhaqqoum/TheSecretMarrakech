@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="images/logo.webp">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — The Secret Marrakech</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,12 +14,12 @@
 
 <header id="siteHeader">
   <nav class="wrap">
-    <a href="index.html" class="brand">
+    <a href="index.html#top" class="brand">
       <img class="brand-mark" src="images/logo.webp" alt="The Secret Marrakech logo" width="30">
       The Secret <span>Marrakech</span>
     </a>
     <div class="nav-links">
-      <a href="index.html">Home</a>
+      <a href="index.html#top">Home</a>
       <a href="tours.html">Tours &amp; Activities</a>
       <a href="services.html">Services</a>
       <a href="shop.html">Shop</a>
@@ -29,7 +30,7 @@
     </div>
     <a href="https://wa.me/212628921377" class="nav-cta">Book on WhatsApp</a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
   </nav>
 </header>
@@ -37,16 +38,16 @@
 <div class="mobile-overlay" id="mobileOverlay"></div>
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-top">
-    <a href="index.html" class="brand" style="color:var(--ink); text-shadow:none; font-size:17px; text-decoration:none;">
+    <span class="brand" style="color:var(--ink); text-shadow:none; font-size:17px;">
       <img class="brand-mark" src="images/logo.webp" alt="The Secret Marrakech logo" width="26">
       The Secret <span>Marrakech</span>
-    </a>
+    </span>
     <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
   <nav>
-    <a href="index.html">Home</a>
+    <a href="index.html#top">Home</a>
     <a href="tours.html">Tours &amp; Activities</a>
     <a href="services.html">Services</a>
     <a href="shop.html">Shop</a>
@@ -60,6 +61,7 @@
     Book on WhatsApp
   </a>
 </div>
+
 
 <section class="page-banner">
   <div class="wrap">
@@ -75,6 +77,7 @@
       <img class="photo-float" src="images/about/p.webp" alt="Guide floating photo">
     </div>
     <div class="guide-info reveal">
+      <img class="about-logo" src="images/logo.webp" alt="The Secret Marrakech logo">
       <span class="guide-name">Licensed guide since 2018</span>
       <h2>Raised in the medina.<br>Still in love with it.</h2>
       <div class="badges">
@@ -112,7 +115,8 @@
 </section>
 
 <footer>
-  <div class="wrap" style="justify-content:center;">
+  <div class="wrap" style="justify-content:center; gap:12px;">
+    <img class="footer-logo" src="images/logo.webp" alt="The Secret Marrakech logo">
     <span>© 2026 The Secret Marrakech</span>
   </div>
 </footer>
