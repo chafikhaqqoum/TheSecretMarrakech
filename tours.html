@@ -312,6 +312,18 @@
   <span class="booking-tour-name" id="bookingTourName">Tour name</span>
 
   <form id="bookingForm" class="contact-form" style="margin-top:0;">
+    <div class="form-group">
+      <label for="bk-name">Name</label>
+      <input type="text" id="bk-name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="bk-phone">Phone</label>
+      <input type="tel" id="bk-phone" name="phone" required>
+    </div>
+    <div class="form-group">
+      <label for="bk-email">Email</label>
+      <input type="email" id="bk-email" name="email" required>
+    </div>
     <div class="booking-fields-book">
       <div class="form-group">
         <label for="bk-option">Tour option</label>
@@ -344,6 +356,7 @@
       </button>
     </div>
     <p class="booking-note" id="bookingNote">You'll pick your dates here, then confirm everything with Chafik directly on WhatsApp or email — nothing is auto-charged.</p>
+    <div class="form-status" id="bkStatus"></div>
   </form>
 </div>
 

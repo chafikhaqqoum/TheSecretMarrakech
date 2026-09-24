@@ -113,6 +113,8 @@ if (bookingModal) {
   function openBookingModal(tourName, intent) {
     bookingModal.setAttribute('data-intent', intent);
     bookingTourName.textContent = tourName;
+    const status = document.getElementById('bkStatus');
+    if (status) { status.textContent = ''; status.classList.remove('success', 'error'); }
     if (intent === 'book') {
       bookingTitle.textContent = 'Book your tour';
       bookingNote.textContent = "You'll pick your dates here, then confirm everything with Chafik directly on WhatsApp or email — nothing is auto-charged.";
@@ -149,19 +151,25 @@ if (bookingModal) {
   function buildBookingMessage() {
     const intent = bookingModal.getAttribute('data-intent');
     const tourName = bookingTourName.textContent;
+    const name = document.getElementById('bk-name').value;
+    const phone = document.getElementById('bk-phone').value;
+    const email = document.getElementById('bk-email').value;
     const option = document.getElementById('bk-option').value;
     const guests = document.getElementById('bk-guests').value;
     const date = document.getElementById('bk-date').value;
     const message = document.getElementById('bk-message').value;
 
     let lines = [];
+    lines.push(`Name: ${name}`);
+    lines.push(`Phone: ${phone}`);
+    lines.push(`Email: ${email}`);
     if (intent === 'book') {
-      lines.push(`Hi! I'd like to book: ${tourName}`);
+      lines.push(`\nHi! I'd like to book: ${tourName}`);
       lines.push(`Option: ${option}`);
       if (guests) lines.push(`Guests: ${guests}`);
       if (date) lines.push(`Date: ${date}`);
     } else {
-      lines.push(`Hi! I have a question about: ${tourName}`);
+      lines.push(`\nHi! I have a question about: ${tourName}`);
       if (guests && guests !== '2') lines.push(`Guests: ${guests}`);
       if (date) lines.push(`Preferred date: ${date}`);
     }
@@ -179,35 +187,30 @@ if (bookingModal) {
     if (!bookingForm.reportValidity()) return;
     const { intent, tourName, text } = buildBookingMessage();
     const subject = (intent === 'book' ? 'Booking request — ' : 'Question about — ') + tourName;
-    window.location.href = 'mailto:chafik.haqqoum@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
+    const mailtoUrl = 'mailto:chafik.haqqoum@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
+
+    // A temporary link + click() opens the mail app more reliably across
+    // browsers than setting location.href directly.
+    const tempLink = document.createElement('a');
+    tempLink.href = mailtoUrl;
+    tempLink.style.display = 'none';
+    document.body.appendChild(tempLink);
+    tempLink.click();
+    document.body.removeChild(tempLink);
+
+    // Fallback: many browsers have no default mail app configured at all
+    // (e.g. Gmail-in-browser-only users), in which case mailto silently
+    // does nothing. Copy the message too, so there's always a way through.
+    const fullText = `To: chafik.haqqoum@gmail.com\nSubject: ${subject}\n\n${text}`;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(fullText).catch(() => {});
+    }
+    const status = document.getElementById('bkStatus');
+    if (status) {
+      status.textContent = "Opening your email app… if nothing happens, we've copied the message — just paste it into a new email to chafik.haqqoum@gmail.com.";
+      status.classList.add('success');
+    }
   });
 }
 
-/* ---------- Tour photo height: match description-through-pricing only ---------- */
-(function syncTourPhotoHeights() {
-  const grids = document.querySelectorAll('.tour-detail-grid');
 
-  function sync() {
-    grids.forEach(grid => {
-      const slider = grid.querySelector('.tour-slider');
-      const desc = grid.querySelector('.desc');
-      const pricing = grid.querySelector('.pricing-table');
-      if (!slider || !desc || !pricing) return;
-
-      if (window.innerWidth <= 820) {
-        slider.style.height = ''; // let mobile's fixed aspect-ratio (CSS) take over
-        return;
-      }
-      const top = desc.getBoundingClientRect().top;
-      const bottom = pricing.getBoundingClientRect().bottom;
-      const h = Math.round(bottom - top);
-      if (h > 0) slider.style.height = h + 'px';
-    });
-  }
-
-  sync();
-  window.addEventListener('resize', sync);
-  window.addEventListener('load', sync);
-  // Re-check shortly after load too, in case web fonts reflow the text
-  setTimeout(sync, 500);
-})();
