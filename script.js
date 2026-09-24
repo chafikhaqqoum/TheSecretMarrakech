@@ -8,24 +8,28 @@ const mobileMenu = document.getElementById('mobileMenu');
 const mobileOverlay = document.getElementById('mobileOverlay');
 const mobileMenuClose = document.getElementById('mobileMenuClose');
 
-function openMobileMenu(){
-  mobileMenu.classList.add('open');
-  mobileOverlay.classList.add('open');
-  navToggle.setAttribute('aria-expanded', 'true');
-  document.body.style.overflow = 'hidden';
-}
+if (navToggle && mobileMenu && mobileOverlay && mobileMenuClose) {
+  function openMobileMenu(){
+    mobileMenu.classList.add('open');
+    mobileOverlay.classList.add('open');
+    navToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
 
-function closeMobileMenu(){
-  mobileMenu.classList.remove('open');
-  mobileOverlay.classList.remove('open');
-  navToggle.setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
-}
+  function closeMobileMenu(){
+    mobileMenu.classList.remove('open');
+    mobileOverlay.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
 
-navToggle.addEventListener('click', openMobileMenu);
-mobileMenuClose.addEventListener('click', closeMobileMenu);
-mobileOverlay.addEventListener('click', closeMobileMenu);
-mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+  navToggle.addEventListener('click', openMobileMenu);
+  mobileMenuClose.addEventListener('click', closeMobileMenu);
+  mobileOverlay.addEventListener('click', closeMobileMenu);
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+} else {
+  console.warn('Mobile menu elements not found on this page — mobile menu disabled, but the rest of the page scripts will still run.');
+}
 
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
@@ -216,23 +220,45 @@ if (bookingModal) {
     const { intent, tourName, text } = buildBookingMessage();
     const subject = (intent === 'book' ? 'Booking request — ' : 'Question about — ') + tourName;
     const mailtoUrl = 'mailto:chafik.haqqoum@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
-
-    // Same mechanism as every other "Send an Email" button on the site.
-    window.location.href = mailtoUrl;
-
-    // Also copy the message, so there's a fallback if the visitor's browser
-    // has no default mail app configured at all.
     const fullText = `To: chafik.haqqoum@gmail.com\nSubject: ${subject}\n\n${text}`;
+
+    // Always show a working, verifiable fallback — don't rely solely on
+    // mailto: succeeding, since that depends on the visitor's device having
+    // a default mail app configured, which isn't guaranteed.
+    const fallbackBox = document.getElementById('bkEmailFallback');
+    const fallbackText = document.getElementById('bkEmailFallbackText');
+    if (fallbackBox && fallbackText) {
+      fallbackText.value = fullText;
+      fallbackBox.classList.add('show');
+    }
+
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(fullText).catch(() => {});
     }
+
     const status = document.getElementById('bkStatus');
     if (status) {
-      status.textContent = "Opening your email app… the message has also been copied, just in case.";
+      status.textContent = "Trying to open your email app — if nothing happens, use the box below.";
       status.classList.remove('error');
       status.classList.add('success');
     }
+
+    // Attempt the handoff last, so the fallback is visible either way.
+    window.location.href = mailtoUrl;
   });
+
+  const bkCopyBtn = document.getElementById('bkCopyBtn');
+  if (bkCopyBtn) {
+    bkCopyBtn.addEventListener('click', () => {
+      const fallbackText = document.getElementById('bkEmailFallbackText');
+      navigator.clipboard.writeText(fallbackText.value).then(() => {
+        bkCopyBtn.textContent = 'Copied!';
+        setTimeout(() => { bkCopyBtn.textContent = 'Copy message'; }, 2000);
+      }).catch(() => {
+        fallbackText.select();
+      });
+    });
+  }
 }
 
 
@@ -278,21 +304,42 @@ if (contactForm) {
     if (!validateContactForm()) return;
     const text = buildContactMessage();
     const subject = 'Tour Inquiry - The Secret Marrakech (from ' + document.getElementById('cf-name').value + ')';
-
-    // Same mechanism as every other "Send an Email" link on the site.
-    window.location.href = 'mailto:chafik.haqqoum@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
-
+    const mailtoUrl = 'mailto:chafik.haqqoum@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
     const fullText = `To: chafik.haqqoum@gmail.com\nSubject: ${subject}\n\n${text}`;
+
+    const fallbackBox = document.getElementById('cfEmailFallback');
+    const fallbackText = document.getElementById('cfEmailFallbackText');
+    if (fallbackBox && fallbackText) {
+      fallbackText.value = fullText;
+      fallbackBox.classList.add('show');
+    }
+
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(fullText).catch(() => {});
     }
+
     const status = document.getElementById('cf-status');
     if (status) {
-      status.textContent = "Opening your email app… the message has also been copied, just in case.";
+      status.textContent = "Trying to open your email app — if nothing happens, use the box below.";
       status.classList.remove('error');
       status.classList.add('success');
     }
+
+    window.location.href = mailtoUrl;
   });
+
+  const cfCopyBtn = document.getElementById('cfCopyBtn');
+  if (cfCopyBtn) {
+    cfCopyBtn.addEventListener('click', () => {
+      const fallbackText = document.getElementById('cfEmailFallbackText');
+      navigator.clipboard.writeText(fallbackText.value).then(() => {
+        cfCopyBtn.textContent = 'Copied!';
+        setTimeout(() => { cfCopyBtn.textContent = 'Copy message'; }, 2000);
+      }).catch(() => {
+        fallbackText.select();
+      });
+    });
+  }
 
   // The WhatsApp button now actually carries the form's content, instead of
   // opening an empty chat.

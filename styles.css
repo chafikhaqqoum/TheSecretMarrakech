@@ -189,3 +189,10 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
 .booking-actions{display:flex;flex-direction:column;gap:10px;margin-top:8px}
 .booking-actions .btn{width:100%;justify-content:center}
 .booking-note{font-size:12.5px;color:var(--ink-soft);margin-top:14px;line-height:1.5}
+
+/* ---------- Always-available email fallback (works with no mail app needed) ---------- */
+.email-fallback{display:none;margin-top:14px;padding:16px;background:var(--paper-2);border:1px solid var(--line);border-radius:10px}
+.email-fallback.show{display:block}
+.email-fallback p{font-size:13px;color:var(--ink-soft);margin-bottom:10px;line-height:1.5}
+.email-fallback textarea{width:100%;min-height:130px;font-family:'Work Sans',sans-serif;font-size:13.5px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;resize:vertical;margin-bottom:10px}
+.email-fallback .btn{width:auto;padding:10px 20px;font-size:12.5px}
