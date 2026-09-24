@@ -236,3 +236,69 @@ if (bookingModal) {
 }
 
 
+
+/* ---------- Contact page form (Send Message / WhatsApp) ---------- */
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  function validateContactForm() {
+    const status = document.getElementById('cf-status');
+    const required = [
+      [document.getElementById('cf-name'), 'your name'],
+      [document.getElementById('cf-phone'), 'your phone number'],
+      [document.getElementById('cf-email'), 'your email'],
+      [document.getElementById('cf-message'), 'a message'],
+    ];
+    for (const [el, label] of required) {
+      if (!el.value.trim()) {
+        if (status) { status.textContent = `Please fill in ${label}.`; status.classList.remove('success'); status.classList.add('error'); }
+        el.focus();
+        return false;
+      }
+    }
+    const emailEl = document.getElementById('cf-email');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+      if (status) { status.textContent = 'Please enter a valid email address.'; status.classList.remove('success'); status.classList.add('error'); }
+      emailEl.focus();
+      return false;
+    }
+    const honey = contactForm.querySelector('[name="_honey"]');
+    if (honey && honey.value) return false; // likely a bot — silently block
+    return true;
+  }
+
+  function buildContactMessage() {
+    const name = document.getElementById('cf-name').value;
+    const phone = document.getElementById('cf-phone').value;
+    const email = document.getElementById('cf-email').value;
+    const message = document.getElementById('cf-message').value;
+    return `Hi! My name is ${name}.\nPhone: ${phone}\nEmail: ${email}\n\n${message}`;
+  }
+
+  document.getElementById('cf-submit').addEventListener('click', () => {
+    if (!validateContactForm()) return;
+    const text = buildContactMessage();
+    const subject = 'Tour Inquiry - The Secret Marrakech (from ' + document.getElementById('cf-name').value + ')';
+
+    // Same mechanism as every other "Send an Email" link on the site.
+    window.location.href = 'mailto:chafik.haqqoum@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
+
+    const fullText = `To: chafik.haqqoum@gmail.com\nSubject: ${subject}\n\n${text}`;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(fullText).catch(() => {});
+    }
+    const status = document.getElementById('cf-status');
+    if (status) {
+      status.textContent = "Opening your email app… the message has also been copied, just in case.";
+      status.classList.remove('error');
+      status.classList.add('success');
+    }
+  });
+
+  // The WhatsApp button now actually carries the form's content, instead of
+  // opening an empty chat.
+  document.getElementById('cf-whatsapp-btn').addEventListener('click', (e) => {
+    if (!validateContactForm()) { e.preventDefault(); return; }
+    const text = buildContactMessage();
+    e.currentTarget.href = 'https://wa.me/212628921377?text=' + encodeURIComponent(text);
+  });
+}
