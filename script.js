@@ -1,3 +1,43 @@
+/* ==========================================================================
+   EMAIL DELIVERY (Web3Forms) — one thing to do before this works:
+   1. Go to https://web3forms.com and enter chafik.haqqoum@gmail.com
+   2. Web3Forms emails you an Access Key (free, no password needed)
+   3. Paste that key below, replacing the placeholder text
+   ========================================================================== */
+const WEB3FORMS_ACCESS_KEY = 'e5bcc737-8362-4f25-8c0b-689a947f3dad';
+
+async function sendViaWeb3Forms(fields, statusEl) {
+  if (statusEl) {
+    statusEl.textContent = 'Sending…';
+    statusEl.classList.remove('error', 'success');
+    statusEl.classList.add('sending');
+  }
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ access_key: WEB3FORMS_ACCESS_KEY, ...fields }),
+    });
+    const result = await response.json();
+    if (response.ok && result.success) {
+      if (statusEl) {
+        statusEl.textContent = "Message sent successfully! We'll get back to you very soon.";
+        statusEl.classList.remove('error', 'sending');
+        statusEl.classList.add('success');
+      }
+      return true;
+    }
+    throw new Error(result.message || 'Submission failed');
+  } catch (err) {
+    if (statusEl) {
+      statusEl.textContent = "Something went wrong sending your message — please try WhatsApp instead, or email chafik.haqqoum@gmail.com directly.";
+      statusEl.classList.remove('success', 'sending');
+      statusEl.classList.add('error');
+    }
+    return false;
+  }
+}
+
 const header = document.getElementById('siteHeader');
 window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 40);
@@ -215,50 +255,18 @@ if (bookingModal) {
     window.open('https://wa.me/212628921377?text=' + encodeURIComponent(text), '_blank');
   });
 
-  document.getElementById('bkSendEmail').addEventListener('click', () => {
+  document.getElementById('bkSendEmail').addEventListener('click', async () => {
     if (!validateBookingForm()) return;
     const { intent, tourName, text } = buildBookingMessage();
     const subject = (intent === 'book' ? 'Booking request — ' : 'Question about — ') + tourName;
-    const mailtoUrl = 'mailto:chafik.haqqoum@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
-    const fullText = `To: chafik.haqqoum@gmail.com\nSubject: ${subject}\n\n${text}`;
-
-    // Always show a working, verifiable fallback — don't rely solely on
-    // mailto: succeeding, since that depends on the visitor's device having
-    // a default mail app configured, which isn't guaranteed.
-    const fallbackBox = document.getElementById('bkEmailFallback');
-    const fallbackText = document.getElementById('bkEmailFallbackText');
-    if (fallbackBox && fallbackText) {
-      fallbackText.value = fullText;
-      fallbackBox.classList.add('show');
-    }
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(fullText).catch(() => {});
-    }
-
     const status = document.getElementById('bkStatus');
-    if (status) {
-      status.textContent = "Trying to open your email app — if nothing happens, use the box below.";
-      status.classList.remove('error');
-      status.classList.add('success');
-    }
-
-    // Attempt the handoff last, so the fallback is visible either way.
-    window.location.href = mailtoUrl;
+    await sendViaWeb3Forms({
+      subject,
+      from_name: document.getElementById('bk-name').value,
+      email: document.getElementById('bk-email').value,
+      message: text,
+    }, status);
   });
-
-  const bkCopyBtn = document.getElementById('bkCopyBtn');
-  if (bkCopyBtn) {
-    bkCopyBtn.addEventListener('click', () => {
-      const fallbackText = document.getElementById('bkEmailFallbackText');
-      navigator.clipboard.writeText(fallbackText.value).then(() => {
-        bkCopyBtn.textContent = 'Copied!';
-        setTimeout(() => { bkCopyBtn.textContent = 'Copy message'; }, 2000);
-      }).catch(() => {
-        fallbackText.select();
-      });
-    });
-  }
 }
 
 
@@ -300,46 +308,19 @@ if (contactForm) {
     return `Hi! My name is ${name}.\nPhone: ${phone}\nEmail: ${email}\n\n${message}`;
   }
 
-  document.getElementById('cf-submit').addEventListener('click', () => {
+  document.getElementById('cf-submit').addEventListener('click', async () => {
     if (!validateContactForm()) return;
     const text = buildContactMessage();
     const subject = 'Tour Inquiry - The Secret Marrakech (from ' + document.getElementById('cf-name').value + ')';
-    const mailtoUrl = 'mailto:chafik.haqqoum@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
-    const fullText = `To: chafik.haqqoum@gmail.com\nSubject: ${subject}\n\n${text}`;
-
-    const fallbackBox = document.getElementById('cfEmailFallback');
-    const fallbackText = document.getElementById('cfEmailFallbackText');
-    if (fallbackBox && fallbackText) {
-      fallbackText.value = fullText;
-      fallbackBox.classList.add('show');
-    }
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(fullText).catch(() => {});
-    }
-
     const status = document.getElementById('cf-status');
-    if (status) {
-      status.textContent = "Trying to open your email app — if nothing happens, use the box below.";
-      status.classList.remove('error');
-      status.classList.add('success');
-    }
-
-    window.location.href = mailtoUrl;
+    const ok = await sendViaWeb3Forms({
+      subject,
+      from_name: document.getElementById('cf-name').value,
+      email: document.getElementById('cf-email').value,
+      message: text,
+    }, status);
+    if (ok) contactForm.reset();
   });
-
-  const cfCopyBtn = document.getElementById('cfCopyBtn');
-  if (cfCopyBtn) {
-    cfCopyBtn.addEventListener('click', () => {
-      const fallbackText = document.getElementById('cfEmailFallbackText');
-      navigator.clipboard.writeText(fallbackText.value).then(() => {
-        cfCopyBtn.textContent = 'Copied!';
-        setTimeout(() => { cfCopyBtn.textContent = 'Copy message'; }, 2000);
-      }).catch(() => {
-        fallbackText.select();
-      });
-    });
-  }
 
   // The WhatsApp button now actually carries the form's content, instead of
   // opening an empty chat.
