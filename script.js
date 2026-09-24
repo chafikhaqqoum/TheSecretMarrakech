@@ -177,37 +177,59 @@ if (bookingModal) {
     return { intent, tourName, text: lines.join('\n') };
   }
 
+  function validateBookingForm() {
+    const status = document.getElementById('bkStatus');
+    const intent = bookingModal.getAttribute('data-intent');
+    const required = [
+      [document.getElementById('bk-name'), 'your name'],
+      [document.getElementById('bk-phone'), 'your phone number'],
+      [document.getElementById('bk-email'), 'your email'],
+    ];
+    if (intent === 'book') {
+      required.push([document.getElementById('bk-guests'), 'the number of guests']);
+      required.push([document.getElementById('bk-date'), 'a date']);
+    }
+    for (const [el, label] of required) {
+      if (!el.value.trim()) {
+        if (status) { status.textContent = `Please fill in ${label}.`; status.classList.remove('success'); status.classList.add('error'); }
+        el.focus();
+        return false;
+      }
+    }
+    const emailEl = document.getElementById('bk-email');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+      if (status) { status.textContent = 'Please enter a valid email address.'; status.classList.remove('success'); status.classList.add('error'); }
+      emailEl.focus();
+      return false;
+    }
+    return true;
+  }
+
   document.getElementById('bkSendWhatsApp').addEventListener('click', () => {
-    if (!bookingForm.reportValidity()) return;
+    if (!validateBookingForm()) return;
     const { text } = buildBookingMessage();
     window.open('https://wa.me/212628921377?text=' + encodeURIComponent(text), '_blank');
   });
 
   document.getElementById('bkSendEmail').addEventListener('click', () => {
-    if (!bookingForm.reportValidity()) return;
+    if (!validateBookingForm()) return;
     const { intent, tourName, text } = buildBookingMessage();
     const subject = (intent === 'book' ? 'Booking request — ' : 'Question about — ') + tourName;
     const mailtoUrl = 'mailto:chafik.haqqoum@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
 
-    // A temporary link + click() opens the mail app more reliably across
-    // browsers than setting location.href directly.
-    const tempLink = document.createElement('a');
-    tempLink.href = mailtoUrl;
-    tempLink.style.display = 'none';
-    document.body.appendChild(tempLink);
-    tempLink.click();
-    document.body.removeChild(tempLink);
+    // Same mechanism as every other "Send an Email" button on the site.
+    window.location.href = mailtoUrl;
 
-    // Fallback: many browsers have no default mail app configured at all
-    // (e.g. Gmail-in-browser-only users), in which case mailto silently
-    // does nothing. Copy the message too, so there's always a way through.
+    // Also copy the message, so there's a fallback if the visitor's browser
+    // has no default mail app configured at all.
     const fullText = `To: chafik.haqqoum@gmail.com\nSubject: ${subject}\n\n${text}`;
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(fullText).catch(() => {});
     }
     const status = document.getElementById('bkStatus');
     if (status) {
-      status.textContent = "Opening your email app… if nothing happens, we've copied the message — just paste it into a new email to chafik.haqqoum@gmail.com.";
+      status.textContent = "Opening your email app… the message has also been copied, just in case.";
+      status.classList.remove('error');
       status.classList.add('success');
     }
   });
