@@ -129,7 +129,7 @@ header .wrap{max-width:1320px;padding-left:20px}@media(max-width:820px){header{b
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(12, 28, 18, 0.4); /* Darkens the single image for clear text */
+  background: rgba(12, 28, 18, 0.6); /* Darkens the single image for clear text */
 }
 
 /* ---------- Reviews slider: 3 cards side by side on desktop (mobile/tablet unchanged) ---------- */
