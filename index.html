@@ -4,353 +4,74 @@
 <meta charset="UTF-8">
 <link rel="icon" href="images/logo.webp">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Secret Marrakech — Private Tours & Local Experiences</title>
-<meta name="description" content="Discover authentic Marrakech with Chafik, a licensed local tour guide. Private walking tours, food tours, and hidden gems in the historical medina and souks.">
+<title>The Secret Marrakech — City Tours &amp; Activities</title>
+<meta name="description" content="Discover Marrakech with a licensed local guide. Explore medina tours, activities, local services and the stories behind the Red City.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="styles.css">
+<style>
+.home-intro{max-width:760px;margin:0 auto;text-align:center;padding:72px 0 24px}.home-intro p,.home-service-card p,.home-review p{color:var(--ink-soft)}
+.home-service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}.home-service-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px}.home-service-card h3{margin:0 0 10px;font-family:'Fraunces',serif;font-size:23px}.home-service-card p{margin-bottom:18px}.home-service-card a{color:var(--majorelle-deep);font-weight:600;text-decoration:none}
+.home-review-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.home-review{padding:26px;background:#fff;border-radius:14px}.home-review .stars{color:var(--saffron-deep);letter-spacing:2px}.home-review p{margin:14px 0;font-family:'Fraunces',serif;font-style:italic}.home-review b{font-size:13px;color:var(--ink-soft)}
+.home-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}.home-map{width:100%;height:330px;border:0;border-radius:12px}.home-socials{display:flex;gap:16px;flex-wrap:wrap;margin-top:24px}.home-socials a{color:var(--majorelle-deep);font-weight:600}
+@media(max-width:760px){.home-service-grid,.home-review-grid,.home-contact-grid{grid-template-columns:1fr}.home-intro{padding:50px 0 16px}.home-map{height:280px}}
+</style>
 </head>
 <body>
-
 <header id="siteHeader">
   <nav class="wrap">
-    <a href="#top" class="brand">
-      <img class="brand-mark" src="images/logo.webp" alt="The Secret Marrakech logo" width="30">
-      The Secret <span>Marrakech</span>
-    </a>
+    <a href="#top" class="brand"><img class="brand-mark" src="images/logo.webp" alt="The Secret Marrakech logo" width="30">The Secret <span>Marrakech</span></a>
     <div class="nav-links">
-      <a href="#top">Home</a>
-      <a href="tours.html">Tours &amp; Activities</a>
-      <a href="services.html">Services</a>
-      <a href="shop.html">Shop</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="about.html">About</a>
-      <a href="FAQ.html">FAQ</a>
-      <a href="contact.html">Contact</a>
+      <a href="#top">Home</a><a href="about.html">About</a><a href="tours.html">Tours &amp; Activities</a><a href="services.html">Services</a><a href="shop.html">Shop</a><a href="gallery.html">Gallery</a><a href="FAQ.html">FAQ</a><a href="contact.html">Contact</a>
     </div>
     <a href="https://wa.me/212628921377" class="nav-cta">Book on WhatsApp</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </nav>
 </header>
-
 <div class="mobile-overlay" id="mobileOverlay"></div>
 <div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-menu-top">
-    <span class="brand" style="color:var(--ink); text-shadow:none; font-size:17px;">
-      <img class="brand-mark" src="images/logo.webp" alt="The Secret Marrakech logo" width="26">
-      The Secret <span>Marrakech</span>
-    </span>
-    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-  </div>
-  <nav>
-    <a href="#top">Home</a>
-    <a href="tours.html">Tours &amp; Activities</a>
-    <a href="services.html">Services</a>
-    <a href="shop.html">Shop</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="about.html">About</a>
-    <a href="FAQ.html">FAQ</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-  <a href="https://wa.me/212628921377" class="btn btn-primary">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M17.47 14.38c-.28-.14-1.64-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.71.9-.87 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.25-1.4-.83-.74-1.4-1.66-1.56-1.94-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.62-1.5-.85-2.06-.22-.53-.45-.46-.62-.47-.16-.01-.35-.01-.53-.01-.18 0-.49.07-.74.35-.25.28-.98.96-.98 2.33s1 2.7 1.14 2.89c.14.18 1.97 3 4.77 4.21.67.29 1.19.46 1.6.59.67.21 1.28.18 1.76.11.54-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z" fill="currentColor"/></svg>
-    Book on WhatsApp
-  </a>
+  <div class="mobile-menu-top"><a href="#top" class="brand" style="color:var(--ink);text-shadow:none;font-size:17px;text-decoration:none"><img class="brand-mark" src="images/logo.webp" alt="The Secret Marrakech logo" width="26">The Secret <span>Marrakech</span></a><button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <nav><a href="#top">Home</a><a href="about.html">About</a><a href="tours.html">Tours &amp; Activities</a><a href="services.html">Services</a><a href="shop.html">Shop</a><a href="gallery.html">Gallery</a><a href="FAQ.html">FAQ</a><a href="contact.html">Contact</a></nav>
+  <a href="https://wa.me/212628921377" class="btn btn-primary">Book on WhatsApp</a>
 </div>
 
+<main>
 <section class="hero" id="top">
-  <div class="hero-bg">
-    <img src="images/gallery/m13.webp" alt="Majorelle Garden in Marrakech">
-  </div>
-  <div class="wrap hero-inner">
-    <h1>Discover the Authentic <em>Marrakech</em> with a Local Expert</h1>
-    <p class="sub">Explore the hidden gems and secret paths of the historical Medina, and the less-touristy parts of the souks—guided by a trusted, licensed local who grew up in the city and knows it inside out.</p>
-    <div class="hero-ctas">
-      <a href="https://wa.me/212628921377" class="btn btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.06-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="currentColor" opacity="0.15"/><path d="M17.47 14.38c-.28-.14-1.64-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.71.9-.87 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.25-1.4-.83-.74-1.4-1.66-1.56-1.94-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.62-1.5-.85-2.06-.22-.53-.45-.46-.62-.47-.16-.01-.35-.01-.53-.01-.18 0-.49.07-.74.35-.25.28-.98.96-.98 2.33s1 2.7 1.14 2.89c.14.18 1.97 3 4.77 4.21.67.29 1.19.46 1.6.59.67.21 1.28.18 1.76.11.54-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z" fill="currentColor"/></svg>
-        Book on WhatsApp
-      </a>
-      <a href="tours.html" class="btn btn-ghost">View tours</a>
-    </div>
-  </div>
+  <div class="hero-bg"><img src="images/gallery/m13.webp" alt="A glimpse of Marrakech"></div>
+  <div class="wrap hero-inner"><h1>Discover the authentic <em>Marrakech</em> with a local expert.</h1><p class="sub">Welcome to The Secret Marrakech. Explore the medina, meet its artisans and discover the city through the eyes of a licensed local guide.</p><div class="hero-ctas"><a href="tours.html" class="btn btn-primary">Explore tours</a><a href="about.html" class="btn btn-ghost">Meet your guide</a></div></div>
 </section>
 
-<section class="guide" id="guide">
-  <div class="wrap">
-    <div class="guide-photos reveal">
-      <img class="photo-main" src="images/about/p2.webp" alt="Chafik, licensed tour guide in Marrakech">
-    </div>
-    <div class="guide-info reveal">
-      <span class="guide-name">Meet your guide</span>
-      <h2>Raised in the city,<br>Still in love with it.</h2>
-      <div class="guide-body">
-        <p>I'm Chafik, a licensed local tour guide based in Marrakech, Morocco. I’ve spent my life navigating the historic medina, knowing precisely which hidden alley in the souks leads to the finest traditional lantern makers, which quiet rooftop catches the best sunset, and which street food stalls serve authentic tagine just for locals. My goal is to take you beyond the typical tourist traps and show you the real Marrakech I live in.</p>
-      </div>
-      <div class="badges">
-        <div class="badge"><b>Licensed</b><span>Ministry of Tourism</span></div>
-        <div class="badge"><b>8+</b><span>Years guiding</span></div>
-        <div class="badge"><b>Fluent</b><span>English, French &amp; Arabic</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="home-intro"><div class="wrap"><span class="eyebrow">A local introduction</span><h2>More than a visit. A real connection with Marrakech.</h2><p>From hidden medina lanes and centuries-old crafts to the flavors of the souks, discover the stories and people that make this city unforgettable.</p></div></section>
 
-<section id="tours">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">Tours &amp; Activities in Marrakech</span>
-      <h2>Pick a starting point.</h2>
-      <p>Four real, tested experiences — each one can run as a small public group or fully private. Full details and pricing on the tours page.</p>
-    </div>
-    <div class="tours-grid">
+<section id="tours"><div class="wrap"><div class="section-head"><span class="eyebrow">Tours &amp; Activities</span><h2>Choose your Marrakech experience.</h2><p>Small-group and private experiences led by a local guide.</p></div>
+<div class="tours-grid">
+<a href="tours.html#secret-marrakech" class="tour-card"><div class="tour-photo"><img src="images/about/p20.webp" alt="Discovering the historic Mellah"><span class="tour-duration">3 hours</span></div><div class="tour-body"><h3>Discover the Secret Marrakech</h3><div class="tour-foot"><span class="tour-price">Walking tour</span><span class="tour-cta">Details</span></div></div></a>
+<a href="tours.html#classic-city" class="tour-card"><div class="tour-photo"><img src="images/gallery/ps2.webp" alt="A historic Marrakech courtyard"><span class="tour-duration">3 hours</span></div><div class="tour-body"><h3>Uncover the Beauty of Marrakech</h3><div class="tour-foot"><span class="tour-price">City tour</span><span class="tour-cta">Details</span></div></div></a>
+<a href="tours.html#hidden-souks" class="tour-card"><div class="tour-photo"><img src="images/gallery/ps5.webp" alt="Craft workshops in the souks"><span class="tour-duration">2 hours</span></div><div class="tour-body"><h3>Unveil the Hidden Souks</h3><div class="tour-foot"><span class="tour-price">Artisans &amp; shopping</span><span class="tour-cta">Details</span></div></div></a>
+<a href="tours.html#food-tour" class="tour-card"><div class="tour-photo"><img src="images/about/p17.webp" alt="Tasting Marrakech street food"><span class="tour-duration">2 hours</span></div><div class="tour-body"><h3>Savor the Street Food</h3><div class="tour-foot"><span class="tour-price">Food tour</span><span class="tour-cta">Details</span></div></div></a>
+</div><div class="tours-more"><a href="tours.html" class="btn btn-ghost">See all tours &amp; activities</a></div></div></section>
 
-      <a href="tours.html#secret-marrakech" class="tour-card reveal">
-        <div class="tour-photo">
-          <img src="images/about/p20.webp" alt="Walking through the Marrakech medina and Mellah">
-          <span class="tour-duration">3 hours</span>
-          <span class="tour-heart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></span>
-        </div>
-        <div class="tour-body">
-          <h3>Discover the Secret Marrakech</h3>
-          <div class="tour-meta-row"><span class="stars">★★★★★</span><span>4.95 · 348 reviews</span></div>
-          <div class="tour-foot">
-            <span class="tour-price">from <b>€20</b></span>
-            <span class="tour-cta">Details</span>
-          </div>
-        </div>
-      </a>
+<section id="services" style="background:var(--paper-2)"><div class="wrap"><div class="section-head"><span class="eyebrow">Services</span><h2>Helpful local support, beyond the tour.</h2><p>Make planning your time in Marrakech and Morocco easier.</p></div><div class="home-service-grid">
+<article class="home-service-card"><h3>Day trips &amp; excursions</h3><p>Discover the Atlas Mountains, Agafay Desert, Essaouira and more with a trip arranged around your plans.</p><a href="services.html">Explore excursions →</a></article>
+<article class="home-service-card"><h3>Custom tour planning</h3><p>Share your interests and schedule for a personalized Marrakech or Morocco itinerary.</p><a href="services.html">View our services →</a></article>
+<article class="home-service-card"><h3>Travel assistance</h3><p>Ask about airport transfers, taxis, restaurant bookings and trusted local recommendations.</p><a href="services.html">See how we can help →</a></article>
+</div></div></section>
 
-      <a href="tours.html#food-tour" class="tour-card reveal">
-        <div class="tour-photo">
-          <img src="images/about/p17.webp" alt="Tasting street food at a local Marrakech stall">
-          <span class="tour-duration">2 hours</span>
-          <span class="tour-heart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></span>
-        </div>
-        <div class="tour-body">
-          <h3>Savor the Street Food of Marrakech</h3>
-          <div class="tour-meta-row"><span class="stars">★★★★★</span><span>5.0 · 65 reviews</span></div>
-          <div class="tour-foot">
-            <span class="tour-price">from <b>€35</b></span>
-            <span class="tour-cta">Details</span>
-          </div>
-        </div>
-      </a>
+<section class="reviews-section"><div class="wrap"><div class="section-head"><span class="eyebrow">Reviews &amp; Testimonials</span><h2>Stories from our guests.</h2></div><div class="home-review-grid">
+<article class="home-review"><span class="stars">★★★★★</span><p>“Highly recommend! Chafik was an excellent guide through Marrakech—extremely knowledgeable and very friendly.”</p><b>Guest review · Airbnb</b></article>
+<article class="home-review"><span class="stars">★★★★★</span><p>“The best way we could have started our trip. He showed us the real city and made the medina come alive.”</p><b>Guest review · Tripadvisor</b></article>
+<article class="home-review"><span class="stars">★★★★★</span><p>“Such a calm, kind and knowledgeable guide. Appreciated every minute of it. Highly recommended!”</p><b>Guest review · Airbnb</b></article>
+</div></div></section>
 
-      <a href="tours.html#classic-city" class="tour-card reveal">
-        <div class="tour-photo">
-          <img src="images/gallery/ps2.webp" alt="A courtyard in a Marrakech heritage site">
-          <span class="tour-duration">3 hours</span>
-          <span class="tour-heart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></span>
-        </div>
-        <div class="tour-body">
-          <h3>Uncover the Beauty of Marrakech</h3>
-          <div class="tour-meta-row"><span class="stars">★★★★★</span><span>5.0 · 6 reviews</span></div>
-          <div class="tour-foot">
-            <span class="tour-price">from <b>€20</b></span>
-            <span class="tour-cta">Details</span>
-          </div>
-        </div>
-      </a>
+<section class="gallery" id="gallery"><div class="wrap"><div class="section-head"><span class="eyebrow">Gallery</span><h2>A glimpse into the beauty of the Red City.</h2></div><div class="gallery-page-grid">
+<img src="images/gallery/k.webp" alt="Koutoubia Mosque in Marrakech"><img src="images/gallery/S33.webp" alt="Traditional babouche slippers in the souks"><img src="images/gallery/w1.webp" alt="A traditional wool-dyeing workshop"><img src="images/gallery/m8.webp" alt="Medersa Ben Youssef courtyard"><img src="images/gallery/ss66.webp" alt="Handmade lanterns in the souks"><img src="images/gallery/s11.webp" alt="A street in the Marrakech medina">
+</div><div class="tours-more"><a href="gallery.html" class="btn btn-ghost">View the full gallery</a></div></div></section>
 
-      <a href="tours.html#hidden-souks" class="tour-card reveal">
-        <div class="tour-photo">
-          <img src="images/gallery/ps5.webp" alt="Spice and craft stalls in the Marrakech souks">
-          <span class="tour-duration">2 hours</span>
-          <span class="tour-heart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></span>
-        </div>
-        <div class="tour-body">
-          <h3>Unveil the Hidden Souks</h3>
-          <div class="tour-meta-row"><span class="stars">★★★★★</span><span>4.93 · 44 reviews</span></div>
-          <div class="tour-foot">
-            <span class="tour-price">from <b>€15</b></span>
-            <span class="tour-cta">Details</span>
-          </div>
-        </div>
-      </a>
-
-    </div>
-    <div class="tours-more">
-      <a href="tours.html" class="btn btn-ghost">See all tours &amp; activities</a>
-    </div>
-  </div>
-</section>
-
-<section class="reviews-section">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">Reviews</span>
-      <h2>What guests are saying.</h2>
-    </div>
-
-    <div class="reviews-slider-wrap reveal">
-      <div class="reviews-slider" id="reviewsSlider">
-        <div class="review-card">
-          <div class="review-card-inner">
-            <div class="review-top"><span class="stars">★★★★★</span><span class="platform-tag">Airbnb</span></div>
-            <p>"Highly recommend! Chafik was an excellent guide through Marrakech - he is extremely knowledgeable, very friendly, and navigated our family beautifully to escape the summer heat yet not miss anything."</p>
-            <div class="reviewer">Melissa — Brussels, Belgium</div>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-card-inner">
-            <div class="review-top"><span class="stars">★★★★★</span><span class="platform-tag">Tripadvisor</span></div>
-            <p>"We had a private walking tour with Chafik on our very first day in Marrakech, and it was honestly the best way we could have started our trip. He didn't just take us to the main historical sites, but also showed us smaller, hidden places we would have never found on our own."</p>
-            <div class="reviewer">Irina B.</div>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-card-inner">
-            <div class="review-top"><span class="stars">★★★★★</span><span class="platform-tag">Airbnb</span></div>
-            <p>"Wonderful introduction to Marrakech and Jewish quarter! Such a calm, kind and knowledgeable guide. Appreciated every minute of it. Highly recommended!"</p>
-            <div class="reviewer">Malene — Aalborg, Denmark</div>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-card-inner">
-            <div class="review-top"><span class="stars">★★★★★</span><span class="platform-tag">Tripadvisor</span></div>
-            <p>"We had an amazing city tour with Chafik. He showed us the real Marrakesh, a bit off the track but very diverse, colourful and interesting. Speaking perfect English! We highly recommend Chafik as a guide."</p>
-            <div class="reviewer">Filip O. — Poznań, Poland</div>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-card-inner">
-            <div class="review-top"><span class="stars">★★★★★</span><span class="platform-tag">Airbnb</span></div>
-            <p>"We had such a great time! Chafik was so knowledgeable and kind! He helped us find some unique pieces and helped us learn the art of battering. If you get the chance, we would definitely recommend!"</p>
-            <div class="reviewer">Jessica — Brisbane City, Australia</div>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-card-inner">
-            <div class="review-top"><span class="stars">★★★★★</span><span class="platform-tag">Tripadvisor</span></div>
-            <p>"Chafik was an excellent tour guide who was extremely knowledgable. He also sent us a list of restaurant recommendations and tailored the tour to suit us . I would highly recommend using him whilst you’re in Marrakesh."</p>
-            <div class="reviewer">Happiness96845 — Flaunden, United Kingdom</div>
-          </div>
-        </div>
-      </div>
-      <div class="slider-nav">
-        <button class="slider-btn" id="sliderPrev" aria-label="Previous reviews">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <button class="slider-btn" id="sliderNext" aria-label="Next reviews">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <div class="platform-links">
-      <a href="https://www.airbnb.com/users/show/298601412" target="_blank" rel="noopener" class="platform-card reveal">
-        <div class="platform-icon" style="background:#FF5A5F;">
-          <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2.2c-.5 0-.9.2-1.2.6-1.9 2.3-6.3 8-6.3 11a7.5 7.5 0 0015 0c0-3-4.4-8.7-6.3-11-.3-.4-.7-.6-1.2-.6zm0 3.1c1.5 2 4.7 6.4 4.7 8.2a4.7 4.7 0 01-9.4 0c0-1.8 3.2-6.2 4.7-8.2zm-2.6 8.4a2.6 2.6 0 002.6 2.3.6.6 0 100-1.2 1.4 1.4 0 01-1.4-1.2.6.6 0 10-1.2.1z"/></svg>
-        </div>
-        <div class="platform-info">
-          <b>Airbnb Experiences</b>
-          <span class="stars">★★★★★</span><span class="p-meta">4.95 · 461 reviews</span><br>
-          <span style="color:var(--sky);">View profile</span>
-        </div>
-      </a>
-      <a href="https://www.tripadvisor.com/Attraction_Review-g293734-d26679692-Reviews-The_Secret_Marrakech-Marrakech_Marrakech_Safi.html" target="_blank" rel="noopener" class="platform-card reveal">
-        <div class="platform-icon" style="background:#34E0A1;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6">
-            <circle cx="7.5" cy="13" r="5.2"/><circle cx="7.5" cy="13" r="1.6" fill="#fff" stroke="none"/>
-            <circle cx="16.5" cy="13" r="5.2"/><circle cx="16.5" cy="13" r="1.6" fill="#fff" stroke="none"/>
-            <path d="M9.3 8.2C11 6.8 13 6.8 14.7 8.2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="platform-info">
-          <b>Tripadvisor</b>
-          <span class="stars">★★★★★</span><span class="p-meta">5.0 · 35 reviews</span><br>
-          <span style="color:var(--sky);">View profile</span>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="gallery" id="gallery">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">Gallery</span>
-      <h2>A glimpse into the beauty of the Red City.</h2>
-    </div>
-    <div class="gallery-page-grid reveal">
-      <img src="images/gallery/k.webp" alt="Koutoubia Mosque minaret framed by a palm tree, Marrakech, Morocco">
-      <img src="images/gallery/S33.webp" alt="Traditional babouche leather slippers in the souks of Marrakech, Morocco">
-      <img src="images/gallery/w1.webp" alt="Master wool-dyer at work in a traditional workshop, Marrakech souks, Morocco">
-      <img src="images/gallery/m8.webp" alt="Central courtyard of the Medersa Ben Youssef, Marrakech, Morocco">
-      <img src="images/gallery/ss66.webp" alt="Handmade lanterns in the blacksmiths’ area of Marrakech’s souks, Morocco">
-      <img src="images/gallery/s5.webp" alt="Ornate archway entrance in the Medina of Marrakech, Morocco">
-      <img src="images/gallery/m12.webp" alt="Majorelle Garden, Marrakech, Morocco">
-      <img src="images/gallery/s11.webp" alt="Colorful ochre street in the Medina of Marrakech, Morocco">
-      <img src="images/gallery/ss22.webp" alt="Man with his donkey in a narrow street of Marrakech’s Medina, Morocco">
-    </div>
-  </div>
-</section>
-
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="contact-left reveal">
-      <span class="eyebrow">Get in touch</span>
-      <h2>Let's plan your trip to Marrakech!</h2>
-      <p class="lead">Send me an email or message me on WhatsApp for the fastest reply.</p>
-      <p class="lead">Tell me what you’d like to explore in Marrakech, and I’ll create a tailored, authentic itinerary for you within a few hours.</p>
-       <div class="contact-cta">
-        <a href="https://wa.me/212628921377" class="btn btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M17.47 14.38c-.28-.14-1.64-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.71.9-.87 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.25-1.4-.83-.74-1.4-1.66-1.56-1.94-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.62-1.5-.85-2.06-.22-.53-.45-.46-.62-.47-.16-.01-.35-.01-.53-.01-.18 0-.49.07-.74.35-.25.28-.98.96-.98 2.33s1 2.7 1.14 2.89c.14.18 1.97 3 4.77 4.21.67.29 1.19.46 1.6.59.67.21 1.28.18 1.76.11.54-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z" fill="currentColor"/></svg>
-          Message on WhatsApp
-        </a>
-        <a href="mailto:chafik.haqqoum@gmail.com?subject=Tour%20Inquiry%20-%20The%20Secret%20Marrakech" class="btn btn-email">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" fill="none"/><path d="M4 6l8 7 8-7"/></svg>
-          Send an Email
-        </a>
-      </div>
-    </div>
-    <div class="contact-right reveal">
-      <div class="contact-details">
-        <b>Hours</b>
-        Mon – Sun · 7am – 10pm
-        <b>WhatsApp / Phone</b>
-        +212 628 921 377
-        <b>Email</b>
-        chafik.haqqoum@gmail.com
-        <b>Based in</b>
-        Marrakech, Morocco
-      </div>
-      <div class="contact-socials">
-        <a href="https://www.instagram.com/thesecretmarrakech/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon" style="background:radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="#fff" stroke="none"/></svg>
-        </a>
-        <a href="https://www.facebook.com/thesecretmarrakech" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon" style="background:#1877F2;">
-          <svg viewBox="0 0 24 24" fill="#fff"><path d="M15 8.5h-2c-.8 0-1.5.7-1.5 1.5v2h3.3l-.4 3h-2.9V21h-3v-6H8v-3h1.5v-2.2C9.5 7.3 11 6 13.2 6H15v2.5z"/></svg>
-        </a>
-        <a href="https://www.tripadvisor.com/Attraction_Review-g293734-d26679692-Reviews-The_Secret_Marrakech-Marrakech_Marrakech_Safi.html" target="_blank" rel="noopener" aria-label="Tripadvisor" class="social-icon" style="background:#34E0A1;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="7.5" cy="13" r="5.2"/><circle cx="7.5" cy="13" r="1.6" fill="#fff" stroke="none"/><circle cx="16.5" cy="13" r="5.2"/><circle cx="16.5" cy="13" r="1.6" fill="#fff" stroke="none"/><path d="M9.3 8.2C11 6.8 13 6.8 14.7 8.2" stroke-linecap="round"/></svg>
-        </a>
-        <a href="https://www.airbnb.com/users/show/298601412" target="_blank" rel="noopener" aria-label="Airbnb" class="social-icon" style="background:#FF5A5F;">
-          <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2.2c-.5 0-.9.2-1.2.6-1.9 2.3-6.3 8-6.3 11a7.5 7.5 0 0015 0c0-3-4.4-8.7-6.3-11-.3-.4-.7-.6-1.2-.6zm0 3.1c1.5 2 4.7 6.4 4.7 8.2a4.7 4.7 0 01-9.4 0c0-1.8 3.2-6.2 4.7-8.2zm-2.6 8.4a2.6 2.6 0 002.6 2.3.6.6 0 100-1.2 1.4 1.4 0 01-1.4-1.2.6.6 0 10-1.2.1z"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap" style="justify-content:center; gap:12px;">
-    <img class="footer-logo" src="images/logo.webp" alt="The Secret Marrakech logo">
-    <span>© 2026 The Secret Marrakech</span>
-  </div>
-</footer>
-
-<a href="https://wa.me/212628921377" class="wa-float">
-  <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.06-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="#0c1c12" opacity="0.12"/><path d="M17.47 14.38c-.28-.14-1.64-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.71.9-.87 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.25-1.4-.83-.74-1.4-1.66-1.56-1.94-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.62-1.5-.85-2.06-.22-.53-.45-.46-.62-.47-.16-.01-.35-.01-.53-.01-.18 0-.49.07-.74.35-.25.28-.98.96-.98 2.33s1 2.7 1.14 2.89c.14.18 1.97 3 4.77 4.21.67.29 1.19.46 1.6.59.67.21 1.28.18 1.76.11.54-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z" fill="#0c1c12"/></svg>
-  <span>WhatsApp</span>
-</a>
-
+<section class="contact" id="contact"><div class="wrap"><div class="home-contact-grid"><div><span class="eyebrow">Contact</span><h2>Let's plan your Marrakech experience.</h2><p class="lead">Get in touch by WhatsApp or email for tours, services and local recommendations.</p><div class="contact-cta"><a href="https://wa.me/212628921377" class="btn btn-primary">Message on WhatsApp</a><a href="mailto:chafik.haqqoum@gmail.com" class="btn btn-email">Send an Email</a></div><div class="home-socials"><a href="https://www.instagram.com/thesecretmarrakech/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/thesecretmarrakech" target="_blank" rel="noopener">Facebook</a><a href="https://www.tripadvisor.com/Attraction_Review-g293734-d26679692-Reviews-The_Secret_Marrakech-Marrakech_Marrakech_Safi.html" target="_blank" rel="noopener">Tripadvisor</a></div><p style="margin-top:20px">Marrakech, Morocco · +212 628 921 377</p></div><iframe class="home-map" title="Map of Marrakech, Morocco" loading="lazy" src="https://maps.google.com/maps?q=Jemaa%20el-Fnaa%2C%20Marrakech&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div></div></section>
+</main>
+<footer><div class="wrap" style="justify-content:center;gap:12px"><img class="footer-logo" src="images/logo.webp" alt="The Secret Marrakech logo"><span>© 2026 The Secret Marrakech</span></div></footer>
+<a href="https://wa.me/212628921377" class="wa-float" aria-label="Contact us on WhatsApp"><span>WhatsApp</span></a>
 <script src="script.js"></script>
-
 </body>
 </html>
