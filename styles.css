@@ -141,3 +141,35 @@ img.brand-mark{height:72px;width:auto;aspect-ratio:1/1;border-radius:40%;object-
 #classic-city .tour-detail-media img,
 #hidden-souks .tour-detail-media img,
 #food-tour .tour-detail-media img{aspect-ratio:8/5}
+
+/* ---------- Category Sliders (Tours & Activities) ---------- */
+.category-slider-section {
+  padding: 60px 0;
+}
+.category-slider-section.alt {
+  background: var(--paper-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.category-slider-wrap {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 10px 4px 24px;
+}
+.category-slider-wrap::-webkit-scrollbar {
+  display: none;
+}
+.category-slider-wrap .tour-card {
+  flex: 0 0 320px;
+  scroll-snap-align: start;
+}
+@media(max-width: 768px) {
+  .category-slider-wrap .tour-card {
+    flex: 0 0 85%;
+  }
+}
+```[cite: 2]
