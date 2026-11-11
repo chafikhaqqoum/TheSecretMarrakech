@@ -79,7 +79,7 @@ if (reviewsSlider) {
 }
 
 // Automatically highlight active page in the navigation bar
-document.addEventListener('DOMContentLoaded', () => {
+function highlightActiveNav() {
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
   
   const allNavLinks = document.querySelectorAll('.nav-links a, .mobile-menu nav a');
@@ -89,4 +89,10 @@ document.addEventListener('DOMContentLoaded', () => {
       link.classList.add('active-nav');
     }
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', highlightActiveNav);
+} else {
+  highlightActiveNav();
+}
