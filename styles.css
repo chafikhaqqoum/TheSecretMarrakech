@@ -172,3 +172,28 @@ img.brand-mark{height:80px;width:auto;aspect-ratio:1/1;border-radius:70%;object-
     flex: 0 0 85%;
   }
 }
+
+/* ---------- Naavigation links size ---------- */
+header .nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+}
+
+header .nav-links a {
+  font-size: 18px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+
+/* Active navigation link indicator */
+.nav-links a.active-nav,
+.mobile-menu nav a.active-nav {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+
+
