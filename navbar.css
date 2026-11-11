@@ -144,8 +144,8 @@ header .wrap {
   color: var(--ink);
 }
 
-/* Mobile responsive adjustments & drawer */
-@media(max-width: 1140px) {
+/* Keep navigation links in the sidebar on phones and tablets. */
+@media(max-width: 1200px) {
   .nav-links {
     display: none;
   }
