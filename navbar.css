@@ -1,23 +1,25 @@
 header {
-  background: rgba(255, 255, 255, 0.72);
-  border-bottom: 1px solid rgba(23, 38, 42, 0.08);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.62);
+  border-bottom: 1px solid rgba(23, 38, 42, 0.06);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 header.scrolled {
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 10px 30px rgba(23, 38, 42, 0.08);
-  border-color: rgba(23, 38, 42, 0.12);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 8px 24px rgba(23, 38, 42, 0.08);
+  border-color: rgba(23, 38, 42, 0.1);
 }
 
 header .wrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  min-height: 90px;
+  gap: 12px;
+  min-height: 78px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 header .brand {
@@ -29,34 +31,34 @@ header .nav-links {
   align-items: center;
   justify-content: center;
   flex: 1 1 auto;
-  gap: 18px;
+  gap: 12px;
   min-width: 0;
+  margin: 0 auto;
 }
 
 header .nav-links a {
   white-space: nowrap;
+  font-size: 13px;
+  letter-spacing: 0.02em;
 }
 
 header .nav-cta {
   margin-left: auto;
+  white-space: nowrap;
 }
 
 @media (min-width: 1141px) {
   header .wrap {
-    padding-right: 12px;
+    padding-right: 10px;
   }
 
   header .nav-links {
-    margin: 0 auto;
+    padding: 0 10px;
   }
 }
 
 @media (max-width: 1140px) {
   header .nav-links {
-    gap: 12px;
-  }
-
-  header .nav-cta {
-    margin-left: 0;
+    gap: 10px;
   }
 }
