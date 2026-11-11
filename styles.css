@@ -173,16 +173,16 @@ img.brand-mark{height:80px;width:auto;aspect-ratio:1/1;border-radius:70%;object-
   }
 }
 
-/* ---------- Naavigation links size ---------- */
+/* ---------- Navigation links size ---------- */
 header .nav-links {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 26px;
+  gap: 22px;
 }
 
 header .nav-links a {
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 0.01em;
   white-space: nowrap;
 }
