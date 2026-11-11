@@ -106,4 +106,3 @@ if (document.readyState === 'loading') {
 } else {
   highlightActiveNav();
 }
-}
