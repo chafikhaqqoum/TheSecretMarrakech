@@ -80,12 +80,22 @@ if (reviewsSlider) {
 
 // Automatically highlight active page in the navigation bar
 function highlightActiveNav() {
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  const currentUrl = window.location.href.toLowerCase();
   
   const allNavLinks = document.querySelectorAll('.nav-links a, .mobile-menu nav a');
+  allNavLinks.get = Array.from(allNavLinks);
+  
   allNavLinks.forEach(link => {
     const linkHref = link.getAttribute('href');
-    if (linkHref === currentPath || (currentPath === '' && linkHref === 'index.html')) {
+    if (!linkHref) return;
+
+    // Clean up the href to match the file name (ignoring anchors like #top)
+    const cleanHref = linkHref.split('#')[0].toLowerCase();
+
+    // Check if the current page URL ends with or includes this page's filename
+    if (cleanHref && currentUrl.endsWith(cleanHref)) {
+      link.classList.add('active-nav');
+    } else if ((currentUrl.endsWith('/') || currentUrl.endsWith('index.html')) && (cleanHref === 'index.html' || cleanHref === '')) {
       link.classList.add('active-nav');
     }
   });
@@ -95,4 +105,5 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', highlightActiveNav);
 } else {
   highlightActiveNav();
+}
 }
