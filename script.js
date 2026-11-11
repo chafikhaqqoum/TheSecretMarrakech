@@ -3,6 +3,12 @@ window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 40);
 });
 
+// Load shared navigation refinements after the main stylesheet.
+const navStylesheet = document.createElement('link');
+navStylesheet.rel = 'stylesheet';
+navStylesheet.href = 'navbar.css';
+document.head.appendChild(navStylesheet);
+
 const navToggle = document.getElementById('navToggle');
 const mobileMenu = document.getElementById('mobileMenu');
 const mobileOverlay = document.getElementById('mobileOverlay');
