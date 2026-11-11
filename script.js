@@ -77,3 +77,16 @@ if (reviewsSlider) {
     }, 100);
   });
 }
+
+// Automatically highlight active page in the navigation bar
+document.addEventListener('DOMContentLoaded', () => {
+  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  
+  const allNavLinks = document.querySelectorAll('.nav-links a, .mobile-menu nav a');
+  allNavLinks.forEach(link => {
+    const linkHref = link.getAttribute('href');
+    if (linkHref === currentPath || (currentPath === '' && linkHref === 'index.html')) {
+      link.classList.add('active-nav');
+    }
+  });
+});
