@@ -53,8 +53,8 @@ header .nav-links a {
 header .nav-cta {
   margin-left: auto;
   white-space: nowrap;
-  padding: 8px 14px;
-  font-size: 11px;
+  padding: 12px 24px;
+  font-size: 18px;
 }
 
 /* At tablet/mobile widths, use the existing side drawer instead of inline links. */
