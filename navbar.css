@@ -114,10 +114,10 @@ header .wrap {
 .nav-cta {
   border: 1px solid #25D366;
   color: #fff !important;
-  padding: 12px 24px;
+  padding: 14px 20px;
   border-radius: var(--radius);
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 18px;
+  font-size: 14px;
   flex-shrink: 0;
   background: #25D366;
   transition: all 0.2s;
