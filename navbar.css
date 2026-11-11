@@ -38,7 +38,7 @@ header .nav-links {
   align-items: center;
   justify-content: center;
   flex: 1 1 auto;
-  gap: 26px;
+  gap: 22px;
   min-width: 0;
   margin: 0 auto;
   padding: 0 8px;
@@ -53,7 +53,7 @@ header .nav-links a {
 header .nav-cta {
   margin-left: auto;
   white-space: nowrap;
-  padding: 12px 24px;
+  padding: 14px 20px;
   font-size: 14px;
 }
 
