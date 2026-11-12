@@ -1,16 +1,3 @@
-/* Global layout wrapper for standard sections */
-.wrap {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 0 32px;
-}
-
-@media(max-width: 640px) {
-  .wrap {
-    padding: 0 20px;
-  }
-}
-
 /* Shared navigation & header styling */
 header {
   background: rgba(255, 255, 255, 0.62);
@@ -45,6 +32,14 @@ header .wrap {
   justify-content: space-between;
   min-height: 80px;
   gap: 16px;
+}
+
+/* Mobile header padding fix to prevent right-side overflow */
+@media(max-width: 640px) {
+  header .wrap {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 
 .brand {
@@ -244,6 +239,7 @@ header .wrap {
 html,
 body {
   width: auto;
+  overflow-x: hidden;
 }
 
 .wrap {
