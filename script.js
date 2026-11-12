@@ -1,7 +1,9 @@
 const header = document.getElementById('siteHeader');
-window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 40);
-});
+if (header) {
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+}
 
 // Load shared navigation refinements after the main stylesheet.
 const navStylesheet = document.createElement('link');
@@ -28,10 +30,28 @@ function closeMobileMenu(){
   document.body.style.overflow = '';
 }
 
-navToggle.addEventListener('click', openMobileMenu);
-mobileMenuClose.addEventListener('click', closeMobileMenu);
-mobileOverlay.addEventListener('click', closeMobileMenu);
-mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+if (navToggle && mobileMenu && mobileOverlay && mobileMenuClose) {
+  navToggle.addEventListener('click', openMobileMenu);
+  mobileMenuClose.addEventListener('click', closeMobileMenu);
+  mobileOverlay.addEventListener('click', closeMobileMenu);
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+}
+
+// Add the floating WhatsApp CTA to every page using this shared script.
+if (!document.querySelector('.wa-float')) {
+  const floatingWhatsApp = document.createElement('a');
+  floatingWhatsApp.href = 'https://wa.me/212628921377';
+  floatingWhatsApp.className = 'wa-float';
+  floatingWhatsApp.setAttribute('aria-label', 'Contact us on WhatsApp');
+  floatingWhatsApp.innerHTML = `
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.06-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="currentColor" opacity="0.12"/>
+      <path d="M17.47 14.38c-.28-.14-1.64-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.71.9-.87 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.25-1.4-.83-.74-1.4-1.66-1.56-1.94-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.62-1.5-.85-2.06-.22-.53-.45-.46-.62-.47-.16-.01-.35-.01-.53-.01-.18 0-.49.07-.74.35-.25.28-.98.96-.98 2.33s1 2.7 1.14 2.89c.14.18 1.97 3 4.77 4.21.67.29 1.19.46 1.6.59.67.21 1.28.18 1.76.11.54-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z" fill="currentColor"/>
+    </svg>
+    <span>WhatsApp</span>
+  `;
+  document.body.appendChild(floatingWhatsApp);
+}
 
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
@@ -81,10 +101,8 @@ if (reviewsSlider) {
 // Automatically highlight active page in the navigation bar
 function highlightActiveNav() {
   const currentUrl = window.location.href.toLowerCase();
-  
   const allNavLinks = document.querySelectorAll('.nav-links a, .mobile-menu nav a');
-  allNavLinks.get = Array.from(allNavLinks);
-  
+
   allNavLinks.forEach(link => {
     const linkHref = link.getAttribute('href');
     if (!linkHref) return;
