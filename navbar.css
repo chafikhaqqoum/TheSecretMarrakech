@@ -144,46 +144,18 @@ header .wrap {
   color: var(--ink);
 }
 
-/* Keep navigation links in the sidebar on phone and tablet screens. */
-@media(max-width: 1200px) {
+/* Mobile responsive adjustments & drawer */
+@media(max-width: 1140px) {
   .nav-links {
     display: none;
   }
   .nav-cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 12px;
-    font-size: 12px;
-    white-space: nowrap;
+    display: none;
   }
   .nav-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-}
-
-@media(max-width: 640px) {
-  header .wrap {
-    padding-left: 16px;
-    padding-right: 16px;
-    gap: 8px;
-  }
-
-  header .brand {
-    font-size: 18px;
-    gap: 5px;
-  }
-
-  header .brand-mark {
-    width: 48px;
-    height: 48px;
-  }
-
-  .nav-cta {
-    padding: 8px 9px;
-    font-size: 10px;
   }
 }
 
@@ -266,4 +238,26 @@ header .wrap {
 .mobile-menu .btn {
   margin-top: 26px;
   justify-content: center;
+}
+
+/* Restore the prior site width rules, undoing the latest width-only override. */
+html,
+body {
+  width: auto;
+}
+
+.wrap {
+  width: min(100%, 1180px);
+  max-width: 1180px;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+@media(max-width: 640px) {
+  .wrap {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
