@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"/>
+    <title>Tour Calendar — Check Availability for Marrakech Tours</title>
+    <meta name="author" content="The Secret Marrakech"/>
+    <meta name="description" content="Pick your dates and see which Marrakech tours run that day — medina walks, street food tours, classic city sightseeing and hidden souk shopping, with times and prices."/>
+    
+    <style>
+      :root{
+        --paper:#FFFFFF;
+        --paper-2:#F2F8F7;
+        --panel:#FFFFFF;
+        --ink:#17262A;
+        --ink-soft:#5C6E70;
+        --majorelle:#0EA893;
+        --majorelle-deep:#0B8574;
+        --saffron:#FF7A54;
+        --saffron-deep:#E85F38;
+        --coral:#FF7A54;
+        --sky:#2E9BD6;
+        --line: rgba(23,38,42,0.12);
+        --radius: 6px;
+      }
+      *{box-sizing:border-box; margin:0; padding:0;}
+      html{scroll-behavior:smooth;}
+      body{
+        background:var(--paper);
+        color:var(--ink);
+        font-family:'Work Sans', sans-serif;
+        font-weight:400;
+        line-height:1.6;
+        overflow-x:hidden;
+      }
+      a{color:inherit; text-decoration:none;}
+      img{display:block; max-width:100%;}
+      .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+      @media (max-width:640px){ .wrap{padding:0 20px;} }
+      h1,h2,h3{
+        font-family:'Fraunces', serif;
+        font-weight:600;
+        letter-spacing:-0.01em;
+        color:var(--ink);
+      }
+      .eyebrow{
+        font-family:'IBM Plex Mono', monospace;
+        font-size:14.5px;
+        font-weight:500;
+        letter-spacing:0.12em;
+        text-transform:uppercase;
+        color:var(--coral);
+      }
+
+      /* ---------- NAV ---------- */
+      header{
+        position:fixed; top:0; left:0; right:0; z-index:100;
+        padding:14px 0;
+        background:rgba(255,255,255,0.97);
+        backdrop-filter: blur(10px);
+        border-bottom:1px solid var(--line);
+      }
+      nav.wrap{ display:flex; align-items:center; gap:24px; }
+      .brand{
+        font-family:'Fraunces', serif;
+        font-weight:600;
+        font-size:19px;
+        letter-spacing:0.01em;
+        color:var(--ink);
+        display:flex;
+        align-items:center;
+        gap:9px;
+        flex-shrink:0;
+      }
+      .brand span{ color:var(--coral); font-style:italic; font-weight:500; }
+      .nav-links{
+        display:flex; gap:20px; align-items:center;
+        flex:1;
+        justify-content:flex-end;
+      }
+      .nav-links a{
+        font-size:12.5px;
+        letter-spacing:0.04em;
+        text-transform:uppercase;
+        color:var(--ink-soft);
+        transition:color 0.2s;
+      }
+      .nav-links a:hover{ color:var(--saffron); }
+      .nav-cta{
+        border:1px solid #25D366;
+        color:#fff !important;
+        padding:9px 18px;
+        border-radius:var(--radius);
+        font-family:'IBM Plex Mono', monospace;
+        font-size:12px;
+        background:#25D366;
+      }
+      .nav-cta:hover{ background:#1FB959; }
+
+      /* ---------- PAGE BANNER ---------- */
+      .page-banner{ padding:170px 0 44px; background:var(--paper-2); text-align:center; }
+      .page-banner .eyebrow{ display:block; }
+      .page-banner h1{ font-size:clamp(32px,5vw,54px); margin-top:14px; max-width:760px; margin-left:auto; margin-right:auto; }
+      .page-banner p{ max-width:600px; margin:20px auto 0; color:var(--ink-soft); font-size:16px; }
+
+      /* ---------- CALENDAR SECTION ---------- */
+      .cal-wrap{ padding:70px 0 90px; }
+      .cal-grid{ display:grid; grid-template-columns:minmax(300px,380px) 1fr; gap:46px; align-items:start; }
+      @media (max-width:860px){ .cal-grid{ grid-template-columns:1fr; gap:34px; } }
+
+      .cal-card{ border:1px solid var(--line); border-radius:16px; padding:20px; background:var(--panel); box-shadow:0 4px 20px -4px rgba(23,38,42,0.06); }
+      .cal-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+      .cal-head h2{ font-size:19px; margin:0; }
+      .cal-nav{ display:flex; gap:8px; }
+      .cal-nav button{ width:34px; height:34px; border-radius:9px; border:1px solid var(--line); background:transparent; cursor:pointer; font-size:16px; line-height:1; color:var(--ink); }
+      .cal-nav button:hover:not(:disabled){ background:rgba(0,0,0,.05); }
+
+      .cal-dow{ display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-bottom:6px; }
+      .cal-dow span{ text-align:center; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); }
+      
+      .cal-days{ display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+      .cal-day{ aspect-ratio:1; border-radius:10px; border:1px solid transparent; background:transparent; font-size:14px; cursor:pointer; color:var(--ink); position:relative; font-family:inherit; transition:all 0.15s ease; }
+      .cal-day:hover:not(:disabled){ border-color:var(--majorelle); background:var(--paper-2); }
+      .cal-day.muted{ opacity:0.35; }
+      .cal-day.selected{ background:var(--majorelle); color:#fff; border-color:var(--majorelle); }
+      .cal-day .dot{ position:absolute; bottom:6px; left:50%; transform:translateX(-50%); width:5px; height:5px; border-radius:50%; background:var(--saffron); }
+      .cal-day.selected .dot{ background:#fff; }
+      
+      .cal-legend{ display:flex; align-items:center; gap:8px; margin-top:14px; font-size:13px; color:var(--ink-soft); }
+      .cal-legend i{ width:6px; height:6px; border-radius:50%; background:var(--saffron); display:inline-block; }
+
+      .cal-results h2{ font-size:clamp(20px,2.6vw,26px); margin:0 0 6px; }
+      .cal-results .cal-sub{ color:var(--ink-soft); margin-bottom: 24px; font-size: 15px; }
+      
+      .tour-slots{ display:flex; flex-direction:column; gap:16px; }
+      .slot-card{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px; display:flex; justify-content:space-between; align-items:center; gap:16px; transition:border-color 0.2s; }
+      .slot-card:hover{ border-color:var(--majorelle); }
+      .slot-info h3{ font-size:18px; margin-bottom:6px; }
+      .slot-meta{ font-size:13px; color:var(--ink-soft); font-family:'IBM Plex Mono', monospace; display:flex; gap:16px; }
+      .slot-action{ text-align:right; flex-shrink:0; }
+      .slot-price{ font-family:'IBM Plex Mono', monospace; font-size:14px; color:var(--ink-soft); margin-bottom:8px; display:block; }
+      .slot-price b{ color:var(--ink); font-size:16px; }
+      .btn-book{ background:var(--coral); color:#fff; padding:8px 18px; border-radius:20px; font-family:'IBM Plex Mono', monospace; font-size:12px; display:inline-block; transition:background 0.2s; }
+      .btn-book:hover{ background:var(--saffron-deep); }
+      
+      @media(max-width:640px){ .slot-card{ flex-direction:column; align-items:flex-start; } .slot-action{ width:100%; display:flex; justify-content:space-between; align-items:center; } }
+
+      /* ---------- FOOTER ---------- */
+      footer{ padding:28px 0; border-top:1px solid var(--line); background:var(--paper); margin-top:60px; }
+      footer .wrap{ display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--ink-soft); flex-wrap:wrap; gap:10px; }
+      footer .socials{ display:flex; gap:18px; }
+      footer .socials a:hover{ color:var(--coral); }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <header>
+        <nav class="wrap">
+            <a href="index.html" class="brand">
+                The Secret <span>Marrakech</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tours.html">Tours</a>
+                <a href="calendar.html" style="color: var(--majorelle); font-weight: 600;">Calendar</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="https://wa.me/212600000000" class="nav-cta" target="_blank">WhatsApp Us</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- BANNER -->
+    <section class="page-banner">
+        <div class="wrap">
+            <span class="eyebrow">Live Schedule</span>
+            <h1>Tour Availability Calendar</h1>
+            <p>Pick your dates and see which Marrakech excursions run that day, with timings and pricing.</p>
+        </div>
+    </section>
+
+    <!-- CALENDAR MAIN -->
+    <div class="wrap cal-wrap">
+        <div class="cal-grid">
+            <!-- Left: Calendar Widget -->
+            <div class="cal-card">
+                <div class="cal-head">
+                    <h2 id="calendar-month-year">November 2026</h2>
+                    <div class="cal-nav">
+                        <button id="prev-month" title="Previous Month">&#10094;</button>
+                        <button id="next-month" title="Next Month">&#10095;</button>
+                    </div>
+                </div>
+                <div class="cal-dow">
+                    <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+                </div>
+                <div class="cal-days" id="calendar-days-container">
+                    <!-- Days injected by JS -->
+                </div>
+                <div class="cal-legend">
+                    <i></i> Tours available on this date
+                </div>
+            </div>
+
+            <!-- Right: Available Tours for Selected Date -->
+            <div class="cal-results">
+                <h2 id="selected-date-title">Select a Date</h2>
+                <p class="cal-sub" id="selected-date-sub">Choose any active date on the calendar to view running tours.</p>
+                
+                <div class="tour-slots" id="tour-slots-container">
+                    <!-- Dynamic tour slots rendered here -->
+                    <div style="padding: 30px; text-align: center; color: var(--ink-soft); border: 1px dashed var(--line); border-radius: 12px;">
+                        Click a date on the calendar to check daily tour schedules.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="wrap">
+            <div>&copy; 2026 The Secret Marrakech. All rights reserved.</div>
+            <div class="socials">
+                <a href="#">Instagram</a>
+                <a href="#">TripAdvisor</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT FOR INTERACTIVE CALENDAR -->
+    <script>
+        // Sample Tour Data mapped by dates (YYYY-MM-DD)
+        const tourData = {
+            "2026-11-14": [
+                { name: "Medina Hidden Souks Walk", time: "09:00 AM & 03:00 PM", duration: "3 hours", price: "€35 / person" },
+                { name: "Jemaa el-Fnaa Food Tour", time: "06:30 PM", duration: "3.5 hours", price: "€50 / person" }
+            ],
+            "2026-11-15": [
+                { name: "Palaces & Secret Gardens Tour", time: "10:00 AM", duration: "4 hours", price: "€40 / person" }
+            ],
+            "2026-11-18": [
+                { name: "Medina Hidden Souks Walk", time: "09:00 AM", duration: "3 hours", price: "€35 / person" },
+                { name: "Authentic Tagine Cooking Workshop", time: "11:00 AM", duration: "4 hours", price: "€65 / person" }
+            ],
+            "2026-11-20": [
+                { name: "Jemaa el-Fnaa Food Tour", time: "06:30 PM", duration: "3.5 hours", price: "€50 / person" }
+            ],
+            "2026-11-25": [
+                { name: "Medina Hidden Souks Walk", time: "09:00 AM", duration: "3 hours", price: "€35 / person" },
+                { name: "Palaces & Secret Gardens Tour", time: "10:00 AM", duration: "4 hours", price: "€40 / person" }
+            ]
+        };
+
+        let currentDate = new Date(2026, 10, 1); // November 2026 based on prompt current date
+        let selectedDateStr = "2026-11-14"; // Default pre-selected
+
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+
+            document.getElementById('calendar-month-year').textContent = `${monthNames[month]} ${year}`;
+
+            const daysContainer = document.getElementById('calendar-days-container');
+            daysContainer.innerHTML = '';
+
+            // First day of the month
+            const firstDayIndex = new Date(year, month, 1).getDay();
+            // Adjust to make Monday start (0 = Mon, 6 = Sun)
+            let startingSpace = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+
+            // Total days in month
+            const totalDays = new Date(year, month + 1, 0).getDate();
+            const prevTotalDays = new Date(year, month, 0).getDate();
+
+            // Previous month trailing days
+            for (let i = startingSpace - 1; i >= 0; i--) {
+                const dayBtn = document.createElement('button');
+                dayBtn.className = 'cal-day muted';
+                dayBtn.textContent = prevTotalDays - i;
+                dayBtn.disabled = true;
+                daysContainer.appendChild(dayBtn);
+            }
+
+            // Current month days
+            for (let day = 1; day <= totalDays; day++) {
+                const dayBtn = document.createElement('button');
+                dayBtn.className = 'cal-day';
+                dayBtn.textContent = day;
+
+                const mFormatted = String(month + 1).padStart(2, '0');
+                const dFormatted = String(day).padStart(2, '0');
+                const dateKey = `${year}-${mFormatted}-${dFormatted}`;
+
+                if (dateKey === selectedDateStr) {
+                    dayBtn.classList.add('selected');
+                }
+
+                // Check if tour exists on this date
+                if (tourData[dateKey]) {
+                    const dot = document.createElement('span');
+                    dot.className = 'dot';
+                    dayBtn.appendChild(dot);
+                }
+
+                dayBtn.addEventListener('click', () => {
+                    selectedDateStr = dateKey;
+                    renderCalendar();
+                    renderTours(dateKey);
+                });
+
+                daysContainer.appendChild(dayBtn);
+            }
+        }
+
+        function renderTours(dateKey) {
+            const titleEl = document.getElementById('selected-date-title');
+            const subEl = document.getElementById('selected-date-sub');
+            const container = document.getElementById('tour-slots-container');
+
+            const [y, m, d] = dateKey.split('-');
+            const formattedDateHeading = `${monthNames[parseInt(m, 10) - 1]} ${parseInt(d, 10)}, ${y}`;
+
+            titleEl.textContent = `Tours on ${formattedDateHeading}`;
+            subEl.textContent = "Select any tour below to book instantly via WhatsApp.";
+
+            const tours = tourData[dateKey];
+            if (!tours || tours.length === 0) {
+                container.innerHTML = `
+                    <div style="padding: 30px; text-align: center; color: var(--ink-soft); border: 1px dashed var(--line); border-radius: 12px;">
+                        No scheduled public tours on this date. Private custom tours can still be booked upon request!
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = tours.map(tour => `
+                <div class="slot-card">
+                    <div class="slot-info">
+                        <h3>${tour.name}</h3>
+                        <div class="slot-meta">
+                            <span>🕒 ${tour.time}</span>
+                            <span>⏳ ${tour.duration}</span>
+                        </div>
+                    </div>
+                    <div class="slot-action">
+                        <span class="slot-price">From <b>${tour.price}</b></span>
+                        <a href="https://wa.me/212600000000?text=I'd%20like%20to%20book%20the%20${encodeURIComponent(tour.name)}%20on%20${dateKey}" class="btn-book" target="_blank">Book via WhatsApp</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.getElementById('prev-month').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        });
+
+        document.getElementById('next-month').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        });
+
+        // Initial render
+        renderCalendar();
+        renderTours(selectedDateStr);
+    </script>
+</body>
+</html>
