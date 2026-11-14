@@ -12,40 +12,40 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="navbar.css">
   <style>
-    .calendar-section{padding:70px 0 90px}
-    .cal-grid{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:46px;align-items:start}
-    .cal-card{border:1px solid var(--line);border-radius:16px;padding:20px;background:var(--panel);box-shadow:0 4px 20px -4px rgba(23,38,42,.06)}
-    .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-    .cal-head h2{font-size:19px;margin:0}
-    .cal-nav{display:flex;gap:8px}
-    .cal-nav button{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:transparent;cursor:pointer;font-size:16px;line-height:1;color:var(--ink)}
-    .cal-nav button:hover{background:var(--paper-2)}
-    .cal-dow,.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-    .cal-dow{margin-bottom:6px}
-    .cal-dow span{text-align:center;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
-    .cal-day{aspect-ratio:1;border-radius:10px;border:1px solid transparent;background:transparent;font-size:14px;cursor:pointer;color:var(--ink);position:relative;font-family:inherit}
-    .cal-day:hover:not(:disabled){border-color:var(--majorelle);background:var(--paper-2)}
-    .cal-day.muted{opacity:.35}
-    .cal-day.selected{background:var(--majorelle);color:#fff;border-color:var(--majorelle)}
-    .cal-day .dot{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--saffron)}
-    .cal-day.selected .dot{background:#fff}
-    .cal-legend{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;color:var(--ink-soft)}
-    .cal-legend i{width:6px;height:6px;border-radius:50%;background:var(--saffron);display:inline-block}
-    .cal-results h2{font-size:clamp(20px,2.6vw,26px);margin:0 0 6px}
-    .cal-sub{color:var(--ink-soft);margin-bottom:24px;font-size:15px}
-    .tour-slots{display:flex;flex-direction:column;gap:16px}
-    .slot-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:border-color .2s}
-    .slot-card:hover{border-color:var(--majorelle)}
-    .slot-info h3{font-size:18px;margin-bottom:6px}
-    .slot-meta{font-size:13px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;display:flex;gap:16px;flex-wrap:wrap}
-    .slot-action{text-align:right;flex-shrink:0}
-    .slot-price{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink-soft);margin-bottom:8px;display:block}
-    .slot-price b{color:var(--ink);font-size:16px}
-    .btn-book{background:var(--coral);color:#fff;padding:8px 18px;border-radius:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;display:inline-block;transition:background .2s}
-    .btn-book:hover{background:var(--saffron-deep)}
-    .empty-state{padding:30px;text-align:center;color:var(--ink-soft);border:1px dashed var(--line);border-radius:12px}
-    @media(max-width:860px){.cal-grid{grid-template-columns:1fr;gap:34px}}
-    @media(max-width:640px){.calendar-section{padding:44px 0 60px}.slot-card{flex-direction:column;align-items:flex-start}.slot-action{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left}}
+    .calendar-section { padding: 70px 0 90px; }
+    .cal-grid { display: grid; grid-template-columns: minmax(300px, 380px) 1fr; gap: 46px; align-items: start; }
+    .cal-card { border: 1px solid var(--line); border-radius: 16px; padding: 20px; background: var(--panel); box-shadow: 0 4px 20px -4px rgba(23,38,42,.06); }
+    .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .cal-head h2 { font-size: 19px; margin: 0; }
+    .cal-nav { display: flex; gap: 8px; }
+    .cal-nav button { width: 34px; height: 34px; border-radius: 9px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-size: 16px; line-height: 1; color: var(--ink); }
+    .cal-nav button:hover { background: var(--paper-2); }
+    .cal-dow, .cal-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .cal-dow { margin-bottom: 6px; }
+    .cal-dow span { text-align: center; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+    .cal-day { aspect-ratio: 1; border-radius: 10px; border: 1px solid transparent; background: transparent; font-size: 14px; cursor: pointer; color: var(--ink); position: relative; font-family: inherit; }
+    .cal-day:hover:not(:disabled) { border-color: var(--majorelle); background: var(--paper-2); }
+    .cal-day.muted { opacity: .35; }
+    .cal-day.selected { background: var(--majorelle); color: #fff; border-color: var(--majorelle); }
+    .cal-day .dot { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%; background: var(--saffron); }
+    .cal-day.selected .dot { background: #fff; }
+    .cal-legend { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 13px; color: var(--ink-soft); }
+    .cal-legend i { width: 6px; height: 6px; border-radius: 50%; background: var(--saffron); display: inline-block; }
+    .cal-results h2 { font-size: clamp(20px, 2.6vw, 26px); margin: 0 0 6px; }
+    .cal-sub { color: var(--ink-soft); margin-bottom: 24px; font-size: 15px; }
+    .tour-slots { display: flex; flex-direction: column; gap: 16px; }
+    .slot-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: border-color .2s; }
+    .slot-card:hover { border-color: var(--majorelle); }
+    .slot-info h3 { font-size: 18px; margin-bottom: 6px; }
+    .slot-meta { font-size: 13px; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; display: flex; gap: 16px; flex-wrap: wrap; }
+    .slot-action { text-align: right; flex-shrink: 0; }
+    .slot-price { font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--ink-soft); margin-bottom: 8px; display: block; }
+    .slot-price b { color: var(--ink); font-size: 16px; }
+    .btn-book { background: var(--coral); color: #fff; padding: 8px 18px; border-radius: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; display: inline-block; transition: background .2s; }
+    .btn-book:hover { background: var(--saffron-deep); }
+    .empty-state { padding: 30px; text-align: center; color: var(--ink-soft); border: 1px dashed var(--line); border-radius: 12px; }
+    @media (max-width: 860px) { .cal-grid { grid-template-columns: 1fr; gap: 34px; } }
+    @media (max-width: 640px) { .calendar-section { padding: 44px 0 60px; } .slot-card { flex-direction: column; align-items: flex-start; } .slot-action { width: 100%; display: flex; justify-content: space-between; align-items: center; text-align: left; } }
   </style>
 </head>
 <body>
@@ -58,12 +58,12 @@
       <div class="nav-links">
         <a href="index.html#top">Home</a>
         <a href="tours.html">Tours &amp; Activities</a>
-        <a href="calendar.html" class="active-nav" aria-current="page">Calendar</a>
         <a href="services.html">Services</a>
         <a href="shop.html">Shop</a>
         <a href="gallery.html">Gallery</a>
         <a href="about.html">About</a>
         <a href="FAQ.html">FAQ</a>
+        <a href="calendar.html" class="active-nav" aria-current="page">Calendar</a>
         <a href="contact.html">Contact</a>
       </div>
       <a href="https://wa.me/212628921377" class="nav-cta">Book on WhatsApp</a>
@@ -76,7 +76,7 @@
   <div class="mobile-overlay" id="mobileOverlay"></div>
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-top">
-      <a href="index.html#top" class="brand" style="color:var(--ink);text-shadow:none;font-size:17px;text-decoration:none">
+      <a href="index.html#top" class="brand" style="color:var(--ink);text-shadow:none;font-size:17px;text-decoration:none;">
         <img class="brand-mark" src="images/logo.webp" alt="The Secret Marrakech logo" width="26">
         The Secret <span>Marrakech</span>
       </a>
@@ -87,12 +87,12 @@
     <nav>
       <a href="index.html#top">Home</a>
       <a href="tours.html">Tours &amp; Activities</a>
-      <a href="calendar.html" class="active-nav" aria-current="page">Calendar</a>
       <a href="services.html">Services</a>
       <a href="shop.html">Shop</a>
       <a href="gallery.html">Gallery</a>
       <a href="about.html">About</a>
       <a href="FAQ.html">FAQ</a>
+      <a href="calendar.html" class="active-nav" aria-current="page">Calendar</a>
       <a href="contact.html">Contact</a>
     </nav>
     <a href="https://wa.me/212628921377" class="btn btn-primary">Book on WhatsApp</a>
