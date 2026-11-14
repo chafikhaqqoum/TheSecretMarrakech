@@ -1,3 +1,22 @@
+function addCalendarNavigationLink(nav) {
+  if (!nav || nav.querySelector('a[href="calendar.html"]')) return;
+
+  const calendarLink = document.createElement('a');
+  calendarLink.href = 'calendar.html';
+  calendarLink.textContent = 'Calendar';
+
+  const toursLink = nav.querySelector('a[href="tours.html"]');
+  if (toursLink) {
+    toursLink.insertAdjacentElement('afterend', calendarLink);
+  } else {
+    nav.appendChild(calendarLink);
+  }
+}
+
+// Keep the calendar available from every page that uses the shared site navigation.
+addCalendarNavigationLink(document.querySelector('.nav-links'));
+addCalendarNavigationLink(document.querySelector('#mobileMenu nav'));
+
 const header = document.getElementById('siteHeader');
 window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 40);
