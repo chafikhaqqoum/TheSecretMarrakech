@@ -1,2 +1,2 @@
 # TheSecretMarrakech
-City Tours &amp; Activities Website
+Guided City Tours &amp; Activities Website
