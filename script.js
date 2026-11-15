@@ -5,9 +5,12 @@ function addCalendarNavigationLink(nav) {
   calendarLink.href = 'calendar.html';
   calendarLink.textContent = 'Calendar';
 
-  const toursLink = nav.querySelector('a[href="tours.html"]');
-  if (toursLink) {
-    toursLink.insertAdjacentElement('afterend', calendarLink);
+  const servicesLink = nav.querySelector('a[href="services.html"]');
+  const shopLink = nav.querySelector('a[href="shop.html"]');
+  if (servicesLink) {
+    servicesLink.insertAdjacentElement('afterend', calendarLink);
+  } else if (shopLink) {
+    shopLink.insertAdjacentElement('beforebegin', calendarLink);
   } else {
     nav.appendChild(calendarLink);
   }
