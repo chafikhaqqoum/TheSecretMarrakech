@@ -196,3 +196,14 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
   text-decoration: underline;
   text-underline-offset: 4px;
 }
+
+/* Phone landscape: pin the menu button to the right corner. */
+@media (max-width: 1140px) and (orientation: landscape) {
+  nav.wrap {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(22px, env(safe-area-inset-right));
+  }
+  .nav-toggle {
+    margin-left: auto;
+  }
+}
