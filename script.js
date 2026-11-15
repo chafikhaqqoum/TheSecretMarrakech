@@ -17,6 +17,74 @@ function addCalendarNavigationLink(nav) {
 addCalendarNavigationLink(document.querySelector('.nav-links'));
 addCalendarNavigationLink(document.querySelector('#mobileMenu nav'));
 
+// Shared floating WhatsApp CTA on every page using this script.
+(() => {
+  const existing = document.querySelector('.wa-float');
+  if (existing) return;
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .wa-float {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 250;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: #25D366;
+      color: #0c1c12;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      line-height: 1.2;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 8px 22px rgba(37, 211, 102, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .wa-float:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(37, 211, 102, 0.42);
+    }
+    .wa-float svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      display: block;
+    }
+    @media (max-width: 640px) {
+      .wa-float {
+        right: 16px;
+        bottom: 16px;
+        padding: 12px;
+      }
+      .wa-float span {
+        display: none;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  const link = document.createElement('a');
+  link.href = 'https://wa.me/212628921377';
+  link.className = 'wa-float';
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.setAttribute('aria-label', 'Contact us on WhatsApp');
+  link.innerHTML = `
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.06-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="#0c1c12" opacity=".12"/>
+      <path d="M17.47 14.38c-.28-.14-1.64-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.71.9-.87 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.25-1.4-.83-.74-1.4-1.66-1.56-1.94-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.62-1.5-.85-2.06-.22-.53-.45-.46-.62-.47-.16-.01-.35-.01-.53-.01-.18 0-.49.07-.74.35-.25.28-.98.96-.98 2.33s1 2.7 1.14 2.89c.14.18 1.97 3 4.77 4.21.67.29 1.19.46 1.6.59.67.21 1.28.18 1.76.11.54-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z" fill="#0c1c12"/>
+    </svg>
+    <span>WhatsApp</span>
+  `;
+
+  document.body.appendChild(link);
+})();
+
 const header = document.getElementById('siteHeader');
 window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 40);
@@ -85,7 +153,6 @@ if (reviewsSlider) {
     }, 100);
   });
 }
-
 
 /* ---------- Tour photo sliders (auto-advance + dots) ---------- */
 document.querySelectorAll('[data-slider]').forEach(slider => {
@@ -236,11 +303,8 @@ if (bookingModal) {
     const subject = (intent === 'book' ? 'Booking request — ' : 'Question about — ') + tourName;
     const mailtoUrl = 'mailto:chafik.haqqoum@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
 
-    // Same mechanism as every other "Send an Email" button on the site.
     window.location.href = mailtoUrl;
 
-    // Also copy the message, so there's a fallback if the visitor's browser
-    // has no default mail app configured at all.
     const fullText = `To: chafik.haqqoum@gmail.com\nSubject: ${subject}\n\n${text}`;
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(fullText).catch(() => {});
@@ -253,8 +317,6 @@ if (bookingModal) {
     }
   });
 }
-
-
 
 /* ---------- Contact page form (Send Message / WhatsApp) ---------- */
 const contactForm = document.getElementById('contactForm');
@@ -281,7 +343,7 @@ if (contactForm) {
       return false;
     }
     const honey = contactForm.querySelector('[name="_honey"]');
-    if (honey && honey.value) return false; // likely a bot — silently block
+    if (honey && honey.value) return false;
     return true;
   }
 
@@ -298,7 +360,6 @@ if (contactForm) {
     const text = buildContactMessage();
     const subject = 'Tour Inquiry - The Secret Marrakech (from ' + document.getElementById('cf-name').value + ')';
 
-    // Same mechanism as every other "Send an Email" link on the site.
     window.location.href = 'mailto:chafik.haqqoum@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
 
     const fullText = `To: chafik.haqqoum@gmail.com\nSubject: ${subject}\n\n${text}`;
@@ -313,8 +374,6 @@ if (contactForm) {
     }
   });
 
-  // The WhatsApp button now actually carries the form's content, instead of
-  // opening an empty chat.
   document.getElementById('cf-whatsapp-btn').addEventListener('click', (e) => {
     if (!validateContactForm()) { e.preventDefault(); return; }
     const text = buildContactMessage();
