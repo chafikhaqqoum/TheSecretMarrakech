@@ -109,7 +109,7 @@
     </a>
     <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
+    </a>
   </div>
   <nav>
     <a href="index.html">Home</a>
@@ -143,7 +143,7 @@
     </div>
     <div class="tours-grid">
 
-      <button type="button" class="tour-card is-active" data-target="secret-marrakech">
+      <a href="#secret-marrakech" class="tour-card is-active" data-target="secret-marrakech">
         <div class="tour-photo">
           <img src="images/about/p20.webp" alt="Walking through the Marrakech medina and Mellah" loading="lazy" decoding="async">
           <span class="tour-duration">3 hours</span>
@@ -156,9 +156,9 @@
             <span class="tour-cta">Details</span>
           </div>
         </div>
-      </button>
+      </a>
 
-      <button type="button" class="tour-card" data-target="food-tour">
+      <a href="#food-tour" class="tour-card" data-target="food-tour">
         <div class="tour-photo">
           <img src="images/about/p17.webp" alt="Tasting street food at a local Marrakech stall" loading="lazy" decoding="async">
           <span class="tour-duration">2 hours</span>
@@ -171,9 +171,9 @@
             <span class="tour-cta">Details</span>
           </div>
         </div>
-      </button>
+      </a>
 
-      <button type="button" class="tour-card" data-target="classic-city">
+      <a href="#classic-city" class="tour-card" data-target="classic-city">
         <div class="tour-photo">
           <img src="images/gallery/ps2.webp" alt="A courtyard in a Marrakech heritage site" loading="lazy" decoding="async">
           <span class="tour-duration">3 hours</span>
@@ -186,9 +186,9 @@
             <span class="tour-cta">Details</span>
           </div>
         </div>
-      </button>
+      </a>
 
-      <button type="button" class="tour-card" data-target="hidden-souks">
+      <a href="#hidden-souks" class="tour-card" data-target="hidden-souks">
         <div class="tour-photo">
           <img src="images/gallery/ps5.webp" alt="Spice and craft stalls in the Marrakech souks" loading="lazy" decoding="async">
           <span class="tour-duration">2 hours</span>
@@ -201,7 +201,7 @@
             <span class="tour-cta">Details</span>
           </div>
         </div>
-      </button>
+      </a>
 
     </div>
   </div>
@@ -558,7 +558,7 @@
 
 {% include footer.html %}
 <script>
-  const tourPickerCards = document.querySelectorAll('.tour-picker-card');
+  const tourPickerCards = document.querySelectorAll('.tour-card[data-target]');
   const tourSections = document.querySelectorAll('[data-tour-section]');
 
   function openTourSection(targetId) {
@@ -584,7 +584,7 @@
   }
 
   tourPickerCards.forEach(button => {
-    button.addEventListener('click', () => openTourSection(button.dataset.target));
+    button.addEventListener('click', event => { event.preventDefault(); openTourSection(button.dataset.target); });
   });
 
   const initialHash = window.location.hash.replace('#', '');
