@@ -1,19 +1,19 @@
 <header id="siteHeader">
   <nav class="wrap">
-    <a href="#top" class="brand">
+    <a href="index.html" class="brand">
       <img class="brand-mark" src="images/logo.webp" alt="The Secret Marrakech logo" width="30">
       The Secret <span>Marrakech</span>
     </a>
     <div class="nav-links">
-      <a aria-current="page" class="active-nav" href="#top">Home</a>
-      <a href="about.html">About</a>
-      <a href="tours.html">Tours &amp; Activities</a>
-      <a href="services.html">Services</a>
-      <a href="calendar.html">Calendar</a>
-      <a href="shop.html">Shop</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="FAQ.html">FAQ</a>
-      <a href="contact.html">Contact</a>
+      <a href="index.html"{% if page.url == "/" or page.url == "/index.html" %} aria-current="page" class="active-nav"{% endif %}>Home</a>
+      <a href="about.html"{% if page.url contains "about" %} aria-current="page" class="active-nav"{% endif %}>About</a>
+      <a href="tours.html"{% if page.url contains "tours" %} aria-current="page" class="active-nav"{% endif %}>Tours &amp; Activities</a>
+      <a href="services.html"{% if page.url contains "services" %} aria-current="page" class="active-nav"{% endif %}>Services</a>
+      <a href="calendar.html"{% if page.url contains "calendar" %} aria-current="page" class="active-nav"{% endif %}>Calendar</a>
+      <a href="shop.html"{% if page.url contains "shop" %} aria-current="page" class="active-nav"{% endif %}>Shop</a>
+      <a href="gallery.html"{% if page.url contains "gallery" %} aria-current="page" class="active-nav"{% endif %}>Gallery</a>
+      <a href="FAQ.html"{% if page.url contains "FAQ" %} aria-current="page" class="active-nav"{% endif %}>FAQ</a>
+      <a href="contact.html"{% if page.url contains "contact" %} aria-current="page" class="active-nav"{% endif %}>Contact</a>
     </div>
     <a href="https://wa.me/212628921377" class="nav-cta">Book on WhatsApp</a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
