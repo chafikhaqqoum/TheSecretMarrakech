@@ -1,24 +1,4 @@
-function addCalendarNavigationLink(nav) {
-  if (!nav || nav.querySelector('a[href="calendar.html"]')) return;
-
-  const calendarLink = document.createElement('a');
-  calendarLink.href = 'calendar.html';
-  calendarLink.textContent = 'Calendar';
-
-  const servicesLink = nav.querySelector('a[href="services.html"]');
-  const shopLink = nav.querySelector('a[href="shop.html"]');
-  if (servicesLink) {
-    servicesLink.insertAdjacentElement('afterend', calendarLink);
-  } else if (shopLink) {
-    shopLink.insertAdjacentElement('beforebegin', calendarLink);
-  } else {
-    nav.appendChild(calendarLink);
-  }
-}
-
-// Keep the calendar available from every page that uses the shared site navigation.
-addCalendarNavigationLink(document.querySelector('.nav-links'));
-addCalendarNavigationLink(document.querySelector('#mobileMenu nav'));
+// The standalone calendar has been retired; do not add it back to site navigation.
 
 // Shared floating WhatsApp CTA on every page using this script.
 (() => {
@@ -238,6 +218,18 @@ if (bookingModal) {
     document.body.style.overflow = '';
   }
 
+  const bookingOption = document.getElementById('bk-option');
+  const guestsHelp = document.getElementById('bk-guests-help');
+  if (bookingOption && guestsHelp) {
+    function updateBookingOptionHelp() {
+      guestsHelp.textContent = bookingOption.value === 'Private'
+        ? 'Enter everyone in your private group. The total price depends on the selected tour and group size.'
+        : 'Enter the number of people in your party. You will join a small group with other guests.';
+    }
+    bookingOption.addEventListener('change', updateBookingOptionHelp);
+    updateBookingOptionHelp();
+  }
+
   document.querySelectorAll('.book-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       openBookingModal(btn.getAttribute('data-tour'), btn.getAttribute('data-intent'));
@@ -264,8 +256,8 @@ if (bookingModal) {
     lines.push(`Email: ${email}`);
     if (intent === 'book') {
       lines.push(`\nHi! I'd like to book: ${tourName}`);
-      lines.push(`Option: ${option}`);
-      if (guests) lines.push(`Guests: ${guests}`);
+      lines.push(`Tour format: ${option === 'Private' ? 'Private — just our group' : 'Public small-group — shared with other guests'}`);
+      if (guests) lines.push(`Total guests: ${guests}`);
       if (date) lines.push(`Date: ${date}`);
     } else {
       lines.push(`\nHi! I have a question about: ${tourName}`);
