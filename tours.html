@@ -437,18 +437,20 @@
     </div>
     <div class="booking-fields-book">
       <div class="form-group">
-        <label for="bk-option">Tour option</label>
-        <select id="bk-option" name="option">
-          <option value="Public">Public tour</option>
-          <option value="Private">Private tour</option>
+        <label for="bk-option">Choose your tour format</label>
+        <select id="bk-option" name="option" aria-describedby="bk-option-help">
+          <option value="Public">Public small-group tour</option>
+          <option value="Private">Private tour — just our group</option>
         </select>
+        <p class="booking-field-help" id="bk-option-help">Join a small shared group with other guests, or book the tour privately for your own group.</p>
       </div>
       <div class="form-group">
-        <label for="bk-guests">Number of guests</label>
-        <input type="number" id="bk-guests" name="guests" min="1" value="2" required>
+        <label for="bk-guests">Total number of guests</label>
+        <input type="number" id="bk-guests" name="guests" min="1" value="2" aria-describedby="bk-guests-help" required>
+        <p class="booking-field-help" id="bk-guests-help">Enter the total number of people in your party, including yourself.</p>
       </div>
       <div class="form-group">
-        <label for="bk-date">Date</label>
+        <label for="bk-date">Preferred date</label>
         <input type="date" id="bk-date" name="date" required>
       </div>
     </div>
