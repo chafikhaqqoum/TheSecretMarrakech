@@ -200,6 +200,16 @@ const bookingForm = document.getElementById('bookingForm');
 
 if (bookingModal) {
   function openBookingModal(tourName, intent) {
+    const dateInput = document.getElementById('bk-date');
+    if (dateInput) {
+      const today = new Date();
+      const localToday = [
+        today.getFullYear(),
+        String(today.getMonth() + 1).padStart(2, '0'),
+        String(today.getDate()).padStart(2, '0')
+      ].join('-');
+      dateInput.min = localToday;
+    }
     bookingModal.setAttribute('data-intent', intent);
     bookingTourName.textContent = tourName;
     const status = document.getElementById('bkStatus');
