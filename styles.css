@@ -201,7 +201,7 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
 .site-footer {
   background-color: #0d2b2a;
   color: #e2e8f0;
-  padding: 50px 24px 80px 28px;
+  padding: 32px 24px 28px 28px;
   font-family: inherit;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -210,34 +210,39 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1.5fr 1fr 1.2fr;
-  gap: 40px;
-  padding-bottom: 35px;
+  gap: 28px;
+  padding-bottom: 22px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 .footer-brand,
 .footer-links,
 .footer-contact {
-  margin-bottom: 28px;
+  margin-bottom: 0;
 }
 .footer-logo-wrap {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: 10px;
+  margin-bottom: 8px;
 }
-.footer-logo-wrap span {
-  font-size: 1.2rem;
-  font-weight: 700;
+.footer-logo-wrap .footer-brand-name {
+  font-family: 'Fraunces',serif;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: #ffffff;
 }
-.footer-logo-wrap span span {
+.footer-logo-wrap .footer-brand-name span {
   color: #FF7A54;
+  font-style: italic;
+  font-weight: 500;
 }
+
 .footer-brand p {
   font-size: 0.95rem;
   line-height: 1.6;
   color: #cbd5e1;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
 }
 .footer-license {
   font-size: 0.85rem !important;
@@ -253,7 +258,7 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
   color: #ffffff;
   font-size: 1.05rem;
   font-weight: 600;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   letter-spacing: 0.02em;
 }
 .footer-links ul {
@@ -262,7 +267,7 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 .footer-links a {
   color: #cbd5e1;
@@ -276,7 +281,7 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
 .footer-contact p {
   font-size: 0.95rem;
   color: #cbd5e1;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 .footer-contact a {
   color: #ffffff;
@@ -287,7 +292,7 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 16px;
+  margin-top: 12px;
 }
 .footer-socials a {
   background-color: rgba(255, 255, 255, 0.1);
@@ -302,7 +307,7 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
 }
 .footer-bottom {
   max-width: 1180px;
-  margin: 25px auto 0;
+  margin: 14px auto 0;
   text-align: left;
   font-size: 0.85rem;
   color: #94a3b8;
@@ -310,7 +315,7 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
 @media(max-width: 900px) {
   .footer-container {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 20px;
   }
 }
 
