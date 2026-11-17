@@ -168,9 +168,10 @@ document.querySelectorAll('[data-slider]').forEach(slider => {
   startAuto();
 });
 
-/* ---------- Email form delivery ---------- */
+/* ---------- Email form delivery (Web3Forms) ---------- */
+const WEB3FORMS_ACCESS_KEY = 'e5bcc737-8362-4f25-8c0b-689a947f3dad';
+
 async function sendFormSubmission(payload, statusEl, button) {
-  const originalLabel = button.textContent.trim();
   button.disabled = true;
   button.setAttribute('aria-busy', 'true');
   if (statusEl) {
@@ -179,20 +180,25 @@ async function sendFormSubmission(payload, statusEl, button) {
   }
 
   try {
-    const response = await fetch('https://formsubmit.co/ajax/chafik.haqqoum@gmail.com', {
+    const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        from_name: 'The Secret Marrakech',
+        ...payload
+      })
     });
     const result = await response.json();
-    if (!response.ok || !(result.success === true || result.success === 'true')) {
-      throw new Error(result.message || 'The email service could not accept your message. Please try WhatsApp instead.');
+    if (!response.ok || result.success !== true) {
+      const detail = result.message || result.body?.message;
+      throw new Error(detail || 'The email service could not accept your message. Please try WhatsApp instead.');
     }
     if (statusEl) {
-      statusEl.textContent = 'Thank you! Your message has been submitted successfully. Chafik will get back to you soon.';
+      statusEl.textContent = 'Thank you! Your message has been sent successfully. Chafik will get back to you soon.';
       statusEl.classList.remove('error');
       statusEl.classList.add('success');
     }
@@ -347,17 +353,16 @@ if (bookingModal) {
     const { intent, tourName, text } = buildBookingMessage();
     const subject = (intent === 'book' ? 'Booking request — ' : 'Question about — ') + tourName;
     const payload = {
-      _subject: subject,
-      _replyto: document.getElementById('bk-email').value.trim(),
-      Name: document.getElementById('bk-name').value.trim(),
-      Phone: document.getElementById('bk-phone').value.trim(),
-      Email: document.getElementById('bk-email').value.trim(),
-      Tour: tourName,
-      'Tour format': document.getElementById('bk-option').value,
-      'Total guests': document.getElementById('bk-guests').value,
-      'Preferred date': document.getElementById('bk-date').value,
-      Message: document.getElementById('bk-message').value.trim(),
-      'Request details': text
+      subject,
+      name: document.getElementById('bk-name').value.trim(),
+      phone: document.getElementById('bk-phone').value.trim(),
+      email: document.getElementById('bk-email').value.trim(),
+      tour: tourName,
+      tour_format: document.getElementById('bk-option').value,
+      total_guests: document.getElementById('bk-guests').value,
+      preferred_date: document.getElementById('bk-date').value,
+      message: document.getElementById('bk-message').value.trim(),
+      request_details: text
     };
     await sendFormSubmission(payload, document.getElementById('bkStatus'), event.currentTarget);
   });
@@ -406,12 +411,11 @@ if (contactForm) {
     const email = document.getElementById('cf-email').value.trim();
     const subject = 'Tour inquiry - The Secret Marrakech (from ' + name + ')';
     const payload = {
-      _subject: subject,
-      _replyto: email,
-      Name: name,
-      Phone: document.getElementById('cf-phone').value.trim(),
-      Email: email,
-      Message: document.getElementById('cf-message').value.trim()
+      subject,
+      name,
+      phone: document.getElementById('cf-phone').value.trim(),
+      email,
+      message: document.getElementById('cf-message').value.trim()
     };
     await sendFormSubmission(payload, document.getElementById('cf-status'), event.currentTarget);
   });
