@@ -343,6 +343,10 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
 /* Visual refinements: brand spacing, hero alignment, section hierarchy and card consistency. */
 .brand span{margin-left:0.18em}
 .hero h1 .hero-authentic{color:#fff;font-style:italic;font-weight:500}
+@media(max-width:640px){
+  .hero h1 .hero-marrakech{display:block}
+  .hero h1 .hero-most-visitors{white-space:nowrap}
+}
 @media (min-width:821px){
   .hero p.sub{margin-left:clamp(160px,18vw,240px);max-width:470px}
 }
