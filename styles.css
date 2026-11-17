@@ -37,8 +37,9 @@ header .wrap{max-width:1320px;padding-left:20px}@media(max-width:820px){header{b
   transition: all 0.2s ease-in-out;
 }
 .tours-cta .btn-email:hover {
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 8px 22px -6px rgba(0, 0, 0, 0.4);
 }
