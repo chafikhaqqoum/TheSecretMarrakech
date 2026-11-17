@@ -386,7 +386,7 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
 
 /* Shared booking benefits strip */
 .booking-benefits{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:25px 0}
-.booking-benefits-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.booking-benefits-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
 .booking-benefit{display:flex;align-items:center;gap:14px;min-width:0}
 .booking-benefit-icon{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border:1px solid rgba(14,128,116,.22);border-radius:50%;color:var(--majorelle)}
 .booking-benefit-icon svg{width:20px;height:20px}
