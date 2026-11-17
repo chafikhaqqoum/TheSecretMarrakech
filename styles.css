@@ -334,3 +334,7 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
 }
 .footer-socials a.social-icon svg{width:18px;height:18px}
 .footer-socials a.social-icon:hover{color:#fff;background:var(--coral);border-color:var(--coral)}
+
+/* Tours page: swap the background treatments of the Tours and Activities sections. */
+.tour-picker-section#tours{background:var(--paper)}
+.activities-section{background:var(--paper-2)}
