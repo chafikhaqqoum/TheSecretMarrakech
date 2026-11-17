@@ -371,6 +371,13 @@ if (bookingModal) {
 /* ---------- Contact page form (Send Message / WhatsApp) ---------- */
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
+  const requestedTour = new URLSearchParams(window.location.search).get('tour');
+  if (requestedTour) {
+    const messageField = document.getElementById('cf-message');
+    if (messageField && !messageField.value.trim()) {
+      messageField.value = `I'm interested in a quote for: ${requestedTour}. Please send me more details.`;
+    }
+  }
   function validateContactForm() {
     const status = document.getElementById('cf-status');
     const required = [
