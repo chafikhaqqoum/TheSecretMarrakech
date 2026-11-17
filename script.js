@@ -168,6 +168,46 @@ document.querySelectorAll('[data-slider]').forEach(slider => {
   startAuto();
 });
 
+/* ---------- Email form delivery ---------- */
+async function sendFormSubmission(payload, statusEl, button) {
+  const originalLabel = button.textContent.trim();
+  button.disabled = true;
+  button.setAttribute('aria-busy', 'true');
+  if (statusEl) {
+    statusEl.textContent = 'Sending your message…';
+    statusEl.classList.remove('success', 'error');
+  }
+
+  try {
+    const response = await fetch('https://formsubmit.co/ajax/chafik.haqqoum@gmail.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json();
+    if (!response.ok || !(result.success === true || result.success === 'true')) {
+      throw new Error(result.message || 'The email service could not accept your message. Please try WhatsApp instead.');
+    }
+    if (statusEl) {
+      statusEl.textContent = 'Thank you! Your message has been submitted successfully. Chafik will get back to you soon.';
+      statusEl.classList.remove('error');
+      statusEl.classList.add('success');
+    }
+  } catch (error) {
+    if (statusEl) {
+      statusEl.textContent = error.message || 'Sorry, your message could not be sent. Please try WhatsApp instead.';
+      statusEl.classList.remove('success');
+      statusEl.classList.add('error');
+    }
+  } finally {
+    button.disabled = false;
+    button.removeAttribute('aria-busy');
+  }
+}
+
 /* ---------- Booking modal ---------- */
 const bookingOverlay = document.getElementById('bookingOverlay');
 const bookingModal = document.getElementById('bookingModal');
@@ -302,24 +342,24 @@ if (bookingModal) {
     window.open('https://wa.me/212628921377?text=' + encodeURIComponent(text), '_blank');
   });
 
-  document.getElementById('bkSendEmail').addEventListener('click', () => {
+  document.getElementById('bkSendEmail').addEventListener('click', async (event) => {
     if (!validateBookingForm()) return;
     const { intent, tourName, text } = buildBookingMessage();
     const subject = (intent === 'book' ? 'Booking request — ' : 'Question about — ') + tourName;
-    const mailtoUrl = 'mailto:chafik.haqqoum@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
-
-    window.location.href = mailtoUrl;
-
-    const fullText = `To: chafik.haqqoum@gmail.com\nSubject: ${subject}\n\n${text}`;
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(fullText).catch(() => {});
-    }
-    const status = document.getElementById('bkStatus');
-    if (status) {
-      status.textContent = "Opening your email app… the message has also been copied, just in case.";
-      status.classList.remove('error');
-      status.classList.add('success');
-    }
+    const payload = {
+      _subject: subject,
+      _replyto: document.getElementById('bk-email').value.trim(),
+      Name: document.getElementById('bk-name').value.trim(),
+      Phone: document.getElementById('bk-phone').value.trim(),
+      Email: document.getElementById('bk-email').value.trim(),
+      Tour: tourName,
+      'Tour format': document.getElementById('bk-option').value,
+      'Total guests': document.getElementById('bk-guests').value,
+      'Preferred date': document.getElementById('bk-date').value,
+      Message: document.getElementById('bk-message').value.trim(),
+      'Request details': text
+    };
+    await sendFormSubmission(payload, document.getElementById('bkStatus'), event.currentTarget);
   });
 }
 
@@ -360,23 +400,20 @@ if (contactForm) {
     return `Hi! My name is ${name}.\nPhone: ${phone}\nEmail: ${email}\n\n${message}`;
   }
 
-  document.getElementById('cf-submit').addEventListener('click', () => {
+  document.getElementById('cf-submit').addEventListener('click', async (event) => {
     if (!validateContactForm()) return;
-    const text = buildContactMessage();
-    const subject = 'Tour Inquiry - The Secret Marrakech (from ' + document.getElementById('cf-name').value + ')';
-
-    window.location.href = 'mailto:chafik.haqqoum@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
-
-    const fullText = `To: chafik.haqqoum@gmail.com\nSubject: ${subject}\n\n${text}`;
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(fullText).catch(() => {});
-    }
-    const status = document.getElementById('cf-status');
-    if (status) {
-      status.textContent = "Opening your email app… the message has also been copied, just in case.";
-      status.classList.remove('error');
-      status.classList.add('success');
-    }
+    const name = document.getElementById('cf-name').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
+    const subject = 'Tour inquiry - The Secret Marrakech (from ' + name + ')';
+    const payload = {
+      _subject: subject,
+      _replyto: email,
+      Name: name,
+      Phone: document.getElementById('cf-phone').value.trim(),
+      Email: email,
+      Message: document.getElementById('cf-message').value.trim()
+    };
+    await sendFormSubmission(payload, document.getElementById('cf-status'), event.currentTarget);
   });
 
   document.getElementById('cf-whatsapp-btn').addEventListener('click', (e) => {
