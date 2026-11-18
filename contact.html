@@ -98,7 +98,7 @@
         </div>
         <div class="form-group">
           <label for="cf-phone">Phone</label>
-          <input type="tel" id="cf-phone" name="phone" required>
+          <input type="tel" id="cf-phone" name="phone" inputmode="tel" autocomplete="tel" pattern="\+?[0-9]{7,15}" maxlength="16" title="Use 7–15 digits, with an optional + at the beginning and no spaces." required>
         </div>
         <div class="form-group">
           <label for="cf-email">Email</label>
@@ -109,9 +109,9 @@
           <textarea id="cf-message" name="message" required></textarea>
         </div>
         <div class="form-submit-row">
-          <button type="button" class="btn btn-email" id="cf-submit">
+          <button type="submit" class="btn btn-email" id="cf-submit">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" fill="none"/><path d="M4 6l8 7 8-7"/></svg>
-            Send Message
+            Send an email
           </button>
           <div class="form-status" id="cf-status"></div>
           <a href="https://wa.me/212628921377" class="btn btn-primary" id="cf-whatsapp-btn">
