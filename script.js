@@ -394,13 +394,13 @@ if (contactForm) {
       }
     }
     const phoneEl = document.getElementById('cf-phone');
-    if (!/^\\+?[0-9]{7,15}$/.test(phoneEl.value.trim())) {
+    if (!/^\+?[0-9]{7,15}$/.test(phoneEl.value.trim())) {
       if (status) { status.textContent = 'Please enter a valid phone number using 7–15 digits, with an optional + at the beginning and no spaces.'; status.classList.remove('success'); status.classList.add('error'); }
       phoneEl.focus();
       return false;
     }
     const emailEl = document.getElementById('cf-email');
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(emailEl.value.trim())) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
       if (status) { status.textContent = 'Please enter a valid email address.'; status.classList.remove('success'); status.classList.add('error'); }
       emailEl.focus();
       return false;
