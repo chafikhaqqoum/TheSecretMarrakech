@@ -393,8 +393,14 @@ if (contactForm) {
         return false;
       }
     }
+    const phoneEl = document.getElementById('cf-phone');
+    if (!/^\\+?[0-9]{7,15}$/.test(phoneEl.value.trim())) {
+      if (status) { status.textContent = 'Please enter a valid phone number using 7–15 digits, with an optional + at the beginning and no spaces.'; status.classList.remove('success'); status.classList.add('error'); }
+      phoneEl.focus();
+      return false;
+    }
     const emailEl = document.getElementById('cf-email');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(emailEl.value.trim())) {
       if (status) { status.textContent = 'Please enter a valid email address.'; status.classList.remove('success'); status.classList.add('error'); }
       emailEl.focus();
       return false;
@@ -412,7 +418,8 @@ if (contactForm) {
     return `Hi! My name is ${name}.\nPhone: ${phone}\nEmail: ${email}\n\n${message}`;
   }
 
-  document.getElementById('cf-submit').addEventListener('click', async (event) => {
+  contactForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
     if (!validateContactForm()) return;
     const name = document.getElementById('cf-name').value.trim();
     const email = document.getElementById('cf-email').value.trim();
@@ -424,7 +431,7 @@ if (contactForm) {
       email,
       message: document.getElementById('cf-message').value.trim()
     };
-    await sendFormSubmission(payload, document.getElementById('cf-status'), event.currentTarget);
+    await sendFormSubmission(payload, document.getElementById('cf-status'), document.getElementById('cf-submit'));
   });
 
   document.getElementById('cf-whatsapp-btn').addEventListener('click', (e) => {
