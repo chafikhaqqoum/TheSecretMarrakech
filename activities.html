@@ -140,9 +140,9 @@
 <script>
 const activityCards=document.querySelectorAll('.tour-card[data-activity-target]');
 const activitySections=document.querySelectorAll('[data-activity-section]');
-function openActivity(id,scroll=true){activitySections.forEach(s=>{const active=s.id===id;s.classList.toggle('is-open',active);s.classList.toggle('is-hidden',!active);});activityCards.forEach(c=>c.classList.toggle('is-active',c.dataset.activityTarget===id));if(scroll)document.getElementById('activity-detail-panel')?.scrollIntoView({behavior:'smooth',block:'start'});if(history.pushState)history.pushState(null,'','#'+id);}
+function openActivity(id,{scroll=true,updateHash=true}={}){activitySections.forEach(s=>{const active=s.id===id;s.classList.toggle('is-open',active);s.classList.toggle('is-hidden',!active);});activityCards.forEach(c=>c.classList.toggle('is-active',c.dataset.activityTarget===id));if(scroll)document.getElementById('activity-detail-panel')?.scrollIntoView({behavior:'smooth',block:'start'});if(updateHash&&history.pushState)history.pushState(null,'','#'+id);}
 activityCards.forEach(c=>c.addEventListener('click',e=>{e.preventDefault();openActivity(c.dataset.activityTarget);}));
-const requested=location.hash.slice(1);if(requested&&document.querySelector('[data-activity-section]#'+CSS.escape(requested)))openActivity(requested,false);else if(activityCards.length)openActivity(activityCards[0].dataset.activityTarget,false);
+const requested=location.hash.slice(1);if(requested&&document.querySelector('[data-activity-section]#'+CSS.escape(requested)))openActivity(requested,{scroll:false,updateHash:false});else if(activityCards.length)openActivity(activityCards[0].dataset.activityTarget,{scroll:false,updateHash:false});
 </script>
 <script src="script.js"></script>
 </body>
