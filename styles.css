@@ -421,3 +421,19 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
 /* Booking enquiry modal: WhatsApp action must remain clearly identifiable in WhatsApp green. */
 #bkSendWhatsApp{background:#25D366!important;color:#fff!important;border-color:#25D366!important}
 #bkSendWhatsApp:hover{background:#1FB959!important;border-color:#1FB959!important;color:#fff!important;box-shadow:0 8px 22px -6px rgba(37,211,102,.5)}
+
+
+/* Booking enquiry modal: use WhatsApp green for the WhatsApp action in every state. */
+#bookingModal .booking-actions #bkSendWhatsApp,
+#bookingModal .booking-actions #bkSendWhatsApp.btn-primary,
+#bookingModal .booking-actions #bkSendWhatsApp.btn-whatsapp {
+  background: #25D366 !important;
+  color: #fff !important;
+  border-color: #25D366 !important;
+}
+#bookingModal .booking-actions #bkSendWhatsApp:hover {
+  background: #1FB959 !important;
+  color: #fff !important;
+  border-color: #1FB959 !important;
+  box-shadow: 0 8px 22px -6px rgba(37,211,102,.5);
+}
