@@ -416,3 +416,8 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
 .tour-detail-panel .tour-detail-media img.activity-detail-image{width:100%;height:100%;min-height:320px;object-fit:cover;border-radius:14px}
 @keyframes detailPanelIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.tour-detail-panel .tour-detail{animation:none}}
+
+
+/* Booking enquiry modal: WhatsApp action must remain clearly identifiable in WhatsApp green. */
+#bkSendWhatsApp{background:#25D366!important;color:#fff!important;border-color:#25D366!important}
+#bkSendWhatsApp:hover{background:#1FB959!important;border-color:#1FB959!important;color:#fff!important;box-shadow:0 8px 22px -6px rgba(37,211,102,.5)}
