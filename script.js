@@ -440,3 +440,47 @@ if (contactForm) {
     e.currentTarget.href = 'https://wa.me/212628921377?text=' + encodeURIComponent(text);
   });
 }
+
+
+/* ---------- Shared Plan Your Trip enquiry modal ---------- */
+(() => {
+  const modal = document.getElementById('planTripModal');
+  const overlay = document.getElementById('planTripOverlay');
+  const form = document.getElementById('planTripForm');
+  if (!modal || !overlay || !form) return;
+  const closeButton = document.getElementById('planTripClose');
+  const status = document.getElementById('pt-status');
+  const submitButton = document.getElementById('pt-submit');
+  const fields = {name:document.getElementById('pt-name'),phone:document.getElementById('pt-phone'),email:document.getElementById('pt-email'),message:document.getElementById('pt-message')};
+
+  function openModal() {
+    status.textContent = ''; status.classList.remove('success','error');
+    modal.classList.add('open'); overlay.classList.add('open');
+    modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+    window.setTimeout(() => fields.name.focus(),50);
+  }
+  function closeModal() {
+    modal.classList.remove('open'); overlay.classList.remove('open');
+    modal.setAttribute('aria-hidden','true'); document.body.style.overflow='';
+  }
+  document.querySelectorAll('[data-plan-trip-trigger]').forEach(trigger => trigger.addEventListener('click',event => {
+    event.preventDefault();
+    if (mobileMenu && mobileMenu.classList.contains('open')) closeMobileMenu();
+    openModal();
+  }));
+  closeButton.addEventListener('click',closeModal);
+  overlay.addEventListener('click',closeModal);
+  document.addEventListener('keydown',event => {if(event.key==='Escape'&&modal.classList.contains('open')) closeModal();});
+
+  form.addEventListener('submit',async event => {
+    event.preventDefault();
+    const fail=(message,field)=>{status.textContent=message;status.classList.remove('success');status.classList.add('error');field.focus();};
+    if(!fields.name.value.trim()) return fail('Please enter your name.',fields.name);
+    if(!/^\+?[0-9]{7,15}$/.test(fields.phone.value.trim())) return fail('Please enter a valid phone number using 7–15 digits, with an optional + at the beginning and no spaces.',fields.phone);
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email.value.trim())) return fail('Please enter a valid email address.',fields.email);
+    if(!fields.message.value.trim()) return fail('Please add a message so we know how to help.',fields.message);
+    if(form.querySelector('[name="_honey"]').value) return;
+    const name=fields.name.value.trim();
+    await sendFormSubmission({subject:'Trip planning enquiry - The Secret Marrakech (from '+name+')',name,phone:fields.phone.value.trim(),email:fields.email.value.trim(),message:fields.message.value.trim()},status,submitButton);
+  });
+})();

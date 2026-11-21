@@ -14,9 +14,42 @@
       <a href="FAQ.html"{% if page.url contains "FAQ" %} aria-current="page" class="active-nav"{% endif %}>FAQ</a>
       <a href="contact.html"{% if page.url contains "contact" %} aria-current="page" class="active-nav"{% endif %}>Contact</a>
     </div>
-    <a href="tours.html" class="nav-cta">Tours</a>
+    <a href="#planTripModal" class="nav-cta" data-plan-trip-trigger>Plan Your Trip</a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
   </nav>
 </header>
+
+<div class="plan-trip-overlay" id="planTripOverlay"></div>
+<section class="plan-trip-modal" id="planTripModal" role="dialog" aria-modal="true" aria-labelledby="planTripTitle" aria-hidden="true">
+  <button type="button" class="plan-trip-close" id="planTripClose" aria-label="Close enquiry form">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <span class="eyebrow">Start planning</span>
+  <h2 id="planTripTitle">Plan Your Trip</h2>
+  <p class="plan-trip-intro">Tell us a little about what you have in mind. We’ll get back to you to help plan your Marrakech experience.</p>
+  <form id="planTripForm" class="contact-form">
+    <input type="text" name="_honey" class="plan-trip-honey" tabindex="-1" autocomplete="off">
+    <div class="form-group">
+      <label for="pt-name">Name</label>
+      <input type="text" id="pt-name" name="name" autocomplete="name" required>
+    </div>
+    <div class="form-group">
+      <label for="pt-phone">Phone</label>
+      <input type="tel" id="pt-phone" name="phone" inputmode="tel" autocomplete="tel" pattern="\+?[0-9]{7,15}" maxlength="16" title="Use 7–15 digits, with an optional + at the beginning and no spaces." required>
+    </div>
+    <div class="form-group">
+      <label for="pt-email">Email</label>
+      <input type="email" id="pt-email" name="email" autocomplete="email" required>
+    </div>
+    <div class="form-group">
+      <label for="pt-message">Message</label>
+      <textarea id="pt-message" name="message" placeholder="Tell us what you’d like to experience and your preferred dates…" required></textarea>
+    </div>
+    <div class="form-submit-row">
+      <button type="submit" class="btn btn-email" id="pt-submit">Send your enquiry</button>
+      <div class="form-status" id="pt-status" role="status" aria-live="polite"></div>
+    </div>
+  </form>
+</section>

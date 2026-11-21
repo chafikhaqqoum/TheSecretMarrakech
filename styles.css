@@ -442,3 +442,23 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
 /* Show only the tour or activity detail selected from its card. */
 .tour-detail-panel .tour-detail.is-hidden{display:none!important}
 .tour-detail-panel .tour-detail.is-open{display:block}
+
+
+/* ---------- Shared Plan Your Trip enquiry modal ---------- */
+.plan-trip-overlay{position:fixed;inset:0;z-index:400;background:rgba(23,38,42,.58);opacity:0;pointer-events:none;transition:opacity .25s ease}
+.plan-trip-overlay.open{opacity:1;pointer-events:auto}
+.plan-trip-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-46%);width:min(92%,520px);max-height:88vh;overflow-y:auto;background:var(--paper);border-radius:14px;z-index:410;padding:34px 30px 30px;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;box-shadow:0 30px 60px -20px rgba(0,0,0,.35)}
+.plan-trip-modal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+.plan-trip-modal h2{font-size:clamp(25px,4vw,32px);margin:8px 32px 8px 0}
+.plan-trip-modal .eyebrow{font-size:12px}
+.plan-trip-intro{color:var(--ink-soft);font-size:14px;line-height:1.6;margin-bottom:4px}
+.plan-trip-modal .contact-form{max-width:none;margin-top:20px;gap:13px}
+.plan-trip-modal .form-group textarea{min-height:90px}
+.plan-trip-modal .form-submit-row{margin-top:2px}
+.plan-trip-modal .form-submit-row .btn{width:100%;justify-content:center}
+.plan-trip-close{position:absolute;top:13px;right:13px;width:38px;height:38px;border:0;border-radius:50%;background:transparent;color:var(--ink-soft);display:grid;place-items:center;cursor:pointer}
+.plan-trip-close:hover{background:var(--paper-2);color:var(--ink)}
+.plan-trip-close svg{width:21px;height:21px}
+.plan-trip-honey{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
+@media(max-width:520px){.plan-trip-modal{padding:30px 22px 24px;max-height:90vh}}
+@media(prefers-reduced-motion:reduce){.plan-trip-overlay,.plan-trip-modal{transition:none}}
