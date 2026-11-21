@@ -437,3 +437,8 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
   border-color: #1FB959 !important;
   box-shadow: 0 8px 22px -6px rgba(37,211,102,.5);
 }
+
+
+/* Show only the tour or activity detail selected from its card. */
+.tour-detail-panel .tour-detail.is-hidden{display:none!important}
+.tour-detail-panel .tour-detail.is-open{display:block}
