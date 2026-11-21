@@ -518,7 +518,7 @@
   const tourPickerCards = document.querySelectorAll('.tour-card[data-target]');
   const tourSections = document.querySelectorAll('[data-tour-section]');
 
-  function openTourSection(targetId) {
+  function openTourSection(targetId, { scroll = true, updateHash = true } = {}) {
     tourSections.forEach(section => {
       const shouldShow = section.id === targetId;
       section.classList.toggle('is-open', shouldShow);
@@ -530,8 +530,10 @@
     });
 
     const selected = document.getElementById(targetId);
-    if (selected) {
+    if (selected && scroll) {
       document.getElementById('tour-detail-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    if (selected && updateHash) {
       if (history.pushState) {
         history.pushState(null, '', '#' + targetId);
       } else {
@@ -546,9 +548,9 @@
 
   const initialHash = window.location.hash.replace('#', '');
   if (initialHash && document.querySelector('[data-tour-section]#' + CSS.escape(initialHash))) {
-    openTourSection(initialHash);
+    openTourSection(initialHash, { scroll: false, updateHash: false });
   } else if (tourPickerCards.length) {
-    openTourSection(tourPickerCards[0].dataset.target);
+    openTourSection(tourPickerCards[0].dataset.target, { scroll: false, updateHash: false });
   }
 </script>
 
