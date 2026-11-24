@@ -528,7 +528,7 @@ if (contactForm) {
   switches.forEach(link => {
     link.href = target + window.location.search + window.location.hash;
     link.textContent = isFrench ? 'EN' : 'FR';
-    link.setAttribute('aria-label', isFrench ? 'Switch to English' : 'Passer en français');
+    link.setAttribute('aria-label', isFrench ? 'Passer à l’anglais' : 'Passer en français');
     link.setAttribute('hreflang', isFrench ? 'en' : 'fr');
   });
 })();
