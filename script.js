@@ -57,7 +57,7 @@ const isFrenchPage = document.documentElement.lang === 'fr';
   link.className = 'wa-float';
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
-  link.setAttribute('aria-label', 'Contact us on WhatsApp');
+  link.setAttribute('aria-label', isFrenchPage ? 'Nous contacter sur WhatsApp' : 'Contact us on WhatsApp');
   link.innerHTML = `
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
       <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.06-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="#0c1c12" opacity=".12"/>
@@ -442,7 +442,7 @@ if (contactForm) {
     const phone = document.getElementById('cf-phone').value;
     const email = document.getElementById('cf-email').value;
     const message = document.getElementById('cf-message').value;
-    return `Hi! My name is ${name}.\nPhone: ${phone}\nEmail: ${email}\n\n${message}`;
+    return isFrenchPage ? `Bonjour, je m’appelle ${name}.\nTéléphone : ${phone}\nE-mail : ${email}\n\n${message}` : `Hi! My name is ${name}.\nPhone: ${phone}\nEmail: ${email}\n\n${message}`;
   }
 
   contactForm.addEventListener('submit', async (event) => {
