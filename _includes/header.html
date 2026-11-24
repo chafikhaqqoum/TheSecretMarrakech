@@ -5,17 +5,18 @@
       The Secret <span>Marrakech</span>
     </a>
     <div class="nav-links">
-      <a href="index.html"{% if page.url == "/" or page.url == "/index.html" %} aria-current="page" class="active-nav"{% endif %}>Home</a>
-      <a href="about.html"{% if page.url contains "about" %} aria-current="page" class="active-nav"{% endif %}>About</a>
-      <a href="tours.html"{% if page.url contains "tours" %} aria-current="page" class="active-nav"{% endif %}>Tours</a>
-      <a href="activities.html"{% if page.url contains "activities" %} aria-current="page" class="active-nav"{% endif %}>Activities</a>
-      <a href="services.html"{% if page.url contains "services" %} aria-current="page" class="active-nav"{% endif %}>Services</a>
-      <a href="gallery.html"{% if page.url contains "gallery" %} aria-current="page" class="active-nav"{% endif %}>Gallery</a>
+      <a href="index.html"{% if page.url == "/" or page.url == "/index.html" or page.url == "/fr/" or page.url == "/fr/index.html" %} aria-current="page" class="active-nav"{% endif %}>{% if page.url contains "/fr/" %}Accueil{% else %}Home{% endif %}</a>
+      <a href="about.html"{% if page.url contains "about" %} aria-current="page" class="active-nav"{% endif %}>{% if page.url contains "/fr/" %}À propos{% else %}About{% endif %}</a>
+      <a href="tours.html"{% if page.url contains "tours" %} aria-current="page" class="active-nav"{% endif %}>{% if page.url contains "/fr/" %}Visites{% else %}Tours{% endif %}</a>
+      <a href="activities.html"{% if page.url contains "activities" %} aria-current="page" class="active-nav"{% endif %}>{% if page.url contains "/fr/" %}Activités{% else %}Activities{% endif %}</a>
+      <a href="services.html"{% if page.url contains "services" %} aria-current="page" class="active-nav"{% endif %}>{% if page.url contains "/fr/" %}Services{% else %}Services{% endif %}</a>
+      <a href="gallery.html"{% if page.url contains "gallery" %} aria-current="page" class="active-nav"{% endif %}>{% if page.url contains "/fr/" %}Galerie{% else %}Gallery{% endif %}</a>
       <a href="FAQ.html"{% if page.url contains "FAQ" %} aria-current="page" class="active-nav"{% endif %}>FAQ</a>
-      <a href="contact.html"{% if page.url contains "contact" %} aria-current="page" class="active-nav"{% endif %}>Contact</a>
+      <a href="contact.html"{% if page.url contains "contact" %} aria-current="page" class="active-nav"{% endif %}>{% if page.url contains "/fr/" %}Contact{% else %}Contact{% endif %}</a>
     </div>
-    <a href="#planTripModal" class="nav-cta" data-plan-trip-trigger>Plan Your Trip</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+    <a href="#" class="language-switch" data-language-switch>{% if page.url contains "/fr/" %}EN{% else %}FR{% endif %}</a>
+    <a href="#planTripModal" class="nav-cta" data-plan-trip-trigger>{% if page.url contains "/fr/" %}Préparer votre séjour{% else %}Plan Your Trip{% endif %}</a>
+    <button class="nav-toggle" id="navToggle" aria-label="{% if page.url contains "/fr/" %}Ouvrir le menu{% else %}Open menu{% endif %}" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
   </nav>
@@ -23,32 +24,32 @@
 
 <div class="plan-trip-overlay" id="planTripOverlay"></div>
 <section class="plan-trip-modal" id="planTripModal" role="dialog" aria-modal="true" aria-labelledby="planTripTitle" aria-hidden="true">
-  <button type="button" class="plan-trip-close" id="planTripClose" aria-label="Close enquiry form">
+  <button type="button" class="plan-trip-close" id="planTripClose" aria-label="{% if page.url contains "/fr/" %}Fermer le formulaire{% else %}Close enquiry form{% endif %}">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
   </button>
-  <span class="eyebrow">Start planning</span>
-  <h2 id="planTripTitle">Plan Your Trip</h2>
-  <p class="plan-trip-intro">Tell us a little about what you have in mind. We’ll get back to you to help plan your Marrakech experience.</p>
+  <span class="eyebrow">{% if page.url contains "/fr/" %}Commençons à organiser votre séjour{% else %}Start planning{% endif %}</span>
+  <h2 id="planTripTitle">{% if page.url contains "/fr/" %}Préparer votre séjour{% else %}Plan Your Trip{% endif %}</h2>
+  <p class="plan-trip-intro">{% if page.url contains "/fr/" %}Parlez-nous de votre projet. Nous vous répondrons pour vous aider à organiser votre expérience à Marrakech.{% else %}Tell us a little about what you have in mind. We’ll get back to you to help plan your Marrakech experience.{% endif %}</p>
   <form id="planTripForm" class="contact-form">
     <input type="text" name="_honey" class="plan-trip-honey" tabindex="-1" autocomplete="off">
     <div class="form-group">
-      <label for="pt-name">Name</label>
+      <label for="pt-name">{% if page.url contains "/fr/" %}Nom{% else %}Name{% endif %}</label>
       <input type="text" id="pt-name" name="name" autocomplete="name" required>
     </div>
     <div class="form-group">
-      <label for="pt-phone">Phone</label>
-      <input type="tel" id="pt-phone" name="phone" inputmode="tel" autocomplete="tel" pattern="\+?[0-9]{7,15}" maxlength="16" title="Use 7–15 digits, with an optional + at the beginning and no spaces." required>
+      <label for="pt-phone">{% if page.url contains "/fr/" %}Téléphone{% else %}Phone{% endif %}</label>
+      <input type="tel" id="pt-phone" name="phone" inputmode="tel" autocomplete="tel" pattern="\+?[0-9]{7,15}" maxlength="16" title="{% if page.url contains "/fr/" %}Saisissez 7 à 15 chiffres, avec un + facultatif au début et sans espaces.{% else %}Use 7–15 digits, with an optional + at the beginning and no spaces.{% endif %}" required>
     </div>
     <div class="form-group">
       <label for="pt-email">Email</label>
       <input type="email" id="pt-email" name="email" autocomplete="email" required>
     </div>
     <div class="form-group">
-      <label for="pt-message">Message</label>
-      <textarea id="pt-message" name="message" placeholder="Tell us what you’d like to experience and your preferred dates…" required></textarea>
+      <label for="pt-message">{% if page.url contains "/fr/" %}Message{% else %}Message{% endif %}</label>
+      <textarea id="pt-message" name="message" placeholder="{% if page.url contains "/fr/" %}Décrivez ce que vous aimeriez découvrir et vos dates préférées…{% else %}Tell us what you’d like to experience and your preferred dates…{% endif %}" required></textarea>
     </div>
     <div class="form-submit-row">
-      <button type="submit" class="btn btn-email" id="pt-submit">Send your enquiry</button>
+      <button type="submit" class="btn btn-email" id="pt-submit">{% if page.url contains "/fr/" %}Envoyer votre demande{% else %}Send your enquiry{% endif %}</button>
       <div class="form-status" id="pt-status" role="status" aria-live="polite"></div>
     </div>
   </form>
