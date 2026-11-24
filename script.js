@@ -531,3 +531,27 @@ if (contactForm) {
     link.setAttribute('hreflang', isFrench ? 'en' : 'fr');
   });
 })();
+
+/* ---------- French validation feedback ---------- */
+(() => {
+  if (document.documentElement.lang !== 'fr') return;
+  const messages = {
+    'Please enter a valid email address.': 'Veuillez saisir une adresse e-mail valide.',
+    'Please enter a valid phone number using 7–15 digits, with an optional + at the beginning and no spaces.': 'Veuillez saisir un numéro de téléphone valide de 7 à 15 chiffres, avec un + facultatif au début et sans espaces.',
+    'Please add a message so we know how to help.': 'Veuillez ajouter un message afin que nous sachions comment vous aider.',
+    'Please fill in your name.': 'Veuillez saisir votre nom.',
+    'Please fill in your phone number.': 'Veuillez saisir votre numéro de téléphone.',
+    'Please fill in your email.': 'Veuillez saisir votre adresse e-mail.',
+    'Please fill in a message.': 'Veuillez saisir un message.',
+    'Please fill in the number of guests.': 'Veuillez indiquer le nombre de participants.',
+    'Please fill in a date.': 'Veuillez indiquer une date.'
+  };
+  const localize = node => {
+    if (!node || !node.textContent) return;
+    const original = node.textContent.trim();
+    if (messages[original]) node.textContent = messages[original];
+  };
+  const watch = () => document.querySelectorAll('.form-status, #bkStatus, #pt-status, #cf-status').forEach(localize);
+  watch();
+  new MutationObserver(watch).observe(document.body, {subtree:true,childList:true,characterData:true});
+})();
