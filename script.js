@@ -510,3 +510,24 @@ if (contactForm) {
     await sendFormSubmission({subject:'Trip planning enquiry - The Secret Marrakech (from '+name+')',name,phone:fields.phone.value.trim(),email:fields.email.value.trim(),message:fields.message.value.trim()},status,submitButton);
   });
 })();
+
+/* ---------- English / French page switch ---------- */
+(() => {
+  const switches = document.querySelectorAll('[data-language-switch]');
+  if (!switches.length) return;
+  const path = window.location.pathname;
+  const isFrench = path === '/fr' || path.startsWith('/fr/');
+  let target;
+  if (isFrench) {
+    target = path.replace(/^\/fr(?=\/|$)/, '') || '/';
+    if (target === '/index.html') target = '/';
+  } else {
+    target = path === '/' || path === '/index.html' ? '/fr/' : '/fr' + path;
+  }
+  switches.forEach(link => {
+    link.href = target + window.location.search + window.location.hash;
+    link.textContent = isFrench ? 'EN' : 'FR';
+    link.setAttribute('aria-label', isFrench ? 'Switch to English' : 'Passer en français');
+    link.setAttribute('hreflang', isFrench ? 'en' : 'fr');
+  });
+})();
