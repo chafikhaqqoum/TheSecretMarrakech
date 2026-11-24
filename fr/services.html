@@ -1,0 +1,70 @@
+---
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/images/brand-logo.webp">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services bientôt disponibles | The Secret Marrakech</title>
+<meta name="description" content="Nous préparons de nouvelles façons de découvrir Marrakech et le Maroc. En attendant, découvrez nos visites guidées ou contactez The Secret Marrakech pour organiser votre séjour.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://www.thesecretmarrakech.com/fr/services.html">
+<link rel="alternate" hreflang="en" href="https://www.thesecretmarrakech.com/fr/services.html">
+<link rel="alternate" hreflang="fr" href="https://www.thesecretmarrakech.com/fr/services.html">
+<link rel="alternate" hreflang="x-default" href="https://www.thesecretmarrakech.com/fr/services.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+{% include header.html %}
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <a href="index.html" class="brand" style="color:var(--ink); text-shadow:none; font-size:17px; text-decoration:none;">
+      <img class="brand-mark" src="/images/brand-logo.webp" alt="The Secret Marrakech logo" width="26">
+      The Secret <span>Marrakech</span>
+    </a>
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="about.html">À propos</a>
+    <a href="tours.html">Visites guidées</a>
+    <a href="activities.html">Activités</a>
+    <a href="services.html" aria-current="page" class="active-nav">Services</a>
+    <a href="gallery.html">Galerie</a>
+    <a href="FAQ.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <a href="#" class="language-switch mobile-language-switch" data-language-switch aria-label="Passer en anglais">EN</a>
+  <a href="#planTripModal" class="btn btn-primary" data-plan-trip-trigger>Préparer votre séjour</a>
+</div>
+<section class="page-banner">
+  <div class="wrap">
+    <span class="eyebrow">Services</span>
+    <h1>De belles nouveautés arrivent bientôt</h1>
+    <p>Nous préparons de nouvelles façons de découvrir Marrakech et de vivre le Maroc.</p>
+  </div>
+</section>
+<section class="shop-soon">
+  <div class="wrap">
+    <div class="icon-badge" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.64 5.64l2.12 2.12M16.24 16.24l2.12 2.12M18.36 5.64l-2.12 2.12M7.76 16.24l-2.12 2.12"/><circle cx="12" cy="12" r="4"/></svg>
+    </div>
+    <h2>Nous y apportons les dernières touches.</h2>
+    <p>En attendant, découvrez nos visites guidées ou contactez-nous. Nous serons ravis de vous aider à organiser votre expérience à Marrakech.</p>
+    <div class="shop-preview">
+      <a href="tours.html" class="btn btn-primary">Explore Guided Visites guidées</a>
+      <a href="contact.html" class="btn btn-ghost">Nous contacter</a>
+    </div>
+  </div>
+</section>
+{% include footer.html %}
+<script src="/script.js"></script>
+</body>
+</html>
