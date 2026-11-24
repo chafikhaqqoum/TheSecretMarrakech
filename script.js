@@ -202,7 +202,7 @@ async function sendFormSubmission(payload, statusEl, button) {
   button.disabled = true;
   button.setAttribute('aria-busy', 'true');
   if (statusEl) {
-    statusEl.textContent = 'Sending your message…';
+    statusEl.textContent = isFrenchPage ? 'Envoi de votre message…' : 'Sending your message…';
     statusEl.classList.remove('success', 'error');
   }
 
@@ -222,16 +222,16 @@ async function sendFormSubmission(payload, statusEl, button) {
     const result = await response.json();
     if (!response.ok || result.success !== true) {
       const detail = result.message || result.body?.message;
-      throw new Error(detail || 'The email service could not accept your message. Please try WhatsApp instead.');
+      throw new Error(detail || (isFrenchPage ? 'Le service e-mail n’a pas pu accepter votre message. Veuillez réessayer par WhatsApp.' : 'The email service could not accept your message. Please try WhatsApp instead.'));
     }
     if (statusEl) {
-      statusEl.textContent = 'Thank you! Your message has been sent successfully. Chafik will get back to you soon.';
+      statusEl.textContent = isFrenchPage ? 'Merci ! Votre message a bien été envoyé. Chafik vous répondra dès que possible.' : 'Thank you! Your message has been sent successfully. Chafik will get back to you soon.';
       statusEl.classList.remove('error');
       statusEl.classList.add('success');
     }
   } catch (error) {
     if (statusEl) {
-      statusEl.textContent = error.message || 'Sorry, your message could not be sent. Please try WhatsApp instead.';
+      statusEl.textContent = isFrenchPage ? (error.message || 'Désolé, votre message n’a pas pu être envoyé. Veuillez réessayer par WhatsApp.') : (error.message || 'Sorry, your message could not be sent. Please try WhatsApp instead.');
       statusEl.classList.remove('success');
       statusEl.classList.add('error');
     }
@@ -537,7 +537,9 @@ if (contactForm) {
 (() => {
   if (document.documentElement.lang !== 'fr') return;
   const messages = {
+    'Please enter your name.': 'Veuillez saisir votre nom.',
     'Please enter a valid email address.': 'Veuillez saisir une adresse e-mail valide.',
+    'Sending your message…': 'Envoi de votre message…',
     'Please enter a valid phone number using 7–15 digits, with an optional + at the beginning and no spaces.': 'Veuillez saisir un numéro de téléphone valide de 7 à 15 chiffres, avec un + facultatif au début et sans espaces.',
     'Please add a message so we know how to help.': 'Veuillez ajouter un message afin que nous sachions comment vous aider.',
     'Please fill in your name.': 'Veuillez saisir votre nom.',
