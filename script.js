@@ -328,17 +328,17 @@ if (bookingModal) {
       `${isFrenchPage ? 'E-mail' : 'Email'} : ${email}`
     ];
     if (intent === 'book') {
-      lines.push(`\\n${isFrenchPage ? 'Bonjour ! Je souhaite réserver' : "Hi! I'd like to book"} : ${tourName}`);
+      lines.push(`\n${isFrenchPage ? 'Bonjour ! Je souhaite réserver' : "Hi! I'd like to book"} : ${tourName}`);
       lines.push(`${isFrenchPage ? 'Format de visite' : 'Tour format'} : ${option === 'Private' ? (isFrenchPage ? 'Privée — uniquement notre groupe' : 'Private — just our group') : (isFrenchPage ? 'Petit groupe partagé avec d’autres voyageurs' : 'Public small-group — shared with other guests')}`);
       if (guests) lines.push(`${isFrenchPage ? 'Nombre de participants' : 'Total guests'} : ${guests}`);
       if (date) lines.push(`${isFrenchPage ? 'Date souhaitée' : 'Date'} : ${date}`);
     } else {
-      lines.push(`\\n${isFrenchPage ? 'Bonjour ! J’aimerais des renseignements sur' : 'Hi! I have a question about'} : ${tourName}`);
+      lines.push(`\n${isFrenchPage ? 'Bonjour ! J’aimerais des renseignements sur' : 'Hi! I have a question about'} : ${tourName}`);
       if (guests && guests !== '2') lines.push(`${isFrenchPage ? 'Participants' : 'Guests'} : ${guests}`);
       if (date) lines.push(`${isFrenchPage ? 'Date souhaitée' : 'Preferred date'} : ${date}`);
     }
     if (message) lines.push(`${isFrenchPage ? 'Message' : 'Message'} : ${message}`);
-    return { intent, tourName, text: lines.join('\\n') };
+    return { intent, tourName, text: lines.join('\n') };
   }
 
   function validateBookingForm() {
