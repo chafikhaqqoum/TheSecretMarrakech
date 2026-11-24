@@ -508,7 +508,7 @@ if (contactForm) {
     if(!fields.message.value.trim()) return fail('Please add a message so we know how to help.',fields.message);
     if(form.querySelector('[name="_honey"]').value) return;
     const name=fields.name.value.trim();
-    await sendFormSubmission({subject:'Trip planning enquiry - The Secret Marrakech (from '+name+')',name,phone:fields.phone.value.trim(),email:fields.email.value.trim(),message:fields.message.value.trim()},status,submitButton);
+    await sendFormSubmission({subject:isFrenchPage ? 'Demande de préparation de séjour — The Secret Marrakech (de la part de '+name+')' : 'Trip planning enquiry - The Secret Marrakech (from '+name+')',name,phone:fields.phone.value.trim(),email:fields.email.value.trim(),message:fields.message.value.trim()},status,submitButton);
   });
 })();
 
