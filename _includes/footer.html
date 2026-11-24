@@ -22,8 +22,8 @@
     </div>
     <div class="footer-contact">
       <h4>{% if page.url contains "/fr/" %}Contact direct{% else %}Connect Directly{% endif %}</h4>
-      <p>WhatsApp : <a href="https://wa.me/212628921377">+212 628 921 377</a></p>
-      <p>Email : <a href="mailto:chafik.haqqoum@gmail.com">chafik.haqqoum@gmail.com</a></p>
+      <p>WhatsApp{% if page.url contains "/fr/" %} :{% else %}:{% endif %} <a href="https://wa.me/212628921377">+212 628 921 377</a></p>
+      <p>Email{% if page.url contains "/fr/" %} :{% else %}:{% endif %} <a href="mailto:chafik.haqqoum@gmail.com">chafik.haqqoum@gmail.com</a></p>
       <div class="footer-socials contact-socials">
         <a href="https://www.instagram.com/thesecretmarrakech/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon" style="background:radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="#fff" stroke="none"/></svg></a>
         <a href="https://www.facebook.com/thesecretmarrakech" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon" style="background:#1877F2;"><svg viewBox="0 0 24 24" fill="#fff"><path d="M15 8.5h-2c-.8 0-1.5.7-1.5 1.5v2h3.3l-.4 3h-2.9V21h-3v-6H8v-3h1.5v-2.2C9.5 7.3 11 6 13.2 6H15v2.5z"/></svg></a>
