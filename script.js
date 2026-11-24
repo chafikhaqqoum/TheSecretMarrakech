@@ -146,6 +146,8 @@ document.querySelectorAll('[data-slider]').forEach(slider => {
 
   let current = 0;
   let timer;
+  const detailSection = slider.closest('[data-tour-section]');
+  let sliderIsVisible = false;
 
   function show(index) {
     current = (index + slides.length) % slides.length;
@@ -155,17 +157,41 @@ document.querySelectorAll('[data-slider]').forEach(slider => {
     if (dots[current]) dots[current].classList.add('active');
   }
 
-  function startAuto() {
+  function stopAuto() {
     clearInterval(timer);
+    timer = null;
+  }
+
+  function startAuto() {
+    if (timer) return;
     timer = setInterval(() => show(current + 1), 4500);
+  }
+
+  function syncAuto() {
+    if (!detailSection || (sliderIsVisible && detailSection.classList.contains('is-open'))) {
+      startAuto();
+    } else {
+      stopAuto();
+    }
   }
 
   dots.forEach((dot, i) => {
     if (i >= slides.length) { dot.style.display = 'none'; return; }
-    dot.addEventListener('click', () => { show(i); startAuto(); });
+    dot.addEventListener('click', () => { show(i); syncAuto(); });
   });
 
-  startAuto();
+  if (detailSection && 'IntersectionObserver' in window) {
+    const sliderObserver = new IntersectionObserver(entries => {
+      sliderIsVisible = entries.some(entry => entry.isIntersecting);
+      syncAuto();
+    }, { threshold: 0.2 });
+    sliderObserver.observe(slider);
+    // The selected detail section may be changed without replacing the slider.
+    const sectionObserver = new MutationObserver(syncAuto);
+    sectionObserver.observe(detailSection, { attributes: true, attributeFilter: ['class'] });
+  } else if (!detailSection) {
+    startAuto();
+  }
 });
 
 /* ---------- Email form delivery (Web3Forms) ---------- */
