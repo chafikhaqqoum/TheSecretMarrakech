@@ -1,4 +1,5 @@
 // The standalone calendar has been retired; do not add it back to site navigation.
+const isFrenchPage = document.documentElement.lang === 'fr';
 
 // Shared floating WhatsApp CTA on every page using this script.
 (() => {
@@ -56,7 +57,7 @@
   link.className = 'wa-float';
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
-  link.setAttribute('aria-label', 'Contact us on WhatsApp');
+  link.setAttribute('aria-label', isFrenchPage ? 'Nous contacter sur WhatsApp' : 'Contact us on WhatsApp');
   link.innerHTML = `
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
       <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.06-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="#0c1c12" opacity=".12"/>
@@ -201,7 +202,7 @@ async function sendFormSubmission(payload, statusEl, button) {
   button.disabled = true;
   button.setAttribute('aria-busy', 'true');
   if (statusEl) {
-    statusEl.textContent = 'Sending your message…';
+    statusEl.textContent = isFrenchPage ? 'Envoi de votre message…' : 'Sending your message…';
     statusEl.classList.remove('success', 'error');
   }
 
@@ -221,16 +222,16 @@ async function sendFormSubmission(payload, statusEl, button) {
     const result = await response.json();
     if (!response.ok || result.success !== true) {
       const detail = result.message || result.body?.message;
-      throw new Error(detail || 'The email service could not accept your message. Please try WhatsApp instead.');
+      throw new Error(detail || (isFrenchPage ? 'Le service e-mail n’a pas pu accepter votre message. Veuillez réessayer par WhatsApp.' : 'The email service could not accept your message. Please try WhatsApp instead.'));
     }
     if (statusEl) {
-      statusEl.textContent = 'Thank you! Your message has been sent successfully. Chafik will get back to you soon.';
+      statusEl.textContent = isFrenchPage ? 'Merci ! Votre message a bien été envoyé. Chafik vous répondra dès que possible.' : 'Thank you! Your message has been sent successfully. Chafik will get back to you soon.';
       statusEl.classList.remove('error');
       statusEl.classList.add('success');
     }
   } catch (error) {
     if (statusEl) {
-      statusEl.textContent = error.message || 'Sorry, your message could not be sent. Please try WhatsApp instead.';
+      statusEl.textContent = isFrenchPage ? (error.message || 'Désolé, votre message n’a pas pu être envoyé. Veuillez réessayer par WhatsApp.') : (error.message || 'Sorry, your message could not be sent. Please try WhatsApp instead.');
       statusEl.classList.remove('success');
       statusEl.classList.add('error');
     }
@@ -267,14 +268,14 @@ if (bookingModal) {
     const status = document.getElementById('bkStatus');
     if (status) { status.textContent = ''; status.classList.remove('success', 'error'); }
     if (intent === 'book') {
-      bookingTitle.textContent = 'Book your tour';
-      bookingNote.textContent = "You'll pick your dates here, then confirm everything with Chafik directly on WhatsApp or email — nothing is auto-charged.";
+      bookingTitle.textContent = isFrenchPage ? 'Réserver votre visite' : 'Book your tour';
+      bookingNote.textContent = isFrenchPage ? 'Indiquez vos dates ici, puis confirmez directement avec Chafik sur WhatsApp ou par e-mail. Aucun paiement automatique ne sera effectué.' : "You'll pick your dates here, then confirm everything with Chafik directly on WhatsApp or email — nothing is auto-charged.";
       bkMessageOptional.style.display = 'inline';
       document.getElementById('bk-guests').required = true;
       document.getElementById('bk-date').required = true;
     } else {
-      bookingTitle.textContent = 'Ask about this tour';
-      bookingNote.textContent = "This sends a message straight to Chafik — no booking details needed unless you want to share them.";
+      bookingTitle.textContent = isFrenchPage ? 'Demander des renseignements' : 'Ask about this tour';
+      bookingNote.textContent = isFrenchPage ? 'Votre message sera envoyé directement à Chafik. Vous n’avez pas besoin de fournir de détails de réservation.' : "This sends a message straight to Chafik — no booking details needed unless you want to share them.";
       bkMessageOptional.style.display = 'none';
       document.getElementById('bk-guests').required = false;
       document.getElementById('bk-date').required = false;
@@ -295,8 +296,8 @@ if (bookingModal) {
   if (bookingOption && guestsHelp) {
     function updateBookingOptionHelp() {
       guestsHelp.textContent = bookingOption.value === 'Private'
-        ? 'Enter everyone in your private group. The total price depends on the selected tour and group size.'
-        : 'Enter the number of people in your party. You will join a small group with other guests.';
+        ? (isFrenchPage ? 'Indiquez le nombre de participants de votre groupe privé. Le prix total dépend de la visite choisie et de la taille du groupe.' : 'Enter everyone in your private group. The total price depends on the selected tour and group size.')
+        : (isFrenchPage ? 'Indiquez le nombre de personnes. Vous rejoindrez un petit groupe avec d’autres voyageurs.' : 'Enter the number of people in your party. You will join a small group with other guests.');
     }
     bookingOption.addEventListener('change', updateBookingOptionHelp);
     updateBookingOptionHelp();
@@ -321,22 +322,22 @@ if (bookingModal) {
     const guests = document.getElementById('bk-guests').value;
     const date = document.getElementById('bk-date').value;
     const message = document.getElementById('bk-message').value;
-
-    let lines = [];
-    lines.push(`Name: ${name}`);
-    lines.push(`Phone: ${phone}`);
-    lines.push(`Email: ${email}`);
+    const lines = [
+      `${isFrenchPage ? 'Nom' : 'Name'} : ${name}`,
+      `${isFrenchPage ? 'Téléphone' : 'Phone'} : ${phone}`,
+      `${isFrenchPage ? 'E-mail' : 'Email'} : ${email}`
+    ];
     if (intent === 'book') {
-      lines.push(`\nHi! I'd like to book: ${tourName}`);
-      lines.push(`Tour format: ${option === 'Private' ? 'Private — just our group' : 'Public small-group — shared with other guests'}`);
-      if (guests) lines.push(`Total guests: ${guests}`);
-      if (date) lines.push(`Date: ${date}`);
+      lines.push(`\n${isFrenchPage ? 'Bonjour ! Je souhaite réserver' : "Hi! I'd like to book"} : ${tourName}`);
+      lines.push(`${isFrenchPage ? 'Format de visite' : 'Tour format'} : ${option === 'Private' ? (isFrenchPage ? 'Privée — uniquement notre groupe' : 'Private — just our group') : (isFrenchPage ? 'Petit groupe partagé avec d’autres voyageurs' : 'Public small-group — shared with other guests')}`);
+      if (guests) lines.push(`${isFrenchPage ? 'Nombre de participants' : 'Total guests'} : ${guests}`);
+      if (date) lines.push(`${isFrenchPage ? 'Date souhaitée' : 'Date'} : ${date}`);
     } else {
-      lines.push(`\nHi! I have a question about: ${tourName}`);
-      if (guests && guests !== '2') lines.push(`Guests: ${guests}`);
-      if (date) lines.push(`Preferred date: ${date}`);
+      lines.push(`\n${isFrenchPage ? 'Bonjour ! J’aimerais des renseignements sur' : 'Hi! I have a question about'} : ${tourName}`);
+      if (guests && guests !== '2') lines.push(`${isFrenchPage ? 'Participants' : 'Guests'} : ${guests}`);
+      if (date) lines.push(`${isFrenchPage ? 'Date souhaitée' : 'Preferred date'} : ${date}`);
     }
-    if (message) lines.push(`Message: ${message}`);
+    if (message) lines.push(`${isFrenchPage ? 'Message' : 'Message'} : ${message}`);
     return { intent, tourName, text: lines.join('\n') };
   }
 
@@ -377,7 +378,7 @@ if (bookingModal) {
   document.getElementById('bkSendEmail').addEventListener('click', async (event) => {
     if (!validateBookingForm()) return;
     const { intent, tourName, text } = buildBookingMessage();
-    const subject = (intent === 'book' ? 'Booking request — ' : 'Question about — ') + tourName;
+    const subject = (intent === 'book' ? (isFrenchPage ? 'Demande de réservation — ' : 'Booking request — ') : (isFrenchPage ? 'Renseignements sur — ' : 'Question about — ')) + tourName;
     const payload = {
       subject,
       name: document.getElementById('bk-name').value.trim(),
@@ -401,7 +402,7 @@ if (contactForm) {
   if (requestedTour) {
     const messageField = document.getElementById('cf-message');
     if (messageField && !messageField.value.trim()) {
-      messageField.value = `I'm interested in a quote for: ${requestedTour}. Please send me more details.`;
+      messageField.value = isFrenchPage ? `Je souhaite obtenir un devis pour : ${requestedTour}. Pourriez-vous m’envoyer plus de détails ?` : `I'm interested in a quote for: ${requestedTour}. Please send me more details.`;
     }
   }
   function validateContactForm() {
@@ -441,7 +442,7 @@ if (contactForm) {
     const phone = document.getElementById('cf-phone').value;
     const email = document.getElementById('cf-email').value;
     const message = document.getElementById('cf-message').value;
-    return `Hi! My name is ${name}.\nPhone: ${phone}\nEmail: ${email}\n\n${message}`;
+    return isFrenchPage ? `Bonjour, je m’appelle ${name}.\nTéléphone : ${phone}\nE-mail : ${email}\n\n${message}` : `Hi! My name is ${name}.\nPhone: ${phone}\nEmail: ${email}\n\n${message}`;
   }
 
   contactForm.addEventListener('submit', async (event) => {
@@ -449,7 +450,7 @@ if (contactForm) {
     if (!validateContactForm()) return;
     const name = document.getElementById('cf-name').value.trim();
     const email = document.getElementById('cf-email').value.trim();
-    const subject = 'Tour inquiry - The Secret Marrakech (from ' + name + ')';
+    const subject = isFrenchPage ? 'Demande de renseignements — The Secret Marrakech (de la part de ' + name + ')' : 'Tour inquiry - The Secret Marrakech (from ' + name + ')';
     const payload = {
       subject,
       name,
@@ -507,6 +508,53 @@ if (contactForm) {
     if(!fields.message.value.trim()) return fail('Please add a message so we know how to help.',fields.message);
     if(form.querySelector('[name="_honey"]').value) return;
     const name=fields.name.value.trim();
-    await sendFormSubmission({subject:'Trip planning enquiry - The Secret Marrakech (from '+name+')',name,phone:fields.phone.value.trim(),email:fields.email.value.trim(),message:fields.message.value.trim()},status,submitButton);
+    await sendFormSubmission({subject:isFrenchPage ? 'Demande de préparation de séjour — The Secret Marrakech (de la part de '+name+')' : 'Trip planning enquiry - The Secret Marrakech (from '+name+')',name,phone:fields.phone.value.trim(),email:fields.email.value.trim(),message:fields.message.value.trim()},status,submitButton);
   });
+})();
+
+/* ---------- English / French page switch ---------- */
+(() => {
+  const switches = document.querySelectorAll('[data-language-switch]');
+  if (!switches.length) return;
+  const path = window.location.pathname;
+  const isFrench = path === '/fr' || path.startsWith('/fr/');
+  let target;
+  if (isFrench) {
+    target = path.replace(/^\/fr(?=\/|$)/, '') || '/';
+    if (target === '/index.html') target = '/';
+  } else {
+    target = path === '/' || path === '/index.html' ? '/fr/' : '/fr' + path;
+  }
+  switches.forEach(link => {
+    link.href = target + window.location.search + window.location.hash;
+    link.textContent = isFrench ? 'EN' : 'FR';
+    link.setAttribute('aria-label', isFrench ? 'Passer à l’anglais' : 'Passer en français');
+    link.setAttribute('hreflang', isFrench ? 'en' : 'fr');
+  });
+})();
+
+/* ---------- French validation feedback ---------- */
+(() => {
+  if (document.documentElement.lang !== 'fr') return;
+  const messages = {
+    'Please enter your name.': 'Veuillez saisir votre nom.',
+    'Please enter a valid email address.': 'Veuillez saisir une adresse e-mail valide.',
+    'Sending your message…': 'Envoi de votre message…',
+    'Please enter a valid phone number using 7–15 digits, with an optional + at the beginning and no spaces.': 'Veuillez saisir un numéro de téléphone valide de 7 à 15 chiffres, avec un + facultatif au début et sans espaces.',
+    'Please add a message so we know how to help.': 'Veuillez ajouter un message afin que nous sachions comment vous aider.',
+    'Please fill in your name.': 'Veuillez saisir votre nom.',
+    'Please fill in your phone number.': 'Veuillez saisir votre numéro de téléphone.',
+    'Please fill in your email.': 'Veuillez saisir votre adresse e-mail.',
+    'Please fill in a message.': 'Veuillez saisir un message.',
+    'Please fill in the number of guests.': 'Veuillez indiquer le nombre de participants.',
+    'Please fill in a date.': 'Veuillez indiquer une date.'
+  };
+  const localize = node => {
+    if (!node || !node.textContent) return;
+    const original = node.textContent.trim();
+    if (messages[original]) node.textContent = messages[original];
+  };
+  const watch = () => document.querySelectorAll('.form-status, #bkStatus, #pt-status, #cf-status').forEach(localize);
+  watch();
+  new MutationObserver(watch).observe(document.body, {subtree:true,childList:true,characterData:true});
 })();

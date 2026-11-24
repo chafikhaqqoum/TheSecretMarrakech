@@ -1,52 +1,36 @@
 <footer class="site-footer">
   <div class="footer-container">
-    <!-- Col 1: Brand & Credential -->
     <div class="footer-brand">
       <div class="footer-logo-wrap">
         <img alt="The Secret Marrakech logo" src="images/brand-logo.webp" width="32">
         <span class="footer-brand-name">The Secret <span>Marrakech</span></span>
       </div>
-      <p class="footer-license"><span>Licensed Tour Guide</span> · Ministry of Tourism, Morocco · Since 2018</p>
+      <p class="footer-license"><span>{% if page.url contains "/fr/" %}Guide touristique agréé{% else %}Licensed Tour Guide{% endif %}</span> · {% if page.url contains "/fr/" %}Ministère du Tourisme, Maroc · Depuis 2018{% else %}Ministry of Tourism, Morocco · Since 2018{% endif %}</p>
     </div>
-
-    <!-- Col 2: Quick Links -->
     <div class="footer-links">
-      <h4>Quick Navigation</h4>
+      <h4>{% if page.url contains "/fr/" %}Navigation rapide{% else %}Quick Navigation{% endif %}</h4>
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Chafik</a></li>
-        <li><a href="tours.html">Tours</a></li>
-        <li><a href="activities.html">Activities</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="index.html">{% if page.url contains "/fr/" %}Accueil{% else %}Home{% endif %}</a></li>
+        <li><a href="about.html">{% if page.url contains "/fr/" %}À propos{% else %}About{% endif %}</a></li>
+        <li><a href="tours.html">{% if page.url contains "/fr/" %}Visites guidées{% else %}Tours{% endif %}</a></li>
+        <li><a href="activities.html">{% if page.url contains "/fr/" %}Activités{% else %}Activities{% endif %}</a></li>
+        <li><a href="services.html">{% if page.url contains "/fr/" %}Services{% else %}Services{% endif %}</a></li>
+        <li><a href="gallery.html">{% if page.url contains "/fr/" %}Galerie{% else %}Gallery{% endif %}</a></li>
         <li><a href="FAQ.html">FAQ</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html">{% if page.url contains "/fr/" %}Contact{% else %}Contact{% endif %}</a></li>
       </ul>
     </div>
-
-    <!-- Col 3: Direct Connect & Socials -->
     <div class="footer-contact">
-      <h4>Connect Directly</h4>
-      <p>WhatsApp: <a href="https://wa.me/212628921377">+212 628 921 377</a></p>
-      <p>Email: <a href="mailto:chafik.haqqoum@gmail.com">chafik.haqqoum@gmail.com</a></p>
+      <h4>{% if page.url contains "/fr/" %}Contact direct{% else %}Connect Directly{% endif %}</h4>
+      <p>WhatsApp{% if page.url contains "/fr/" %} :{% else %}:{% endif %} <a href="https://wa.me/212628921377">+212 628 921 377</a></p>
+      <p>Email{% if page.url contains "/fr/" %} :{% else %}:{% endif %} <a href="mailto:chafik.haqqoum@gmail.com">chafik.haqqoum@gmail.com</a></p>
       <div class="footer-socials contact-socials">
-        <a href="https://www.instagram.com/thesecretmarrakech/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon" style="background:radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="#fff" stroke="none"/></svg>
-        </a>
-        <a href="https://www.facebook.com/thesecretmarrakech" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon" style="background:#1877F2;">
-          <svg viewBox="0 0 24 24" fill="#fff"><path d="M15 8.5h-2c-.8 0-1.5.7-1.5 1.5v2h3.3l-.4 3h-2.9V21h-3v-6H8v-3h1.5v-2.2C9.5 7.3 11 6 13.2 6H15v2.5z"/></svg>
-        </a>
-        <a href="https://www.tripadvisor.com/Attraction_Review-g293734-d26679692-Reviews-The_Secret_Marrakech-Marrakech_Marrakech_Safi.html" target="_blank" rel="noopener" aria-label="Tripadvisor" class="social-icon" style="background:#34E0A1;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="7.5" cy="13" r="5.2"/><circle cx="7.5" cy="13" r="1.6" fill="#fff" stroke="none"/><circle cx="16.5" cy="13" r="5.2"/><circle cx="16.5" cy="13" r="1.6" fill="#fff" stroke="none"/><path d="M9.3 8.2C11 6.8 13 6.8 14.7 8.2" stroke-linecap="round"/></svg>
-        </a>
-        <a href="https://www.airbnb.com/users/show/298601412" target="_blank" rel="noopener" aria-label="Airbnb" class="social-icon" style="background:#FF5A5F;">
-          <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2.2c-.5 0-.9.2-1.2.6-1.9 2.3-6.3 8-6.3 11a7.5 7.5 0 0015 0c0-3-4.4-8.7-6.3-11-.3-.4-.7-.6-1.2-.6zm0 3.1c1.5 2 4.7 6.4 4.7 8.2a4.7 4.7 0 01-9.4 0c0-1.8 3.2-6.2 4.7-8.2zm-2.6 8.4a2.6 2.6 0 002.6 2.3.6.6 0 100-1.2 1.4 1.4 0 01-1.4-1.2.6.6 0 10-1.2.1z"/></svg>
-        </a>
+        <a href="https://www.instagram.com/thesecretmarrakech/" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon" style="background:radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="#fff" stroke="none"/></svg></a>
+        <a href="https://www.facebook.com/thesecretmarrakech" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon" style="background:#1877F2;"><svg viewBox="0 0 24 24" fill="#fff"><path d="M15 8.5h-2c-.8 0-1.5.7-1.5 1.5v2h3.3l-.4 3h-2.9V21h-3v-6H8v-3h1.5v-2.2C9.5 7.3 11 6 13.2 6H15v2.5z"/></svg></a>
+        <a href="https://www.tripadvisor.com/Attraction_Review-g293734-d26679692-Reviews-The_Secret_Marrakech-Marrakech_Marrakech_Safi.html" target="_blank" rel="noopener" aria-label="Tripadvisor" class="social-icon" style="background:#34E0A1;"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="7.5" cy="13" r="5.2"/><circle cx="7.5" cy="13" r="1.6" fill="#fff" stroke="none"/><circle cx="16.5" cy="13" r="5.2"/><circle cx="16.5" cy="13" r="1.6" fill="#fff" stroke="none"/><path d="M9.3 8.2C11 6.8 13 6.8 14.7 8.2" stroke-linecap="round"/></svg></a>
+        <a href="https://www.airbnb.com/users/show/298601412" target="_blank" rel="noopener" aria-label="Airbnb" class="social-icon" style="background:#FF5A5F;"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2.2c-.5 0-.9.2-1.2.6-1.9 2.3-6.3 8-6.3 11a7.5 7.5 0 0015 0c0-3-4.4-8.7-6.3-11-.3-.4-.7-.6-1.2-.6zm0 3.1c1.5 2 4.7 6.4 4.7 8.2a4.7 4.7 0 01-9.4 0c0-1.8 3.2-6.2 4.7-8.2zm-2.6 8.4a2.6 2.6 0 002.6 2.3.6.6 0 100-1.2 1.4 1.4 0 01-1.4-1.2.6.6 0 10-1.2.1z"/></svg></a>
       </div>
     </div>
   </div>
-
-  <div class="footer-bottom">
-    <p>© 2026 The Secret Marrakech. All rights reserved.</p>
-  </div>
+  <div class="footer-bottom"><p>© 2026 The Secret Marrakech. {% if page.url contains "/fr/" %}Tous droits réservés.{% else %}All rights reserved.{% endif %}</p></div>
 </footer>
