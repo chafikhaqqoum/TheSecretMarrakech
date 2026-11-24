@@ -322,23 +322,23 @@ if (bookingModal) {
     const guests = document.getElementById('bk-guests').value;
     const date = document.getElementById('bk-date').value;
     const message = document.getElementById('bk-message').value;
-
-    let lines = [];
-    lines.push(`Name: ${name}`);
-    lines.push(`Phone: ${phone}`);
-    lines.push(`Email: ${email}`);
+    const lines = [
+      `${isFrenchPage ? 'Nom' : 'Name'} : ${name}`,
+      `${isFrenchPage ? 'Téléphone' : 'Phone'} : ${phone}`,
+      `${isFrenchPage ? 'E-mail' : 'Email'} : ${email}`
+    ];
     if (intent === 'book') {
-      lines.push(`\nHi! I'd like to book: ${tourName}`);
-      lines.push(`Tour format: ${option === 'Private' ? 'Private — just our group' : 'Public small-group — shared with other guests'}`);
-      if (guests) lines.push(`Total guests: ${guests}`);
-      if (date) lines.push(`Date: ${date}`);
+      lines.push(`\\n${isFrenchPage ? 'Bonjour ! Je souhaite réserver' : "Hi! I'd like to book"} : ${tourName}`);
+      lines.push(`${isFrenchPage ? 'Format de visite' : 'Tour format'} : ${option === 'Private' ? (isFrenchPage ? 'Privée — uniquement notre groupe' : 'Private — just our group') : (isFrenchPage ? 'Petit groupe partagé avec d’autres voyageurs' : 'Public small-group — shared with other guests')}`);
+      if (guests) lines.push(`${isFrenchPage ? 'Nombre de participants' : 'Total guests'} : ${guests}`);
+      if (date) lines.push(`${isFrenchPage ? 'Date souhaitée' : 'Date'} : ${date}`);
     } else {
-      lines.push(`\nHi! I have a question about: ${tourName}`);
-      if (guests && guests !== '2') lines.push(`Guests: ${guests}`);
-      if (date) lines.push(`Preferred date: ${date}`);
+      lines.push(`\\n${isFrenchPage ? 'Bonjour ! J’aimerais des renseignements sur' : 'Hi! I have a question about'} : ${tourName}`);
+      if (guests && guests !== '2') lines.push(`${isFrenchPage ? 'Participants' : 'Guests'} : ${guests}`);
+      if (date) lines.push(`${isFrenchPage ? 'Date souhaitée' : 'Preferred date'} : ${date}`);
     }
-    if (message) lines.push(`Message: ${message}`);
-    return { intent, tourName, text: lines.join('\n') };
+    if (message) lines.push(`${isFrenchPage ? 'Message' : 'Message'} : ${message}`);
+    return { intent, tourName, text: lines.join('\\n') };
   }
 
   function validateBookingForm() {
