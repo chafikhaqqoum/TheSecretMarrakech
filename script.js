@@ -1,4 +1,5 @@
 // The standalone calendar has been retired; do not add it back to site navigation.
+const isFrenchPage = document.documentElement.lang === 'fr';
 
 // Shared floating WhatsApp CTA on every page using this script.
 (() => {
@@ -267,14 +268,14 @@ if (bookingModal) {
     const status = document.getElementById('bkStatus');
     if (status) { status.textContent = ''; status.classList.remove('success', 'error'); }
     if (intent === 'book') {
-      bookingTitle.textContent = 'Book your tour';
-      bookingNote.textContent = "You'll pick your dates here, then confirm everything with Chafik directly on WhatsApp or email — nothing is auto-charged.";
+      bookingTitle.textContent = isFrenchPage ? 'Réserver votre visite' : 'Book your tour';
+      bookingNote.textContent = isFrenchPage ? 'Indiquez vos dates ici, puis confirmez directement avec Chafik sur WhatsApp ou par e-mail. Aucun paiement automatique ne sera effectué.' : "You'll pick your dates here, then confirm everything with Chafik directly on WhatsApp or email — nothing is auto-charged.";
       bkMessageOptional.style.display = 'inline';
       document.getElementById('bk-guests').required = true;
       document.getElementById('bk-date').required = true;
     } else {
-      bookingTitle.textContent = 'Ask about this tour';
-      bookingNote.textContent = "This sends a message straight to Chafik — no booking details needed unless you want to share them.";
+      bookingTitle.textContent = isFrenchPage ? 'Demander des renseignements' : 'Ask about this tour';
+      bookingNote.textContent = isFrenchPage ? 'Votre message sera envoyé directement à Chafik. Vous n’avez pas besoin de fournir de détails de réservation.' : "This sends a message straight to Chafik — no booking details needed unless you want to share them.";
       bkMessageOptional.style.display = 'none';
       document.getElementById('bk-guests').required = false;
       document.getElementById('bk-date').required = false;
@@ -295,8 +296,8 @@ if (bookingModal) {
   if (bookingOption && guestsHelp) {
     function updateBookingOptionHelp() {
       guestsHelp.textContent = bookingOption.value === 'Private'
-        ? 'Enter everyone in your private group. The total price depends on the selected tour and group size.'
-        : 'Enter the number of people in your party. You will join a small group with other guests.';
+        ? (isFrenchPage ? 'Indiquez le nombre de participants de votre groupe privé. Le prix total dépend de la visite choisie et de la taille du groupe.' : 'Enter everyone in your private group. The total price depends on the selected tour and group size.')
+        : (isFrenchPage ? 'Indiquez le nombre de personnes. Vous rejoindrez un petit groupe avec d’autres voyageurs.' : 'Enter the number of people in your party. You will join a small group with other guests.');
     }
     bookingOption.addEventListener('change', updateBookingOptionHelp);
     updateBookingOptionHelp();
@@ -377,7 +378,7 @@ if (bookingModal) {
   document.getElementById('bkSendEmail').addEventListener('click', async (event) => {
     if (!validateBookingForm()) return;
     const { intent, tourName, text } = buildBookingMessage();
-    const subject = (intent === 'book' ? 'Booking request — ' : 'Question about — ') + tourName;
+    const subject = (intent === 'book' ? (isFrenchPage ? 'Demande de réservation — ' : 'Booking request — ') : (isFrenchPage ? 'Renseignements sur — ' : 'Question about — ')) + tourName;
     const payload = {
       subject,
       name: document.getElementById('bk-name').value.trim(),
@@ -401,7 +402,7 @@ if (contactForm) {
   if (requestedTour) {
     const messageField = document.getElementById('cf-message');
     if (messageField && !messageField.value.trim()) {
-      messageField.value = `I'm interested in a quote for: ${requestedTour}. Please send me more details.`;
+      messageField.value = isFrenchPage ? `Je souhaite obtenir un devis pour : ${requestedTour}. Pourriez-vous m’envoyer plus de détails ?` : `I'm interested in a quote for: ${requestedTour}. Please send me more details.`;
     }
   }
   function validateContactForm() {
@@ -449,7 +450,7 @@ if (contactForm) {
     if (!validateContactForm()) return;
     const name = document.getElementById('cf-name').value.trim();
     const email = document.getElementById('cf-email').value.trim();
-    const subject = 'Tour inquiry - The Secret Marrakech (from ' + name + ')';
+    const subject = isFrenchPage ? 'Demande de renseignements — The Secret Marrakech (de la part de ' + name + ')' : 'Tour inquiry - The Secret Marrakech (from ' + name + ')';
     const payload = {
       subject,
       name,
