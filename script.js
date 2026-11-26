@@ -519,7 +519,12 @@ if (contactForm) {
   const path = window.location.pathname;
   const isFrench = path === '/fr' || path.startsWith('/fr/');
   let target;
-  if (isFrench) {
+  const blogArticleSlugs = ["things-to-do-in-marrakech","marrakech-medina-guide","marrakech-souks-guide","is-marrakech-safe","best-time-to-visit-marrakech","day-trips-from-marrakech","what-to-eat-in-marrakech","marrakech-3-day-itinerary"];
+  const articleMatch = path.match(/^\/(?:fr\/)?([^/]+)\.html$/);
+  const isBlogArticle = articleMatch && blogArticleSlugs.includes(articleMatch[1]);
+  if (isBlogArticle) {
+    target = (isFrench ? "" : "/fr") + "/" + articleMatch[1] + ".html";
+  } else if (isFrench) {
     target = path.replace(/^\/fr(?=\/|$)/, '') || '/';
     if (target === '/index.html') target = '/';
   } else {
