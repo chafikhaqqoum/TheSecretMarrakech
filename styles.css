@@ -185,6 +185,7 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
 .nav-links a.active-nav,
 .mobile-menu nav a.active-nav {
   text-decoration: underline;
+  text-decoration-color: var(--saffron);
   text-underline-offset: 4px;
 }
 
