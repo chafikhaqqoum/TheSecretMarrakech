@@ -156,6 +156,7 @@
   </div>
 </section>
 
+<div class="experience-group" data-experience-group="tours">
 <section class="tour-picker-section" id="tours">
   <div class="wrap">
     <div class="section-head">
@@ -163,9 +164,9 @@
       <h2>Pick a starting point.</h2>
       <p>Click a tour card below to check its full details, itinerary, and pricing.</p>
     </div>
-    <div class="tours-grid">
+    <div class="tours-grid tour-carousel" aria-label="Guided tours">
 
-      <a href="#secret-marrakech" class="tour-card is-active" data-target="secret-marrakech">
+      <a href="#secret-marrakech" class="tour-card" data-target="secret-marrakech" aria-controls="secret-marrakech" aria-expanded="false">
         <div class="tour-photo">
           <img src="images/about/chafik-with-guests-jewish-synagogue.webp" alt="Chafik with guests at a Jewish synagogue in Marrakech" loading="lazy" decoding="async">
           
@@ -180,7 +181,7 @@
         </div>
       </a>
 
-      <a href="#food-tour" class="tour-card" data-target="food-tour">
+      <a href="#food-tour" class="tour-card" data-target="food-tour" aria-controls="food-tour" aria-expanded="false">
         <div class="tour-photo">
           <img src="images/about/chafik-guests-enjoying-moroccan-harira.webp" alt="Chafik’s guests enjoying Moroccan harira" loading="lazy" decoding="async">
           
@@ -195,7 +196,7 @@
         </div>
       </a>
 
-      <a href="#classic-city" class="tour-card" data-target="classic-city">
+      <a href="#classic-city" class="tour-card" data-target="classic-city" aria-controls="classic-city" aria-expanded="false">
         <div class="tour-photo">
           <img src="images/gallery/chafik-talking-with-guests-lantern-lit-souk.webp" alt="Chafik talking with guests beneath hanging lamps in a narrow Marrakech souk alley" loading="lazy" decoding="async">
           
@@ -210,7 +211,7 @@
         </div>
       </a>
 
-      <a href="#hidden-souks" class="tour-card" data-target="hidden-souks">
+      <a href="#hidden-souks" class="tour-card" data-target="hidden-souks" aria-controls="hidden-souks" aria-expanded="false">
         <div class="tour-photo">
           <img src="images/gallery/chafik-exploring-moroccan-lamp-souk.webp" alt="Chafik looking at a colorful lantern in the lamps section of the Marrakech souks" loading="lazy" decoding="async">
           
@@ -229,7 +230,7 @@
   </div>
 </section>
 
-<div class="tour-detail-panel" id="tour-detail-panel" aria-live="polite">
+<div class="tour-detail-panel" id="tour-detail-panel-tours" data-detail-panel aria-live="polite">
 <section class="tour-detail is-hidden" id="secret-marrakech" data-tour-section>
   <div class="wrap tour-detail-grid">
     <div class="tour-detail-media">
@@ -431,6 +432,24 @@
 </section>
 
 </div>
+</div>
+
+<section class="tour-picker-section activities-section" id="activities" data-experience-group="activities">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Activities</span>
+      <h2>More ways to discover Marrakech.</h2>
+      <p>We’re preparing a few new experiences. Check back soon.</p>
+    </div>
+    <div class="activities-coming-soon">
+      <span class="activities-coming-soon-label">Coming Soon</span>
+      <h3>New experiences are on the way.</h3>
+      <p>We’re working on additional ways to explore Marrakech. In the meantime, discover our guided walking tours.</p>
+      <a class="btn btn-primary" href="#tours">Explore Tours</a>
+    </div>
+  </div>
+  <div class="tour-detail-panel" id="activity-detail-panel" data-detail-panel aria-live="polite"></div>
+</section>
 
 <section class="tours-cta">
   <p class="map-note">Can't find the meeting point? Here's exactly where to go 👇</p>
@@ -509,43 +528,57 @@
 
 {% include footer.html %}
 <script>
-  const tourPickerCards = document.querySelectorAll('.tour-card[data-target]');
-  const tourSections = document.querySelectorAll('[data-tour-section]');
+  // Each section manages its own cards and expandable detail panel.
+  document.querySelectorAll('[data-experience-group]').forEach(group => {
+    const cards = Array.from(group.querySelectorAll('.tour-card[data-target]'));
+    const details = Array.from(group.querySelectorAll('[data-tour-section]'));
+    const detailPanel = group.querySelector('[data-detail-panel]');
 
-  function openTourSection(targetId, { scroll = true, updateHash = true } = {}) {
-    tourSections.forEach(section => {
-      const shouldShow = section.id === targetId;
-      section.classList.toggle('is-open', shouldShow);
-      section.classList.toggle('is-hidden', !shouldShow);
-    });
+    function setOpen(targetId, { scroll = true, updateHash = true } = {}) {
+      const selected = details.find(detail => detail.id === targetId);
+      if (!selected) return;
 
-    tourPickerCards.forEach(card => {
-      card.classList.toggle('is-active', card.dataset.target === targetId);
-    });
+      const shouldOpen = !selected.classList.contains('is-open');
+      details.forEach(detail => {
+        const open = shouldOpen && detail === selected;
+        detail.classList.toggle('is-open', open);
+        detail.classList.toggle('is-hidden', !open);
+      });
 
-    const selected = document.getElementById(targetId);
-    if (selected && scroll) {
-      document.getElementById('tour-detail-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    if (selected && updateHash) {
-      if (history.pushState) {
-        history.pushState(null, '', '#' + targetId);
-      } else {
-        location.hash = targetId;
+      cards.forEach(card => {
+        const active = shouldOpen && card.dataset.target === targetId;
+        card.classList.toggle('is-active', active);
+        card.setAttribute('aria-expanded', String(active));
+      });
+
+      if (updateHash) {
+        const nextUrl = shouldOpen ? '#' + targetId : window.location.pathname + window.location.search;
+        history.pushState(null, '', nextUrl);
+      }
+      if (shouldOpen && scroll && detailPanel) {
+        detailPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-  }
 
-  tourPickerCards.forEach(button => {
-    button.addEventListener('click', event => { event.preventDefault(); openTourSection(button.dataset.target); });
+    cards.forEach(card => {
+      card.addEventListener('click', event => {
+        event.preventDefault();
+        setOpen(card.dataset.target);
+      });
+    });
+
+    const initialHash = window.location.hash.slice(1);
+    if (initialHash && details.some(detail => detail.id === initialHash)) {
+      const selected = details.find(detail => detail.id === initialHash);
+      selected.classList.remove('is-hidden');
+      selected.classList.add('is-open');
+      const activeCard = cards.find(card => card.dataset.target === initialHash);
+      if (activeCard) {
+        activeCard.classList.add('is-active');
+        activeCard.setAttribute('aria-expanded', 'true');
+      }
+    }
   });
-
-  const initialHash = window.location.hash.replace('#', '');
-  if (initialHash && document.querySelector('[data-tour-section]#' + CSS.escape(initialHash))) {
-    openTourSection(initialHash, { scroll: false, updateHash: false });
-  } else if (tourPickerCards.length) {
-    openTourSection(tourPickerCards[0].dataset.target, { scroll: false, updateHash: false });
-  }
 </script>
 
 <script src="script.js"></script>
