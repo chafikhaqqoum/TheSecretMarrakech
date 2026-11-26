@@ -521,15 +521,8 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
   color:var(--ink-soft);
 }
 @media(max-width:820px){
-  .tour-carousel .tour-card{flex-basis:min(78%,360px)}
   .activities-section{padding:58px 0 66px}
 }
 @media(max-width:520px){
-  .tour-carousel{gap:14px;margin-inline:-4px;padding-inline:4px}
-  .tour-carousel .tour-card{flex-basis:86%;min-width:0}
-  .tour-carousel .tour-photo{height:230px}
   .activities-coming-soon{padding:34px 20px}
-}
-@media(prefers-reduced-motion:reduce){
-  .tour-carousel{scroll-behavior:auto}
 }
