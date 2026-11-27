@@ -103,6 +103,7 @@ header .wrap {
 .nav-links a.active-nav,
 .mobile-menu nav a.active-nav {
   text-decoration: underline;
+  text-decoration-color: #000 !important;
   text-underline-offset: 4px;
 }
 
