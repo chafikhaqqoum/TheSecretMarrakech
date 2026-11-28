@@ -527,3 +527,7 @@ img.brand-mark{height:56px;width:auto;aspect-ratio:1/1;border-radius:50%;object-
 @media(max-width:520px){
   .activities-coming-soon{padding:34px 20px}
 }
+
+
+/* Brand accent for the Home and About headings updated in November 2026. */
+.orange-heading{color:var(--saffron)!important}
